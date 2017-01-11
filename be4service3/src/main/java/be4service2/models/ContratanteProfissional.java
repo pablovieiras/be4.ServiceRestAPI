@@ -37,32 +37,7 @@ public class ContratanteProfissional extends Pessoa{
 		
 	}
 	
-	public ContratanteProfissional(Integer id, String nome, String cpf) {
-		super(id, nome, cpf);
-		// TODO Auto-generated constructor stub
-	}
 
-	public ContratanteProfissional(Integer id, String nome) {
-		super(id, nome);
-		// TODO Auto-generated constructor stub
-	}
-
-	public ContratanteProfissional(String nome) {
-		super(nome);
-		// TODO Auto-generated constructor stub
-	}
-
-	public ContratanteProfissional(String nome, Double avaliacaoProfissional, Double avaliacaoContratante) {
-		super(nome);
-		this.avaliacaoProfissional = avaliacaoProfissional;
-		this.avaliacaoContratante = avaliacaoContratante;
-	}
-	
-	public ContratanteProfissional(Integer id, String nome, Double avaliacaoProfissional, Double avaliacaoContratante) {
-		super(id, nome);
-		this.avaliacaoProfissional = avaliacaoProfissional;
-		this.avaliacaoContratante = avaliacaoContratante;
-	}
 
 	public Double getAvaliacaoProfissional() {
 		return avaliacaoProfissional;

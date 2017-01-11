@@ -16,9 +16,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @DiscriminatorValue(value="profissional")
 public class Profissional extends Pessoa
 {
-	
+	private String profissao;
+	private String resumoProfissional;
+	private String competencias;
 	private Double avaliacaoProfissional=0.0;
-	
+	private Double avaliacaoQualidade=0.0;
+	private Double avaliacaoPreco=0.0;
+	private Double avaliacaoPontualidade=0.0;
+
 	@OneToMany(mappedBy="profissional")
 	private List<Proposta> listaProposta=new ArrayList<>();
 
@@ -33,14 +38,7 @@ public class Profissional extends Pessoa
 	
 	}
 	
-	public Profissional(Integer id, String nome, Double avaliacaoProfissional) {
-		super(id, nome);
-		this.avaliacaoProfissional = avaliacaoProfissional;
-	}
-	public Profissional( String nome, Double avaliacaoProfissional) {
-		super(nome);
-		this.avaliacaoProfissional = avaliacaoProfissional;
-	}
+
 
 	
 	

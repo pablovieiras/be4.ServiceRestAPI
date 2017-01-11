@@ -2,6 +2,8 @@ package be4service2.models;
 
 
 
+import java.util.Date;
+
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
@@ -21,24 +23,47 @@ public abstract class Pessoa {
 	private Integer id;
 	private String nome;
 	private String cpf;
+	private Date dataNascimento;
+	private String email;
+	private String senha;
+	private String telefone;
+	private String celular;
+	private String cep;
+	private String lougradouro;
+	private String numero;
+	private String cidade;
+	private String bairro;
+	private String complemento;
+	private String foto;
 
-	public Pessoa(Integer id, String nome) {
-		super();
-		this.id = id;
-		this.nome = nome;
-	}
 	
-	public Pessoa(Integer id, String nome, String cpf) {
+	public Pessoa(String nome, String cpf, Date dataNascimento, String email, String senha, String celular, String cep,
+			String lougradouro, String numero, String cidade, String bairro, String complemento, String foto) {
 		super();
-		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
+		this.dataNascimento = dataNascimento;
+		this.email = email;
+		this.senha = senha;
+		this.celular = celular;
+		this.cep = cep;
+		this.lougradouro = lougradouro;
+		this.numero = numero;
+		this.cidade = cidade;
+		this.bairro = bairro;
+		this.complemento = complemento;
+		this.foto = foto;
 	}
 
-	public Pessoa(String nome) {
+	public Pessoa(String nome, String email, String senha, String celular, String foto) {
 		super();
 		this.nome = nome;
+		this.email = email;
+		this.senha = senha;
+		this.celular = celular;
+		this.foto = foto;
 	}
+
 	public Pessoa() {
 		super();
 	}
@@ -61,6 +86,103 @@ public abstract class Pessoa {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+	
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getCelular() {
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getLougradouro() {
+		return lougradouro;
+	}
+
+	public void setLougradouro(String lougradouro) {
+		this.lougradouro = lougradouro;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

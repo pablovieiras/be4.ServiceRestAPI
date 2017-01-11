@@ -22,7 +22,10 @@ public class Proposta {
 	@ManyToOne
 	@JoinColumn(name="id_profissional")
 	private Profissional profissional;
+	private String titulo;
 	private BigDecimal valorProposta;
+	private int prazoEstimado;
+	private String descricao;
 	
 	public Proposta(){
 		

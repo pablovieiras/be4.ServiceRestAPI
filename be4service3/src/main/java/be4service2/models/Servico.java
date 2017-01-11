@@ -34,8 +34,12 @@ public class Servico {
 	
 	@OneToMany(mappedBy="servico")
 	private List<Avaliacao> avaliacao=new ArrayList<>();
+	private String titulo;
 	private String status;
 	private BigDecimal valor;
+	private int prazoEstimado;
+	private String competencias;
+	private String descricao;
 	
 	public Servico(Integer idServico, Contratante contratante) {
 		super();
