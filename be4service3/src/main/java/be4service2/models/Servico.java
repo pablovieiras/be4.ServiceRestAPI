@@ -41,10 +41,19 @@ public class Servico {
 	private String competencias;
 	private String descricao;
 	
-	public Servico(Integer idServico, Contratante contratante) {
+	
+
+	public Servico(Pessoa contratante, List<Avaliacao> avaliacao, String titulo, String status, BigDecimal valor,
+			int prazoEstimado, String competencias, String descricao) {
 		super();
-		this.idServico = idServico;
 		this.contratante = contratante;
+		this.avaliacao = avaliacao;
+		this.titulo = titulo;
+		this.status = status;
+		this.valor = valor;
+		this.prazoEstimado = prazoEstimado;
+		this.competencias = competencias;
+		this.descricao = descricao;
 	}
 
 
@@ -67,9 +76,60 @@ public class Servico {
 	public void setIdServico(Integer idServico) {
 		this.idServico = idServico;
 	}
-
+	
+	
 
 	
+
+	public List<Avaliacao> getAvaliacao() {
+		return avaliacao;
+	}
+
+
+	public void setAvaliacao(List<Avaliacao> avaliacao) {
+		this.avaliacao = avaliacao;
+	}
+
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+
+	public int getPrazoEstimado() {
+		return prazoEstimado;
+	}
+
+
+	public void setPrazoEstimado(int prazoEstimado) {
+		this.prazoEstimado = prazoEstimado;
+	}
+
+
+	public String getCompetencias() {
+		return competencias;
+	}
+
+
+	public void setCompetencias(String competencias) {
+		this.competencias = competencias;
+	}
+
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
 
 	@JsonIgnore
 	public Pessoa getContratante() {
