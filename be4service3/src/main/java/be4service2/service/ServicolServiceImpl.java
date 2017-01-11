@@ -209,7 +209,7 @@ public class ServicolServiceImpl implements ServicoService {
 			//guarda o profissional dentro da avaliacao
 			avaliacao.setContratante(servico.getContratante());
 			Contratante c=contratanteDao.findById(servico.getContratante().getId());
-			c.mediaAvaliacao(avaliacao.getAvaliacaoContratante());
+			//////////////// mudarrrc.mediaAvaliacao(avaliacao.getAvaliacaoContratante());
 			//salvar a avaliacao
 			avaliacaoDao.save(avaliacao);
 		}
