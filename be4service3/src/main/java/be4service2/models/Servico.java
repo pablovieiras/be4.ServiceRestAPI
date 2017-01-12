@@ -131,7 +131,7 @@ public class Servico {
 	}
 
 
-
+	@JsonIgnore
 	public Pessoa getContratante() {
 		return contratante;
 	}
