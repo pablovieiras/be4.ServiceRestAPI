@@ -41,4 +41,6 @@ public interface ServicoService {
 	void avaliaProfissional(Integer idServico,Avaliacao avaliacao);
 	
 	void avaliaContratante(Integer idServico, Avaliacao avaliacao) ;
+	
+	void finalizarServico (Servico servico);
 }
