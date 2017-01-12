@@ -71,6 +71,13 @@ public class ServicolServiceImpl implements ServicoService {
 		servico.setStatus("Aberto");
 		servicoDao.save(servico);
 	}
+	
+	@Override
+	public void finalizarServico(Servico servico) {
+		servico.setStatus("finalizado");
+		servicoDao.update(servico);
+	}
+	
 
 	@Override
 	public void selecionarProfissional(Profissional profissional, Servico servico,BigDecimal valor) {
@@ -222,8 +229,6 @@ public class ServicolServiceImpl implements ServicoService {
 			}
 		}
 	}
+
 	
-
-
-
 }

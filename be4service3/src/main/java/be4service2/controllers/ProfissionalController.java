@@ -87,7 +87,10 @@ public class ProfissionalController
 	}
 
 
-
+	@RequestMapping(value="/servico/{id_servico}/finalizarServico",method = RequestMethod.PUT)
+	public void finalizarServico (@PathVariable("id_servico")Integer idServico){
+		servicoService.finalizarServico(servicoService.findById(idServico));
+	}
 
 
 

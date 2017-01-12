@@ -104,4 +104,9 @@ public class ContratanteController
 	public void avaliaProfissional(@PathVariable("id_servico")Integer idServico,@RequestBody Avaliacao avaliacao){
 		servicoService.avaliaProfissional(idServico, avaliacao);
 	}
+	
+	@RequestMapping(value="/servico/{id_servico}/finalizarServico",method = RequestMethod.PUT)
+	public void finalizarServico (@PathVariable("id_servico")Integer idServico){
+		servicoService.finalizarServico(servicoService.findById(idServico));
+	}
 }
