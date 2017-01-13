@@ -1,18 +1,8 @@
 package be4service2.models;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import javax.xml.bind.annotation.XmlTransient;
-////////foi kkk
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @DiscriminatorValue(value="contratante")
@@ -75,6 +65,6 @@ public class Contratante extends Pessoa
 		Double mediaCompromisso=(valorAntigoCompromisso+avCompromisso)/this.numeroAvaliacoesContratante;
 		this.setAvaliacaoCompromisso(mediaCompromisso);
 		Double mediaCordialidade=(valorAntigoCordialidade+avCordialidade)/this.numeroAvaliacoesContratante;
-		this.setAvaliacaoCompromisso(mediaCordialidade);
+		this.setAvaliacaoCordialidade(mediaCordialidade);
 	}
 }

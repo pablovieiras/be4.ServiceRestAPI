@@ -6,8 +6,6 @@ import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -112,16 +110,22 @@ public class Profissional extends Pessoa
 		//faz calculo para achar o valor completo de todas avaliacoes
 		Double valorAntigoQualidade=this.getAvaliacaoQualidade()*this.getNumeroAvaliacoesProfissional();
 		Double valorAntigoPreco=this.getAvaliacaoPreco()*this.getNumeroAvaliacoesProfissional();
-		Double valorAntigoPontualidade=this.getAvaliacaoPontualidade()*this.getNumeroAvaliacoesProfissional();
+		System.out.println("avProntualidade"+avPontualidade );
+		System.out.println("conta: "+this.avaliacaoPontualidade+" "+this.getNumeroAvaliacoesProfissional());
+		Double valorAntigoPontualidade=this.avaliacaoPontualidade*this.getNumeroAvaliacoesProfissional();
+		System.out.println("valorAntigoPontualidade"+valorAntigoPontualidade );
+	
 		//aumenta o numero de pessoas que avaliaram o contratante
 		this.numeroAvaliacoesProfissional++;
+		System.out.println("numeroAvaliacoesProfissional"+numeroAvaliacoesProfissional );
 		//faz a media do valor total e seta o valor na avaliacao do contratante
 		Double mediaQualidade=(valorAntigoQualidade+avQualidade)/this.getNumeroAvaliacoesProfissional();
 		this.setAvaliacaoQualidade(mediaQualidade);
 		Double mediaPreco=(valorAntigoPreco+avPreco)/this.getNumeroAvaliacoesProfissional();
 		this.setAvaliacaoPreco(mediaPreco);
 		Double mediaPontualidade=(valorAntigoPontualidade+avPontualidade)/this.getNumeroAvaliacoesProfissional();
-		this.setAvaliacaoQualidade(mediaPontualidade);
+		this.setAvaliacaoPontualidade(mediaPontualidade);
+	
 		
 	}
 
