@@ -42,6 +42,7 @@ public class ServicoDaoImpl implements ServicoDao {
 		manager.merge(this.findById(servico.getIdServico()));
 	}
 
+	//retorna lista dos contratantes do id
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Servico> allId(Contratante contratante) {
