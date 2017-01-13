@@ -1,7 +1,5 @@
 package be4service2.models;
 
-
-
 import java.util.Date;
 
 import javax.persistence.DiscriminatorColumn;
@@ -19,201 +17,201 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="tipo",discriminatorType=DiscriminatorType.STRING)
 public abstract class Pessoa {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	private String nome;
-	private String cpf;
-	private Date dataNascimento;
-	private String email;
-	private String senha;
-	private String telefone;
-	private String celular;
-	private String cep;
-	private String lougradouro;
-	private String numero;
-	private String cidade;
-	private String bairro;
-	private String complemento;
-	private String foto;
 
-	
-	public Pessoa(String nome, String cpf, Date dataNascimento, String email, String senha, String celular, String cep,
-			String lougradouro, String numero, String cidade, String bairro, String complemento, String foto) {
-		super();
-		this.nome = nome;
-		this.cpf = cpf;
-		this.dataNascimento = dataNascimento;
-		this.email = email;
-		this.senha = senha;
-		this.celular = celular;
-		this.cep = cep;
-		this.lougradouro = lougradouro;
-		this.numero = numero;
-		this.cidade = cidade;
-		this.bairro = bairro;
-		this.complemento = complemento;
-		this.foto = foto;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private String nome;
+    private String cpf;
+    private Date dataNascimento;
+    private String email;
+    private String senha;
+    private String telefone;
+    private String celular;
+    private String cep;
+    private String lougradouro;
+    private String numero;
+    private String cidade;
+    private String bairro;
+    private String complemento;
+    private String foto;
 
-	public Pessoa(String nome, String email, String senha, String celular, String foto) {
-		super();
-		this.nome = nome;
-		this.email = email;
-		this.senha = senha;
-		this.celular = celular;
-		this.foto = foto;
-	}
 
-	public Pessoa() {
-		super();
-	}
-	
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	public String getCpf() {
-		return cpf;
-	}
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-	
-	public Date getDataNascimento() {
-		return dataNascimento;
-	}
+    public Pessoa(String nome, String cpf, Date dataNascimento, String email, String senha, String celular, String cep,
+            String lougradouro, String numero, String cidade, String bairro, String complemento, String foto) {
+        super();
+        this.nome = nome;
+        this.cpf = cpf;
+        this.dataNascimento = dataNascimento;
+        this.email = email;
+        this.senha = senha;
+        this.celular = celular;
+        this.cep = cep;
+        this.lougradouro = lougradouro;
+        this.numero = numero;
+        this.cidade = cidade;
+        this.bairro = bairro;
+        this.complemento = complemento;
+        this.foto = foto;
+    }
 
-	public void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
+    public Pessoa(String nome, String email, String senha, String celular, String foto) {
+        super();
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.celular = celular;
+        this.foto = foto;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public Pessoa() {
+        super();
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
-	@JsonIgnore
-	public String getSenha() {
-		return senha;
-	}
+    public Integer getId() {
+        return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    public String getNome() {
+        return nome;
+    }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    public String getCpf() {
+        return cpf;
+    }
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
 
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
 
-	public String getTelefone() {
-		return telefone;
-	}
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getCelular() {
-		return celular;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setCelular(String celular) {
-		this.celular = celular;
-	}
+    @JsonIgnore
+    public String getSenha() {
+        return senha;
+    }
 
-	public String getCep() {
-		return cep;
-	}
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
+    public String getTelefone() {
+        return telefone;
+    }
 
-	public String getLougradouro() {
-		return lougradouro;
-	}
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
 
-	public void setLougradouro(String lougradouro) {
-		this.lougradouro = lougradouro;
-	}
+    public String getCelular() {
+        return celular;
+    }
 
-	public String getNumero() {
-		return numero;
-	}
+    public void setCelular(String celular) {
+        this.celular = celular;
+    }
 
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
+    public String getCep() {
+        return cep;
+    }
 
-	public String getCidade() {
-		return cidade;
-	}
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
 
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
+    public String getLougradouro() {
+        return lougradouro;
+    }
 
-	public String getBairro() {
-		return bairro;
-	}
+    public void setLougradouro(String lougradouro) {
+        this.lougradouro = lougradouro;
+    }
 
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
+    public String getNumero() {
+        return numero;
+    }
 
-	public String getComplemento() {
-		return complemento;
-	}
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
 
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
-	}
+    public String getCidade() {
+        return cidade;
+    }
 
-	public String getFoto() {
-		return foto;
-	}
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
 
-	public void setFoto(String foto) {
-		this.foto = foto;
-	}
+    public String getBairro() {
+        return bairro;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Pessoa other = (Pessoa) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
 
-	@Override
-	public String toString() {
-		return "Pessoa [id=" + id + ", nome=" + nome + ", cpf=" + cpf + "]";
-	}
+    public String getComplemento() {
+        return complemento;
+    }
 
-	
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Pessoa other = (Pessoa) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Pessoa [id=" + id + ", nome=" + nome + ", cpf=" + cpf + "]";
+    }
+
+
 }

@@ -73,6 +73,12 @@ public class ServicolServiceImpl implements ServicoService {
 	}
 
 	@Override
+ 	public void finalizarServico(Servico servico) {
+		servico.setStatus("finalizado");
+		servicoDao.update(servico);
+	}
+
+	@Override
 	public void selecionarProfissional(Profissional profissional, Servico servico,BigDecimal valor) {
 		if(profissional!=null){
 			servico.setProfissional(profissional);

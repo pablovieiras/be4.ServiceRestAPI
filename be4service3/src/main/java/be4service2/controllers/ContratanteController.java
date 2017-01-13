@@ -5,11 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import be4service2.models.Avaliacao;
 import be4service2.models.Contratante;
@@ -20,10 +16,10 @@ import be4service2.service.ProfissionalService;
 import be4service2.service.ServicoService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:50281")
 @RequestMapping(value= "/contratante")
 
-public class ContratanteController
-{
+public class ContratanteController {
 
 	@Autowired
     private ContratanteService contratanteService;
@@ -35,11 +31,8 @@ public class ContratanteController
 	private ServicoService servicoService;
 		
 	private List<Contratante> contratante;
-	public ContratanteController(){
-		contratante=new ArrayList<Contratante>();
-		//contratante.add(new Contratante(1,"aa","aa","aa"));
-		//contratante.add(new Contratante(2,"bb","bb","bb"));
-		//contratante.add(new Contratante(2,"cc","cc","cc"));
+	public ContratanteController() {
+		contratante = new ArrayList<Contratante>();
 	}
 	
    @RequestMapping(method = RequestMethod.GET)
@@ -96,12 +89,17 @@ public class ContratanteController
 
 
 	@RequestMapping(value="/servico/{id_servico}/proposta/{id}",method = RequestMethod.POST)
-	public void selecionarProposta(@PathVariable("id") Integer id,@PathVariable("id_servico") Integer idServico){
+	public void selecionarProposta(@PathVariable("id") Integer id,@PathVariable("id_servico") Integer idServico) {
 		   	servicoService.selecionarProposta(id,servicoService.findById(idServico));
 	 }
 
 	@RequestMapping(value="/servico/{id_servico}/avaliaProfissional",method = RequestMethod.POST)
-	public void avaliaProfissional(@PathVariable("id_servico")Integer idServico,@RequestBody Avaliacao avaliacao){
+	public void avaliaProfissional(@PathVariable("id_servico")Integer idServico,@RequestBody Avaliacao avaliacao) {
 		servicoService.avaliaProfissional(idServico, avaliacao);
 	}
+
+    @RequestMapping(value="/servico/{id_servico}/finalizarServico",method = RequestMethod.PUT)
+ 	public void finalizarServico (@PathVariable("id_servico")Integer idServico) {
+        servicoService.finalizarServico(servicoService.findById(idServico));
+    }
 }

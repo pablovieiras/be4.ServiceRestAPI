@@ -22,4 +22,5 @@ public interface ContratanteDao {
 
 	void criarServico(Contratante contratante);
 
+	Contratante findByEmail(String email);
 }

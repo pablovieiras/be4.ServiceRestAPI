@@ -1,6 +1,8 @@
 package be4service2.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +38,7 @@ public class Contratante extends Pessoa
 		super();
 	}
 
+	@JsonIgnore
 	public List<Servico> getServicosContratados() {
 		return servicosContratados;
 	}

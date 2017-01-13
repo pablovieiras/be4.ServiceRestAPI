@@ -1,6 +1,5 @@
 package be4service2.models;
 
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +16,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Servico {
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idServico;
-	
+
 	@ManyToOne
 	@JoinColumn(name="id_contratante")
 	private Pessoa contratante;
@@ -31,7 +29,7 @@ public class Servico {
 
 	@OneToMany(mappedBy="servico")
 	private List<Proposta> listaProposta=new ArrayList<>();
-	
+
 	@OneToMany(mappedBy="servico")
 	private List<Avaliacao> avaliacao=new ArrayList<>();
 	private String titulo;
@@ -40,12 +38,12 @@ public class Servico {
 	private int prazoEstimado;
 	private String competencias;
 	private String descricao;
-	
-	
+    private String categoria;
 
-	public Servico(Pessoa contratante, List<Avaliacao> avaliacao, String titulo, String status, BigDecimal valor,
-			int prazoEstimado, String competencias, String descricao) {
+	public Servico(Integer idServico, Pessoa contratante, List<Avaliacao> avaliacao, String titulo, String status, BigDecimal valor,
+			int prazoEstimado, String competencias, String descricao, String categoria) {
 		super();
+		this.idServico = idServico;
 		this.contratante = contratante;
 		this.avaliacao = avaliacao;
 		this.titulo = titulo;
@@ -54,70 +52,56 @@ public class Servico {
 		this.prazoEstimado = prazoEstimado;
 		this.competencias = competencias;
 		this.descricao = descricao;
+        this.categoria = categoria;
 	}
-
 
 	public Servico(){
-		super();
+        super();
 	}
-
 
 	public Servico(Servico s,Contratante contratante) {
 		super();
 		this.contratante = contratante;
 	}
 
-
 	public Integer getIdServico() {
-		return idServico;
+        return idServico;
 	}
-
 
 	public void setIdServico(Integer idServico) {
-		this.idServico = idServico;
+        this.idServico = idServico;
 	}
-	
-	
-
-	
 
 	public List<Avaliacao> getAvaliacao() {
-		return avaliacao;
+        return avaliacao;
 	}
-
 
 	public void setAvaliacao(List<Avaliacao> avaliacao) {
-		this.avaliacao = avaliacao;
+        this.avaliacao = avaliacao;
 	}
-
 
 	public String getTitulo() {
-		return titulo;
+        return titulo;
 	}
-
 
 	public void setTitulo(String titulo) {
-		this.titulo = titulo;
+        this.titulo = titulo;
 	}
-
 
 	public int getPrazoEstimado() {
-		return prazoEstimado;
+        return prazoEstimado;
 	}
-
 
 	public void setPrazoEstimado(int prazoEstimado) {
-		this.prazoEstimado = prazoEstimado;
+        this.prazoEstimado = prazoEstimado;
 	}
-
 
 	public String getCompetencias() {
-		return competencias;
+        return competencias;
 	}
 
-
 	public void setCompetencias(String competencias) {
-		this.competencias = competencias;
+        this.competencias = competencias;
 	}
 
 
@@ -125,32 +109,35 @@ public class Servico {
 		return descricao;
 	}
 
-
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
 
+    public String getCategoria() {
+        return categoria;
+    }
 
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
 
 	public Pessoa getContratante() {
-		return contratante;
+        return contratante;
 	}
 
 
 	public void setContratante(Pessoa contratante) {
-		this.contratante = contratante;
+        this.contratante = contratante;
 	}
 
 	@JsonIgnore
 	public Pessoa getProfissional() {
-		return profissional;
+        return profissional;
 	}
-
 
 	public void setProfissional(Pessoa profissional) {
-		this.profissional = profissional;
+        this.profissional = profissional;
 	}
-
 
 	@Override
 	public String toString() {
@@ -158,42 +145,33 @@ public class Servico {
 				+ "]";
 	}
 
-
 	public String getStatus() {
-		return status;
+        return status;
 	}
-
 
 	public void setStatus(String status) {
-		this.status = status;
+        this.status = status;
 	}
 
-	
 	public List<Proposta> getListaProposta() {
-		return listaProposta;
+        return listaProposta;
 	}
-
 
 	public void setListaProposta(List<Proposta> listaProposta) {
-		this.listaProposta = listaProposta;
+        this.listaProposta = listaProposta;
 	}
-	
+
 	public void limpa(List<Proposta> listaProposta) {
 		for (int i = listaProposta.size()-1; i >=0; i--) {
 			listaProposta.remove(i);
 		}
-		System.out.println(listaProposta.size());
 	}
 
+    public BigDecimal getValor() {
+        return valor;
+    }
 
-	public BigDecimal getValor() {
-		return valor;
-	}
-
-
-	public void setValor(BigDecimal valor) {
-		this.valor = valor;
-	}
-	
-	
+    public void setValor(BigDecimal valor) {
+        this.valor = valor;
+    }
 }

@@ -11,7 +11,6 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
 @Entity
 @DiscriminatorValue(value="profissional")
 public class Profissional extends Pessoa
@@ -73,9 +72,4 @@ public class Profissional extends Pessoa
 		Double media=(valorAntigo+nota)/this.numeroAvaliacoesProfissional;
 		this.setAvaliacaoProfissional(media);
 	}
-
-
-  
-   
-
 }

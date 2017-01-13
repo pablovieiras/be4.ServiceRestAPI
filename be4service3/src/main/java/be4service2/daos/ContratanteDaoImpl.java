@@ -38,6 +38,11 @@ public Contratante findById(Integer id)
       return manager.find(Contratante.class, id);
    }
 
+@Override
+public Contratante findByEmail(String email) {
+   return manager.find(Contratante.class, email);
+}
+
 
 @Override
 public void remove(Contratante contratante)
