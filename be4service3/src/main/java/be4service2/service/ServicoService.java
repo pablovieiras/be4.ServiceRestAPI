@@ -46,4 +46,6 @@ public interface ServicoService {
 	void finalizarServico (Servico servico);
 	
 	List<Servico> getListaServicosContratados(Contratante contratante);
+	
+	List<Servico> listarAbertos ();
 }

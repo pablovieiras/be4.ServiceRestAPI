@@ -238,5 +238,11 @@ public class ServicolServiceImpl implements ServicoService {
 		return servicoDao.allId(contratante);
 	}
 
+	@Override
+	public List<Servico> listarAbertos() {
+
+		return servicoDao.listarAbertos();
+	}
+
 	
 }

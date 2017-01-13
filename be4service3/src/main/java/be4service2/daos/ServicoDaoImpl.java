@@ -1,8 +1,10 @@
 package be4service2.daos;
 
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import org.springframework.stereotype.Repository;
 
 import be4service2.models.Contratante;
@@ -47,6 +49,14 @@ public class ServicoDaoImpl implements ServicoDao {
 		   javax.persistence.Query query = manager.createQuery(ss);
 		   query.setParameter("idc", contratante.getId());
 		return query.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Servico> listarAbertos() {
+		String ss="select s from Servico s where status=Aberto";
+		   javax.persistence.Query query = manager.createQuery(ss);
+		 return query.getResultList();
 	}
 
 

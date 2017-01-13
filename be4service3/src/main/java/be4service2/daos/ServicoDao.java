@@ -19,4 +19,6 @@ public interface ServicoDao {
 	
 	List<Servico> allId(Contratante contratante);
 	
+	List<Servico> listarAbertos ();
+	
 }

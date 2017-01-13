@@ -121,7 +121,7 @@ public class Profissional extends Pessoa
 		Double mediaPreco=(valorAntigoPreco+avPreco)/this.getNumeroAvaliacoesProfissional();
 		this.setAvaliacaoPreco(mediaPreco);
 		Double mediaPontualidade=(valorAntigoPontualidade+avPontualidade)/this.getNumeroAvaliacoesProfissional();
-		this.setAvaliacaoQualidade(mediaPontualidade);
+		this.setAvaliacaoPontualidade(mediaPontualidade);
 		
 	}
 
