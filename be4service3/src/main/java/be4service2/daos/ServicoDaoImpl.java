@@ -55,7 +55,7 @@ public class ServicoDaoImpl implements ServicoDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Servico> listarAbertos() {
-		String ss="select s from Servico s where status=Aberto";
+		String ss="select s from Servico s where s.status='Aberto'";
 		   javax.persistence.Query query = manager.createQuery(ss);
 		 return query.getResultList();
 	}
