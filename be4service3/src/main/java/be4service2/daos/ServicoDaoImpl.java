@@ -40,6 +40,15 @@ public class ServicoDaoImpl implements ServicoDao {
 		manager.merge(this.findById(servico.getIdServico()));
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Servico> allId(Contratante contratante) {
+		String ss="select s from Servico s where id_contratante=:idc";
+		   javax.persistence.Query query = manager.createQuery(ss);
+		   query.setParameter("idc", contratante.getId());
+		return query.getResultList();
+	}
+
 
 
 

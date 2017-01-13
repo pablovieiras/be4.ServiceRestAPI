@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlTransient;
 ////////foi kkk
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @DiscriminatorValue(value="contratante")
 public class Contratante extends Pessoa
@@ -21,28 +23,18 @@ public class Contratante extends Pessoa
 	private Double avaliacaoCordialidade=0.0;
 	private Double avaliacaoCompromisso=0.0;
 
-	@OneToMany(mappedBy="contratante")
-	private List<Servico> servicosContratados=new ArrayList<>();
 
 	private Integer numeroAvaliacoesContratante=0;
 
 
-
+	public Contratante() {
+		super();
+	}
 	public Contratante(String nome, String email, String senha, String celular, String foto) {
 		super(nome, email, senha, celular, foto);
 	}
 
-	public Contratante() {
-		super();
-	}
 
-	public List<Servico> getServicosContratados() {
-		return servicosContratados;
-	}
-
-	public void setServicosContratados(List<Servico> servicosContratados) {
-		this.servicosContratados = servicosContratados;
-	}
 
 
 	public Integer getNumeroAvaliacoesContratante() {
@@ -72,15 +64,16 @@ public class Contratante extends Pessoa
 	public void setAvaliacaoCompromisso(Double avaliacaoCompromisso) {
 		this.avaliacaoCompromisso = avaliacaoCompromisso;
 	}
-
+	//media geral das avaliacoes contratante
 	public void mediaAvaliacao(Double avCompromisso,Double avCordialidade){
+		//faz calculo para achar o valor completo de todas avaliacoes
 		Double valorAntigoCompromisso=this.getAvaliacaoCordialidade()*numeroAvaliacoesContratante;
+		Double valorAntigoCordialidade=this.getAvaliacaoCompromisso()*numeroAvaliacoesContratante;
+		//aumenta o numero de pessoas que avaliaram o contratante
 		this.numeroAvaliacoesContratante++;
+		//faz a media do valor total e seta o valor na avaliacao do contratante
 		Double mediaCompromisso=(valorAntigoCompromisso+avCompromisso)/this.numeroAvaliacoesContratante;
 		this.setAvaliacaoCompromisso(mediaCompromisso);
-		
-		Double valorAntigoCordialidade=this.getAvaliacaoCompromisso()*numeroAvaliacoesContratante;
-		this.numeroAvaliacoesContratante++;
 		Double mediaCordialidade=(valorAntigoCordialidade+avCordialidade)/this.numeroAvaliacoesContratante;
 		this.setAvaliacaoCompromisso(mediaCordialidade);
 	}

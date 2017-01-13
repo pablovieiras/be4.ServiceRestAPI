@@ -3,7 +3,8 @@ package be4service2.service;
 import java.math.BigDecimal;
 import java.util.List;
 
-import be4service2.models.Avaliacao;
+import be4service2.models.AvaliacaoContratante;
+import be4service2.models.AvaliacaoProfissional;
 import be4service2.models.Contratante;
 import be4service2.models.ContratanteProfissional;
 import be4service2.models.Profissional;
@@ -38,9 +39,11 @@ public interface ServicoService {
 	
 	void fazerProposta(Profissional p,Servico servico,Proposta proposta);
 	
-	void avaliaProfissional(Integer idServico,Avaliacao avaliacao);
+	void avaliaProfissional(Integer idServico,AvaliacaoProfissional avaliacao);
 	
-	void avaliaContratante(Integer idServico, Avaliacao avaliacao) ;
+	void avaliaContratante(Integer idServico, AvaliacaoContratante avaliacao) ;
 	
 	void finalizarServico (Servico servico);
+	
+	List<Servico> getListaServicosContratados(Contratante contratante);
 }

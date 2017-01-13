@@ -2,6 +2,7 @@ package be4service2.daos;
 
 import java.util.List;
 
+import be4service2.models.Contratante;
 import be4service2.models.Servico;
 
 public interface ServicoDao {
@@ -16,6 +17,6 @@ public interface ServicoDao {
 
 	void update(Servico servico);
 	
-	
+	List<Servico> allId(Contratante contratante);
 	
 }

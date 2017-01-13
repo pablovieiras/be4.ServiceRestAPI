@@ -7,12 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import be4service2.daos.AvaliacaoDao;
+import be4service2.daos.AvaliacaoContratanteDao;
+import be4service2.daos.AvaliacaoProfissionalDao;
 import be4service2.daos.ContratanteDao;
 import be4service2.daos.ProfissionalDao;
 import be4service2.daos.PropostaDao;
 import be4service2.daos.ServicoDao;
-import be4service2.models.Avaliacao;
+import be4service2.models.AvaliacaoContratante;
+import be4service2.models.AvaliacaoProfissional;
 import be4service2.models.Contratante;
 import be4service2.models.ContratanteProfissional;
 import be4service2.models.Profissional;
@@ -30,7 +32,9 @@ public class ServicolServiceImpl implements ServicoService {
 	 @Autowired
 	   private ProfissionalDao profissionalDao;
 	 @Autowired
-	   private AvaliacaoDao avaliacaoDao;
+	   private AvaliacaoContratanteDao avaliacaoContratanteDao;
+	 @Autowired
+	   private AvaliacaoProfissionalDao avaliacaoProfissionalDao;
 	 @Autowired
 	   private ContratanteDao contratanteDao;
 	
@@ -67,7 +71,7 @@ public class ServicolServiceImpl implements ServicoService {
 	@Override
 	public void criarServico(Contratante contratante,Servico servico) {
 		servico.setContratante(contratante);
-		contratante.getServicosContratados().add(servico);
+		
 		servico.setStatus("Aberto");
 		servicoDao.save(servico);
 	}
@@ -83,7 +87,7 @@ public class ServicolServiceImpl implements ServicoService {
 	public void selecionarProfissional(Profissional profissional, Servico servico,BigDecimal valor) {
 		if(profissional!=null){
 			servico.setProfissional(profissional);
-			profissional.getServicosPrestados().add(servico);
+		
 			servico.setStatus("Aguardando Aceitação do Profissional");
 			servico.setValor(valor);
 			servicoDao.update(servico);
@@ -101,7 +105,7 @@ public class ServicolServiceImpl implements ServicoService {
 	public void selecionarProfissional(Profissional profissional, Servico servico) {
 		if(profissional!=null){
 			servico.setProfissional(profissional);
-			profissional.getServicosPrestados().add(servico);
+
 			servico.setStatus("Aguardando Aceitação do Profissional");
 			servicoDao.update(servico);
 		}else{
@@ -137,10 +141,6 @@ public class ServicolServiceImpl implements ServicoService {
 			
 			//muda o status
 			servico.setStatus("Aberto");
-			//cria um objeto profissional e seta o profissional do servico
-			Profissional p=(Profissional) servico.getProfissional();
-			//remove o serviço da lista do profissional
-			p.getServicosPrestados().remove(servico.getIdServico());
 			//remove o profissional do serviço
 			servico.setProfissional(null);	
 			//remove o valor
@@ -179,20 +179,22 @@ public class ServicolServiceImpl implements ServicoService {
 	}
 
 	@Override
-	public void avaliaProfissional(Integer idServico, Avaliacao avaliacao)  {
+	public void avaliaProfissional(Integer idServico, AvaliacaoProfissional avaliacaoProfissional)  {
 		
 		//busca o id do servico e guarda em uma variavel
 		Servico servico=servicoDao.findById(idServico);
 		
 		if(servico.getStatus().equals("Em Andamento")||servico.getStatus().equals("Finalizado")){
 			//guarda o servico dentro da avaliacao
-			avaliacao.setServico(servico);
+			avaliacaoProfissional.setServico(servico);
 			//guarda o profissional dentro da avaliacao
-			avaliacao.setProfissional(servico.getProfissional());
+			avaliacaoProfissional.setProfissional(servico.getProfissional());
 			Profissional p=profissionalDao.findById(servico.getProfissional().getId());
-			p.mediaAvaliacao(avaliacao.getAvaliacaoProfissional());
+			p.mediaAvaliacao(avaliacaoProfissional.getAvaliacaoQualidade(),avaliacaoProfissional.getAvaliacaoPreco(),avaliacaoProfissional.getAvaliacaoPontualidade());
+			profissionalDao.update(p);
 			//salvar a avaliacao
-			avaliacaoDao.save(avaliacao);
+			avaliacaoProfissionalDao.save(avaliacaoProfissional);
+			
 		}
 		else{
 			try {
@@ -205,20 +207,20 @@ public class ServicolServiceImpl implements ServicoService {
 	}
 	
 	@Override
-	public void avaliaContratante(Integer idServico, Avaliacao avaliacao)  {
+	public void avaliaContratante(Integer idServico, AvaliacaoContratante avaliacaoContratante)  {
 		
 		//busca o id do servico e guarda em uma variavel
 		Servico servico=servicoDao.findById(idServico);
 		
 		if(servico.getStatus().equals("Em Andamento")||servico.getStatus().equals("Finalizado")){
 			//guarda o servico dentro da avaliacao
-			avaliacao.setServico(servico);
-			//guarda o profissional dentro da avaliacao
-			avaliacao.setContratante(servico.getContratante());
+			avaliacaoContratante.setServico(servico);
+			//guarda o contratante dentro da avaliacao
+			avaliacaoContratante.setContratante(servico.getContratante());
 			Contratante c=contratanteDao.findById(servico.getContratante().getId());
-			//////////////// mudarrrc.mediaAvaliacao(avaliacao.getAvaliacaoContratante());
+			c.mediaAvaliacao(avaliacaoContratante.getAvaliacaoCordialidade(),avaliacaoContratante.getAvaliacaoCompromisso());
 			//salvar a avaliacao
-			avaliacaoDao.save(avaliacao);
+			avaliacaoContratanteDao.save(avaliacaoContratante);
 		}
 		else{
 			try {
@@ -228,6 +230,12 @@ public class ServicolServiceImpl implements ServicoService {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@Override
+	public List<Servico> getListaServicosContratados(Contratante contratante) {
+	
+		return servicoDao.allId(contratante);
 	}
 
 	

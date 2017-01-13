@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import be4service2.models.Avaliacao;
+import be4service2.models.AvaliacaoProfissional;
 import be4service2.models.Contratante;
 import be4service2.models.ContratanteProfissional;
 import be4service2.models.Servico;
@@ -50,8 +50,15 @@ public class ContratanteController
    
    @RequestMapping(value="/{id}",method = RequestMethod.GET)
    public Contratante findById(@PathVariable("id") Integer id)
-   {
-      return contratanteService.findById(id);
+   { 
+	   return  contratanteService.findById(id); 
+   }
+   
+   @RequestMapping(value="/{id}/servicosContratados",method = RequestMethod.GET)
+   public List<Servico> getAllServicosContratados(@PathVariable("id") Integer id)
+   { 
+	   return servicoService.getListaServicosContratados(contratanteService.findById(id));
+			   
    }
    
 /*   produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE*/
@@ -101,8 +108,9 @@ public class ContratanteController
 	 }
 
 	@RequestMapping(value="/servico/{id_servico}/avaliaProfissional",method = RequestMethod.POST)
-	public void avaliaProfissional(@PathVariable("id_servico")Integer idServico,@RequestBody Avaliacao avaliacao){
-		servicoService.avaliaProfissional(idServico, avaliacao);
+	public void avaliaProfissional(@PathVariable("id_servico")Integer idServico,@RequestBody AvaliacaoProfissional avaliacaoProfissional){
+		System.out.println("****************************************************************"+avaliacaoProfissional.toString());
+		servicoService.avaliaProfissional(idServico, avaliacaoProfissional);
 	}
 	
 	@RequestMapping(value="/servico/{id_servico}/finalizarServico",method = RequestMethod.PUT)

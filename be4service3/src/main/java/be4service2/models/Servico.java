@@ -32,8 +32,7 @@ public class Servico {
 	@OneToMany(mappedBy="servico")
 	private List<Proposta> listaProposta=new ArrayList<>();
 	
-	@OneToMany(mappedBy="servico")
-	private List<Avaliacao> avaliacao=new ArrayList<>();
+
 	private String titulo;
 	private String status;
 	private BigDecimal valor;
@@ -43,11 +42,10 @@ public class Servico {
 	
 	
 
-	public Servico(Pessoa contratante, List<Avaliacao> avaliacao, String titulo, String status, BigDecimal valor,
+	public Servico(Pessoa contratante, String titulo, String status, BigDecimal valor,
 			int prazoEstimado, String competencias, String descricao) {
 		super();
 		this.contratante = contratante;
-		this.avaliacao = avaliacao;
 		this.titulo = titulo;
 		this.status = status;
 		this.valor = valor;
@@ -75,19 +73,6 @@ public class Servico {
 
 	public void setIdServico(Integer idServico) {
 		this.idServico = idServico;
-	}
-	
-	
-
-	
-
-	public List<Avaliacao> getAvaliacao() {
-		return avaliacao;
-	}
-
-
-	public void setAvaliacao(List<Avaliacao> avaliacao) {
-		this.avaliacao = avaliacao;
 	}
 
 
@@ -131,7 +116,7 @@ public class Servico {
 	}
 
 
-	@JsonIgnore
+
 	public Pessoa getContratante() {
 		return contratante;
 	}
@@ -141,7 +126,7 @@ public class Servico {
 		this.contratante = contratante;
 	}
 
-	@JsonIgnore
+
 	public Pessoa getProfissional() {
 		return profissional;
 	}
