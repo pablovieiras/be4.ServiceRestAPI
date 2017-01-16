@@ -2,7 +2,7 @@ package be4service2.daos;
 
 import java.util.List;
 
-import be4service2.models.ContratanteProfissional;
+import be4service2.models.Pessoa;
 import be4service2.models.Profissional;
 
 public interface ProfissionalDao {
@@ -18,7 +18,5 @@ public interface ProfissionalDao {
 	void update(Profissional profissional);
 	
 	void tornarContratante(Integer id);
-
-
-
-}
+	
+	}
