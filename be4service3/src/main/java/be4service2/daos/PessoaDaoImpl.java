@@ -14,28 +14,11 @@ public class PessoaDaoImpl {
 	@PersistenceContext
 	private EntityManager manager;
 
-	public List<Pessoa> all() {
-		return manager.createQuery("select c from Pessoa c", Pessoa.class).getResultList();
-	}
 
-	
-	public void save(Pessoa pessoa) {
-		manager.persist(pessoa);
-	}
-
-	
 	public Pessoa findById(Integer id) {
-		return manager.find(Pessoa.class, id);
+		return manager.find(Pessoa.class, "select c.id from Pessoa c");
 	}
+	
+	
 
-	
-	public void remove(Pessoa pessoa) {
-		manager.remove(pessoa);
-	}
-
-	
-	public void update(Pessoa pessoa) {
-		manager.merge(pessoa);
-	}
-	
 }
