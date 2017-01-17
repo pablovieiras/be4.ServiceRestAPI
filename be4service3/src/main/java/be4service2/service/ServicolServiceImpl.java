@@ -78,7 +78,7 @@ public class ServicolServiceImpl implements ServicoService {
 	
 	@Override
 	public void finalizarServico(Servico servico) {
-		servico.setStatus("finalizado");
+		servico.setStatus("Finalizado");
 		servicoDao.update(servico);
 	}
 	
