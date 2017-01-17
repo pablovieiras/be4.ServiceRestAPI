@@ -18,13 +18,13 @@ public class PessoaDaoImpl {
 	}
 	
 	public Pessoa verificaLogin (String login, String senha){
-		String ss="select p from Pessoa p where p.email=':email' && p.senha=':senha'";
+		String ss="select p from Pessoa p where p.email=:emailurl AND p.senha=:senhaurl";
 		
 		javax.persistence.Query query = manager.createQuery(ss);
-		query.setParameter("email", login);
-		query.setParameter("senha", senha);
-		/*Pessoa p = (Pessoa) query.getSingleResult();
-		String[] params={this.verificaTipo(p.getId()),p.getId()+""};*/
+		query.setParameter("emailurl", login);
+		query.setParameter("senhaurl", senha);
+		Pessoa p = (Pessoa) query.getSingleResult();
+		String[] params={this.verificaTipo(p.getId()),p.getId()+""};
 		
 		return (Pessoa) query.getSingleResult();
 		

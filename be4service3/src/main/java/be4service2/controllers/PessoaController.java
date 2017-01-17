@@ -16,7 +16,7 @@ public class PessoaController {
 	@Autowired
     private PessoaDaoImpl pessoaDao;
 	
-	@RequestMapping(value="/{email}/{senha}",method = RequestMethod.POST)
+	@RequestMapping(value="email/{email}/senha/{senha}",method = RequestMethod.POST)
 	  public Pessoa verificaLogin(@PathVariable("email") String email, @PathVariable("senha") String senha){
 		return pessoaDao.verificaLogin(email, senha);
 		   
