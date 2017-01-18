@@ -2,7 +2,6 @@ package be4service2.service;
 
 import java.util.List;
 
-import be4service2.models.ContratanteProfissional;
 import be4service2.models.Profissional;
 
 public interface ProfissionalService {

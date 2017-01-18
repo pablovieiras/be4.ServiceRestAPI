@@ -1,6 +1,5 @@
 package be4service2.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +29,7 @@ public class ContratanteProfissionalController
 	private ProfissionalService profissionalService;
 		
 	
-	private List<ContratanteProfissional> contratanteProfissional;
-	public ContratanteProfissionalController(){
-		contratanteProfissional=new ArrayList<ContratanteProfissional>();
-		//contratanteProfissional.add(new ContratanteProfissional(1,"aa","aa","aa"));
-		//contratanteProfissional.add(new ContratanteProfissional(2,"bb","bb","bb"));
-		//contratanteProfissional.add(new ContratanteProfissional(2,"cc","cc","cc"));
-	}
+
 	
    @RequestMapping(method = RequestMethod.GET)
    public List<ContratanteProfissional> load()
@@ -50,9 +43,7 @@ public class ContratanteProfissionalController
       return contratanteProfissionalService.findById(id);
    }
    
-/*   produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE*/
-   
-   
+  
 	@RequestMapping(value="/save",method = RequestMethod.POST)
 	  public void save(@RequestBody ContratanteProfissional contratanteProfissional){
 		
@@ -91,10 +82,5 @@ public class ContratanteProfissionalController
 	
 		   	servicoService.selecionarProfissional(profissionalService.findById(id),servicoService.findById(idServico));
 	 }
-
-
-
-
-
 
 }

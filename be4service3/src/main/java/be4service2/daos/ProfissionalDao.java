@@ -2,7 +2,6 @@ package be4service2.daos;
 
 import java.util.List;
 
-import be4service2.models.Pessoa;
 import be4service2.models.Profissional;
 
 public interface ProfissionalDao {

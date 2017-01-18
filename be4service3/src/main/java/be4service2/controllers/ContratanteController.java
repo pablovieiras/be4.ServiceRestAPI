@@ -1,16 +1,13 @@
 package be4service2.controllers;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import be4service2.models.AvaliacaoProfissional;
 import be4service2.models.Contratante;
 import be4service2.models.ContratanteProfissional;
@@ -34,13 +31,6 @@ public class ContratanteController
 	@Autowired
 	private ServicoService servicoService;
 		
-	private List<Contratante> contratante;
-	public ContratanteController(){
-		contratante=new ArrayList<Contratante>();
-		//contratante.add(new Contratante(1,"aa","aa","aa"));
-		//contratante.add(new Contratante(2,"bb","bb","bb"));
-		//contratante.add(new Contratante(2,"cc","cc","cc"));
-	}
 	
    @RequestMapping(method = RequestMethod.GET)
    public List<Contratante> load()
@@ -60,8 +50,6 @@ public class ContratanteController
 	   return servicoService.getListaServicosContratados(contratanteService.findById(id));
 			   
    }
-   
-/*   produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE*/
    
    
 	@RequestMapping(value="/save",method = RequestMethod.POST)

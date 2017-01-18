@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import be4service2.daos.ProfissionalDao;
-import be4service2.models.ContratanteProfissional;
 import be4service2.models.Profissional;
 
 @Service
