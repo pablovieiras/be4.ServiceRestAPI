@@ -36,6 +36,7 @@ public class ContratanteServiceImpl implements ContratanteService {
 
 	@Override
 	public void save(Contratante contratante) {
+		contratante.setTipo("contratante");
 		 contratanteDao.save(contratante);
 		
 	}
@@ -62,10 +63,12 @@ public class ContratanteServiceImpl implements ContratanteService {
 	@Override
 	public void tornarProfissional(Integer id,ContratanteProfissional contratante) {
 		Contratante c=contratanteDao.findById(id);
-		if(c.getCpf()!=null){
+	/*	if(c.getCpf()!=null){
 			contratante.setCpf(c.getCpf());
 		}
-		
+		if(c.getBairro()!=null){
+			contratante.setCpf(c.getBairro());
+		}*/
 		System.out.println(contratante);
 		
 		

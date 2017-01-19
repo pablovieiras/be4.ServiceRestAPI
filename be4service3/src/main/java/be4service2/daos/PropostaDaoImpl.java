@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 
 import be4service2.models.Proposta;
+import be4service2.models.Servico;
 
 @Repository
 public class PropostaDaoImpl implements PropostaDao {
@@ -41,6 +42,28 @@ public class PropostaDaoImpl implements PropostaDao {
 	@Override
 	public void update(Proposta proposta) {
 		manager.merge(proposta);
+	}
+
+
+	@Override
+	public void mudarStatusParaRejeitado(Integer idServico, Integer idSelecionado) {
+		String ss="UPDATE Proposta p set status='Rejeitado' where p.id=:idServico AND p.id!=:idselecionado";
+		   javax.persistence.Query query = manager.createQuery(ss);
+		   query.setParameter("idServicol", idServico);
+		   query.setParameter("idselecionado", idSelecionado);
+		   query.executeUpdate();
+		
+	}
+
+
+	@Override
+	public void mudarStatusParaRejeitadoDaPropostaRecusada(Integer idServico, Integer idSelecionado) {
+		String ss="UPDATE Proposta p set status='Rejeitado' where p.id!=:idselecionado";
+		   javax.persistence.Query query = manager.createQuery(ss);
+		   query.setParameter("idServicol", idServico);
+		   query.setParameter("idselecionado", idSelecionado);
+		   query.executeUpdate();
+		
 	}
 	
 }

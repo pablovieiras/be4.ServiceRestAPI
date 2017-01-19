@@ -20,12 +20,14 @@ public class Proposta {
 	@JoinColumn(name="id_servico")
 	private Servico servico;
 	@ManyToOne
-	@JoinColumn(name="id_profissional")
-	private Profissional profissional;
+	@JoinColumn(name="id_pessoa")
+	private Pessoa pessoa;
+
 	private String titulo;
 	private BigDecimal valorProposta;
 	private int prazoEstimado;
 	private String descricao;
+	private String status;
 	
 	public Proposta(){
 		
@@ -40,7 +42,7 @@ public class Proposta {
 	public Proposta(Servico servico, Profissional profissional, BigDecimal valorProposta) {
 		super();
 		this.servico = servico;
-		this.profissional = profissional;
+		this.pessoa = pessoa;
 		this.valorProposta = valorProposta;
 	}
 	
@@ -48,7 +50,7 @@ public class Proposta {
 		super();
 		this.idProposta = idProposta;
 		this.servico = servico;
-		this.profissional = profissional;
+		this.pessoa = pessoa;
 		this.valorProposta = valorProposta;
 	}
 
@@ -56,20 +58,14 @@ public class Proposta {
 		super();
 		this.valorProposta = valorProposta;
 	}
-	@JsonIgnore
+
 	public Servico getServico() {
 		return servico;
 	}
 	public void setServico(Servico servico) {
 		this.servico = servico;
 	}
-	@JsonIgnore
-	public Profissional getProfissional() {
-		return profissional;
-	}
-	public void setProfissional(Profissional profissional) {
-		this.profissional = profissional;
-	}
+	
 	public BigDecimal getValorProposta() {
 		return valorProposta;
 	}
@@ -85,11 +81,48 @@ public class Proposta {
 		this.idProposta = idProposta;
 	}
 
-	@Override
-	public String toString() {
-		return "Proposta [idProposta=" + idProposta + ", servico=" + servico + ", profissional=" + profissional
-				+ ", valorProposta=" + valorProposta + "]";
+	public String getTitulo() {
+		return titulo;
 	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public int getPrazoEstimado() {
+		return prazoEstimado;
+	}
+
+	public void setPrazoEstimado(int prazoEstimado) {
+		this.prazoEstimado = prazoEstimado;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
+	}
+
+	
+
+
 	
 	
 	

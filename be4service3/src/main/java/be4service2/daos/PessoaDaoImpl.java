@@ -23,8 +23,8 @@ public class PessoaDaoImpl {
 		javax.persistence.Query query = manager.createQuery(ss);
 		query.setParameter("emailurl", login);
 		query.setParameter("senhaurl", senha);
-		Pessoa p = (Pessoa) query.getSingleResult();
-		String[] params={this.verificaTipo(p.getId()),p.getId()+""};
+		//Pessoa p = (Pessoa) query.getSingleResult();
+		//String[] params={this.verificaTipo(p.getId()),p.getId()+""};
 		
 		return (Pessoa) query.getSingleResult();
 		

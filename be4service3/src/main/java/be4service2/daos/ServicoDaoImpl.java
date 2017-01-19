@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import be4service2.models.Contratante;
+import be4service2.models.Proposta;
 import be4service2.models.Servico;
 
 @Repository
@@ -22,8 +23,9 @@ public class ServicoDaoImpl implements ServicoDao {
 	}
 
 	@Override
-	public void save(Servico servico) {
+	public Servico save(Servico servico) {
 		manager.persist(servico);
+		return servico;
 	}
 
 	@Override
@@ -59,6 +61,15 @@ public class ServicoDaoImpl implements ServicoDao {
 		   javax.persistence.Query query = manager.createQuery(ss);
 		 return query.getResultList();
 
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Proposta> listaPropostasServico(Servico servico) {
+		String ss="select s from Proposta s where s.id_servico=:ids";
+		   javax.persistence.Query query = manager.createQuery(ss);
+		   query.setParameter("ids", servico.getIdServico());
+		return query.getResultList();
 	}
 
 

@@ -10,7 +10,7 @@ import be4service2.daos.PessoaDaoImpl;
 import be4service2.models.Pessoa;
 
 @RestController
-@RequestMapping(value= "/login")
+@RequestMapping(value= "/login2")
 public class PessoaController {
 	
 	@Autowired
@@ -18,7 +18,9 @@ public class PessoaController {
 	
 	@RequestMapping(value="email/{email}/senha/{senha}",method = RequestMethod.POST)
 	  public Pessoa verificaLogin(@PathVariable("email") String email, @PathVariable("senha") String senha){
+		
 		return pessoaDao.verificaLogin(email, senha);
+		
 		   
 	   }
 	

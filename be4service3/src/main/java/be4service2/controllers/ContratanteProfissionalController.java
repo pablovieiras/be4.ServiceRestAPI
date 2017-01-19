@@ -29,15 +29,6 @@ public class ContratanteProfissionalController
 	@Autowired
 	private ProfissionalService profissionalService;
 		
-	
-	private List<ContratanteProfissional> contratanteProfissional;
-	public ContratanteProfissionalController(){
-		contratanteProfissional=new ArrayList<ContratanteProfissional>();
-		//contratanteProfissional.add(new ContratanteProfissional(1,"aa","aa","aa"));
-		//contratanteProfissional.add(new ContratanteProfissional(2,"bb","bb","bb"));
-		//contratanteProfissional.add(new ContratanteProfissional(2,"cc","cc","cc"));
-	}
-	
    @RequestMapping(method = RequestMethod.GET)
    public List<ContratanteProfissional> load()
    {

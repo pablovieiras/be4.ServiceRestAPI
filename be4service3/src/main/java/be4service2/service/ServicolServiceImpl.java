@@ -1,7 +1,8 @@
 package be4service2.service;
 
-import java.math.BigDecimal;
 import java.util.List;
+
+import javax.servlet.ServletException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import be4service2.models.AvaliacaoContratante;
 import be4service2.models.AvaliacaoProfissional;
 import be4service2.models.Contratante;
 import be4service2.models.ContratanteProfissional;
+import be4service2.models.Pessoa;
 import be4service2.models.Profissional;
 import be4service2.models.Proposta;
 import be4service2.models.Servico;
@@ -69,11 +71,12 @@ public class ServicolServiceImpl implements ServicoService {
 	}
 
 	@Override
-	public void criarServico(Contratante contratante,Servico servico) {
+	public Servico criarServico(Contratante contratante,Servico servico) {
 		servico.setContratante(contratante);
 		
 		servico.setStatus("Aberto");
-		servicoDao.save(servico);
+		return servicoDao.save(servico);
+		 
 	}
 	
 	@Override
@@ -84,25 +87,25 @@ public class ServicolServiceImpl implements ServicoService {
 	
 
 	@Override
-	public void selecionarProfissional(Profissional profissional, Servico servico,BigDecimal valor) {
-		if(profissional!=null){
-			servico.setProfissional(profissional);
-		
-			servico.setStatus("Aguardando Aceitação do Profissional");
-			servico.setValor(valor);
-			servicoDao.update(servico);
-		}else{
-			try {
-				throw new Exception("Profissional não cadastrado.");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+	public void selecionarProfissional(Profissional profissional, Servico servico,Integer idProposta) throws ServletException {
+		if(profissional==null){
+			throw new ServletException("Profissional invalido");
 		}
+		Proposta p=propostaDao.findById(idProposta);
+		if(p==null){
+			throw new ServletException("proposta não existe");
+		}
+		
+		servico.setProfissional(profissional);
+		servico.setStatus("Aguardando Aceitação do Profissional");
+		
+		servico.setValor(p.getValorProposta());
+		servicoDao.update(servico);
 		
 	}
 	
 	@Override
-	public void selecionarProfissional(Profissional profissional, Servico servico) {
+	public void selecionarProfissional(Pessoa profissional, Servico servico) {
 		if(profissional!=null){
 			servico.setProfissional(profissional);
 
@@ -138,7 +141,8 @@ public class ServicolServiceImpl implements ServicoService {
 		//busca o servico
 		Servico servico=servicoDao.findById(id);
 		if(resposta==0){
-			
+			//muda status da proposta no banco
+			propostaDao.mudarStatusParaRejeitadoDaPropostaRecusada(servico.getIdServico(), servico.getProfissional().getId());
 			//muda o status
 			servico.setStatus("Aberto");
 			//remove o profissional do serviço
@@ -148,42 +152,41 @@ public class ServicolServiceImpl implements ServicoService {
 		}
 		else{
 			servico.setStatus("Em Andamento");
-			servico.limpa(servico.getListaProposta());//pode
+			propostaDao.mudarStatusParaRejeitado(servico.getIdServico(), servico.getProfissional().getId());
 			servicoDao.update(servico);//remover
-			/*servico.setListaProposta(new ArrayList<>());
-			servicoDao.update(servico);
-			Profissional p= profissionalDao.findById(servico.getProfissional().getId());
-			p.setListaProposta(new ArrayList<>());*/
+			
 		}
 		
 	}
 
 	@Override
-	public void fazerProposta(Profissional profissional,Servico servico, Proposta proposta) {
-		proposta.setProfissional(profissional);
-		proposta.setServico(servico);
-		profissional.getListaProposta().add(proposta);
-		servico.getListaProposta().add(proposta);
-		
+	public void fazerProposta(Pessoa pessoa,Servico servico, Proposta proposta) {
+		proposta.setPessoa(pessoa);
+		proposta.setServico(servico);		
 		propostaDao.save(proposta);
 		
 	}
+	
 
 	@Override
 	public void selecionarProposta(Integer id, Servico servico) {
-		Proposta p= propostaDao.findById(id);
-		servico.setProfissional(p.getProfissional());
-		servico.setValor(p.getValorProposta());
-		this.selecionarProfissional(p.getProfissional(), servico);
+		Proposta proposta= propostaDao.findById(id);
+		servico.setProfissional(proposta.getPessoa());
+		servico.setValor(proposta.getValorProposta());
+		this.selecionarProfissional(proposta.getPessoa(), servico);
 		
 	}
 
 	@Override
-	public void avaliaProfissional(Integer idServico, AvaliacaoProfissional avaliacaoProfissional)  {
+	public void avaliaProfissional(Integer idServico, AvaliacaoProfissional avaliacaoProfissional) throws ServletException  {
 		
 		//busca o id do servico e guarda em uma variavel
 		Servico servico=servicoDao.findById(idServico);
 		
+		if(servico.isAvaliacaoProfissional()==true){
+			throw new ServletException("avaliação ja realizada");
+		}
+		servico.setAvaliacaoProfissional(true);
 		if(servico.getStatus().equals("Em Andamento")||servico.getStatus().equals("Finalizado")){
 			//guarda o servico dentro da avaliacao
 			avaliacaoProfissional.setServico(servico);
@@ -242,6 +245,13 @@ public class ServicolServiceImpl implements ServicoService {
 	public List<Servico> listarAbertos() {
 
 		return servicoDao.listarAbertos();
+	}
+
+	@Override
+	public List<Proposta> listaPropostasServico(Servico servico) {
+
+		return servicoDao.listaPropostasServico(servico);
+
 	}
 
 	

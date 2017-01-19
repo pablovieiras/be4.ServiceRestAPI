@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="tipo",discriminatorType=DiscriminatorType.STRING)
+@DiscriminatorColumn(name="tipoPessoa",discriminatorType=DiscriminatorType.STRING)
 public abstract class Pessoa {
 	
 	@Id
@@ -25,7 +25,7 @@ public abstract class Pessoa {
 	private Integer id;
 	private String nome;
 	private String cpf;
-	private Date dataNascimento;
+	private String dataNascimento;
 	private String email;
 	private String senha;
 	private String telefone;
@@ -37,16 +37,20 @@ public abstract class Pessoa {
 	private String bairro;
 	private String complemento;
 	private String foto;
+	private String chave;
+	private String tipo;
 
-	
-	public Pessoa(String nome, String cpf, Date dataNascimento, String email, String senha, String celular, String cep,
-			String lougradouro, String numero, String cidade, String bairro, String complemento, String foto) {
+	public Pessoa(Integer id, String nome, String cpf, String dataNascimento, String email, String senha, String telefone,
+			String celular, String cep, String lougradouro, String numero, String cidade, String bairro,
+			String complemento, String foto, String chave) {
 		super();
+		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
 		this.email = email;
 		this.senha = senha;
+		this.telefone = telefone;
 		this.celular = celular;
 		this.cep = cep;
 		this.lougradouro = lougradouro;
@@ -55,6 +59,7 @@ public abstract class Pessoa {
 		this.bairro = bairro;
 		this.complemento = complemento;
 		this.foto = foto;
+		this.chave = chave;
 	}
 
 	public Pessoa(String nome, String email, String senha, String celular, String foto) {
@@ -69,7 +74,7 @@ public abstract class Pessoa {
 	public Pessoa() {
 		super();
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -89,11 +94,11 @@ public abstract class Pessoa {
 		this.cpf = cpf;
 	}
 	
-	public Date getDataNascimento() {
+	public String getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(String dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
@@ -104,8 +109,7 @@ public abstract class Pessoa {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	@JsonIgnore
+
 	public String getSenha() {
 		return senha;
 	}
@@ -212,8 +216,29 @@ public abstract class Pessoa {
 
 	@Override
 	public String toString() {
-		return "Pessoa [id=" + id + ", nome=" + nome + ", cpf=" + cpf + "]";
+		return "Pessoa [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", dataNascimento=" + dataNascimento
+				+ ", email=" + email + ", senha=" + senha + ", telefone=" + telefone + ", celular=" + celular + ", cep="
+				+ cep + ", lougradouro=" + lougradouro + ", numero=" + numero + ", cidade=" + cidade + ", bairro="
+				+ bairro + ", complemento=" + complemento + ", foto=" + foto + "]";
 	}
+
+	public String getChave() {
+		return chave;
+	}
+
+	public void setChave(String chave) {
+		this.chave = chave;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+
 
 	
 }

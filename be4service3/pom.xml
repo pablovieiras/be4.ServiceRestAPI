@@ -58,6 +58,13 @@
       <artifactId>spring-boot-starter-web</artifactId>
       <scope>compile</scope>
     </dependency>
+    <!-- web token  -->
+	<dependency>
+		<groupId>io.jsonwebtoken</groupId>
+		<artifactId>jjwt</artifactId>
+		<version>0.7.0</version>
+	</dependency>
+    
     <dependency>
       <groupId>javax.servlet.jsp.jstl</groupId>
       <artifactId>jstl-api</artifactId>

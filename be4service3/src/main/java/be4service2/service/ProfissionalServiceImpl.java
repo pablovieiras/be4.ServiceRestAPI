@@ -24,7 +24,8 @@ public class ProfissionalServiceImpl implements ProfissionalService {
 
 	@Override
 	public void save(Profissional profissional) {
-		 profissionalDao.save(profissional);
+		profissional.setTipo("profissional");
+		profissionalDao.save(profissional);
 		
 	}
 

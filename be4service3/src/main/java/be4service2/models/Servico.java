@@ -28,10 +28,8 @@ public class Servico {
 	@ManyToOne
 	@JoinColumn(name="id_profissional")
 	private Pessoa profissional;
-
-	@OneToMany(mappedBy="servico")
-	private List<Proposta> listaProposta=new ArrayList<>();
-	
+	private boolean avaliacaoContratante=false;
+	private boolean avaliacaoProfissional=false;
 
 	private String titulo;
 	private String status;
@@ -153,23 +151,13 @@ public class Servico {
 		this.status = status;
 	}
 
-	
-	public List<Proposta> getListaProposta() {
-		return listaProposta;
-	}
-
-
-	public void setListaProposta(List<Proposta> listaProposta) {
-		this.listaProposta = listaProposta;
-	}
-	
-	public void limpa(List<Proposta> listaProposta) {
+/*	public void limpa(List<Proposta> listaProposta) {
 		for (int i = listaProposta.size()-1; i >=0; i--) {
 			listaProposta.remove(i);
 		}
 		System.out.println(listaProposta.size());
 	}
-
+*/
 
 	public BigDecimal getValor() {
 		return valor;
@@ -178,6 +166,26 @@ public class Servico {
 
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
+	}
+
+
+	public boolean isAvaliacaoContratante() {
+		return avaliacaoContratante;
+	}
+
+
+	public void setAvaliacaoContratante(boolean avaliacaoContratante) {
+		this.avaliacaoContratante = avaliacaoContratante;
+	}
+
+
+	public boolean isAvaliacaoProfissional() {
+		return avaliacaoProfissional;
+	}
+
+
+	public void setAvaliacaoProfissional(boolean avaliacaoProfissional) {
+		this.avaliacaoProfissional = avaliacaoProfissional;
 	}
 	
 	

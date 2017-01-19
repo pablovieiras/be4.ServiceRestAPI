@@ -1,8 +1,8 @@
 package be4service2.controllers;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.ServletException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,16 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 import be4service2.models.AvaliacaoProfissional;
 import be4service2.models.Contratante;
 import be4service2.models.ContratanteProfissional;
+import be4service2.models.Proposta;
 import be4service2.models.Servico;
 import be4service2.service.ContratanteService;
 import be4service2.service.ProfissionalService;
 import be4service2.service.ServicoService;
-
+/*   produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE*/
 @RestController
-@RequestMapping(value= "/contratante")
-
-public class ContratanteController
-{
+@RequestMapping(value= "contratante")
+public class ContratanteController{
 
 	@Autowired
     private ContratanteService contratanteService;
@@ -33,86 +32,80 @@ public class ContratanteController
 		
 	@Autowired
 	private ServicoService servicoService;
-		
-	private List<Contratante> contratante;
-	public ContratanteController(){
-		contratante=new ArrayList<Contratante>();
-		//contratante.add(new Contratante(1,"aa","aa","aa"));
-		//contratante.add(new Contratante(2,"bb","bb","bb"));
-		//contratante.add(new Contratante(2,"cc","cc","cc"));
-	}
-	
-   @RequestMapping(method = RequestMethod.GET)
-   public List<Contratante> load()
-   {
-      return contratanteService.all();
-   }
    
-   @RequestMapping(value="/{id}",method = RequestMethod.GET)
-   public Contratante findById(@PathVariable("id") Integer id)
-   { 
-	   return  contratanteService.findById(id); 
-   }
-   
-   @RequestMapping(value="/{id}/servicosContratados",method = RequestMethod.GET)
+    
+@RequestMapping(value="/{id}/servicosContratados",method = RequestMethod.GET)
    public List<Servico> getAllServicosContratados(@PathVariable("id") Integer id)
    { 
 	   return servicoService.getListaServicosContratados(contratanteService.findById(id));
 			   
    }
    
-/*   produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE*/
+    
+@RequestMapping(value="/{id}/propostasServiço",method = RequestMethod.GET)
+   public List<Proposta> getListaPropostasServico(@PathVariable("id") Integer id)
+   { 
+	   return servicoService.listaPropostasServico(servicoService.findById(id));
+			   
+   }
+
    
    
+	 
 	@RequestMapping(value="/save",method = RequestMethod.POST)
 	  public void save(@RequestBody Contratante contratante){
 		
 		   contratanteService.save(contratante);
 	   }
 	
+	 
 	@RequestMapping(value="/{id}",method = RequestMethod.PUT)
 	public void update(@RequestBody Contratante contratante){
 		
 		   contratanteService.update(contratante);
 	 }
-	
 
+	 
 	@RequestMapping(value="/{id}/tornarProfissional",method = RequestMethod.PUT)
 	public void tornarProfissional(@PathVariable("id") Integer id,@RequestBody ContratanteProfissional contratante){
 			
 		   	contratanteService.tornarProfissional(id,contratante);
 	 }
 
-	@RequestMapping(value="/{id}",method = RequestMethod.DELETE)
-	public void remove(@RequestBody Contratante contratante){
-		   contratanteService.remove(contratante);
+	 
+	@RequestMapping(value="/{id}/criarServico",method = RequestMethod.POST)
+	public Servico criarServico(@PathVariable("id") Integer id,@RequestBody Servico servico){
+	
+		   	return servicoService.criarServico(contratanteService.findById(id),servico);
 	 }
 
-	@RequestMapping(value="/{id}/criarServico",method = RequestMethod.POST)
-	public void criarServico(@PathVariable("id") Integer id,@RequestBody Servico servico){
 	
-		   	servicoService.criarServico(contratanteService.findById(id),servico);
-	 }
 	//seleciona um profissional e faz uma oferta para ele fazer o determinado servico
 	@RequestMapping(value="/profissional/{id}/servico/{id_servico}/fazerOferta",method = RequestMethod.POST)
 	public void selecionarProfissional(@PathVariable("id") Integer id,@PathVariable("id_servico") Integer idServico,
-			@RequestBody BigDecimal valor){
+			@PathVariable("id") Integer idProposta) throws ServletException{
 		   	servicoService.selecionarProfissional(profissionalService.findById(id),servicoService.findById(idServico),
-		   			valor);
+		   			idProposta);
 	 }
 
-
+	@RequestMapping(value="/{id}/servico/{idServico}/fazerProposta",method = RequestMethod.POST)
+	public void fazerProposta(@PathVariable("id") Integer id,@PathVariable("idServico") Integer idServico,@RequestBody Proposta proposta){
+		System.out.println(proposta.toString());
+		 	servicoService.fazerProposta(contratanteService.findById(id),servicoService.findById(idServico),proposta);
+	 }
+	 
 	@RequestMapping(value="/servico/{id_servico}/proposta/{id}",method = RequestMethod.POST)
 	public void selecionarProposta(@PathVariable("id") Integer id,@PathVariable("id_servico") Integer idServico){
 		   	servicoService.selecionarProposta(id,servicoService.findById(idServico));
 	 }
 
+	 
 	@RequestMapping(value="/servico/{id_servico}/avaliaProfissional",method = RequestMethod.POST)
-	public void avaliaProfissional(@PathVariable("id_servico")Integer idServico,@RequestBody AvaliacaoProfissional avaliacaoProfissional){
-		System.out.println("****************************************************************"+avaliacaoProfissional.toString());
+	public void avaliaProfissional(@PathVariable("id_servico")Integer idServico,@RequestBody AvaliacaoProfissional avaliacaoProfissional) throws ServletException{
 		servicoService.avaliaProfissional(idServico, avaliacaoProfissional);
 	}
 	
+	 
 	@RequestMapping(value="/servico/{id_servico}/finalizarServico",method = RequestMethod.PUT)
 	public void finalizarServico (@PathVariable("id_servico")Integer idServico){
 		servicoService.finalizarServico(servicoService.findById(idServico));
