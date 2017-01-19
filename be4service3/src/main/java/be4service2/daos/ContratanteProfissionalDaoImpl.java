@@ -7,7 +7,6 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
-import be4service2.models.Contratante;
 import be4service2.models.ContratanteProfissional;
 
 @Repository

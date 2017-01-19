@@ -1,6 +1,5 @@
 package be4service2.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +40,7 @@ public class ContratanteProfissionalController
       return contratanteProfissionalService.findById(id);
    }
    
-/*   produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE*/
-   
-   
+  
 	@RequestMapping(value="/save",method = RequestMethod.POST)
 	  public void save(@RequestBody ContratanteProfissional contratanteProfissional){
 		
@@ -82,10 +79,5 @@ public class ContratanteProfissionalController
 	
 		   	servicoService.selecionarProfissional(profissionalService.findById(id),servicoService.findById(idServico));
 	 }
-
-
-
-
-
 
 }

@@ -4,8 +4,6 @@ import java.util.List;
 
 import be4service2.models.Contratante;
 import be4service2.models.ContratanteProfissional;
-import be4service2.models.Profissional;
-import be4service2.models.Servico;
 
 public interface ContratanteService {
 	List<Contratante> all();
@@ -20,9 +18,4 @@ public interface ContratanteService {
 	
 	void tornarProfissional(Integer id,ContratanteProfissional contratante);
 	
-	/*void criarServico(Contratante contratante,Servico servico);
-	
-	void selecionarProfissional(Profissional profissional,Servico servico);*/
-
-
 }

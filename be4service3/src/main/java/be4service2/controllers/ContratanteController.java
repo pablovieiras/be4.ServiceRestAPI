@@ -1,7 +1,6 @@
 package be4service2.controllers;
 
 import java.util.List;
-
 import javax.servlet.ServletException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import be4service2.models.AvaliacaoProfissional;
 import be4service2.models.Contratante;
 import be4service2.models.ContratanteProfissional;
@@ -42,7 +40,7 @@ public class ContratanteController{
    }
    
     
-@RequestMapping(value="/{id}/propostasServiÃ§o",method = RequestMethod.GET)
+@RequestMapping(value="/{id}/propostasServiço",method = RequestMethod.GET)
    public List<Proposta> getListaPropostasServico(@PathVariable("id") Integer id)
    { 
 	   return servicoService.listaPropostasServico(servicoService.findById(id));
