@@ -3,6 +3,7 @@ package be4service2.daos;
 import java.util.List;
 
 import be4service2.models.Contratante;
+import be4service2.models.Profissional;
 import be4service2.models.Proposta;
 import be4service2.models.Servico;
 
@@ -18,10 +19,14 @@ public interface ServicoDao {
 
 	void update(Servico servico);
 	
-	List<Servico> allId(Contratante contratante);
+	List<Servico> getListaServicosContratados(Contratante contratante);
+	
+	List<Servico> getAllServicosExecutados(Profissional profissional);
 	
 	List<Servico> listarAbertos ();
 	
 	List<Proposta> listaPropostasServico(Servico servico);
+	
+	List<Proposta> getAllPropostasFeitas(Profissional profissional);
 	
 }

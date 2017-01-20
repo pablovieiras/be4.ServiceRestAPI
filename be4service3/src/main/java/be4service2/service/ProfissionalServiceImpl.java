@@ -12,12 +12,12 @@ import be4service2.models.Profissional;
 @Service
 @Transactional
 public class ProfissionalServiceImpl implements ProfissionalService {
-	 @Autowired
-	   private ProfissionalDao profissionalDao;
-	
+	@Autowired
+	private ProfissionalDao profissionalDao;
+
 	@Override
 	public List<Profissional> all() {
-		
+
 		return profissionalDao.all();
 	}
 
@@ -25,30 +25,35 @@ public class ProfissionalServiceImpl implements ProfissionalService {
 	public void save(Profissional profissional) {
 		profissional.setTipo("profissional");
 		profissionalDao.save(profissional);
-		
+
 	}
 
 	@Override
 	public Profissional findById(Integer id) {
-		
+
 		return profissionalDao.findById(id);
 	}
 
 	@Override
 	public void remove(Profissional profissional) {
 		profissionalDao.remove(profissional);
-		
+
 	}
 
 	@Override
 	public void update(Profissional profissional) {
 		profissionalDao.update(profissional);
-		
+
 	}
 
-	public void tornarContratante(Integer id){
+	public void tornarContratante(Integer id) {
 		profissionalDao.tornarContratante(id);
 	}
 
+	@Override
+	public void desativarConta(Profissional profissional) {
+		profissionalDao.desativarConta(profissional);
+		
+	}
 
 }

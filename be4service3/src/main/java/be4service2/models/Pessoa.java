@@ -1,9 +1,5 @@
 package be4service2.models;
 
-
-
-import java.util.Date;
-
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
@@ -13,13 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="tipoPessoa",discriminatorType=DiscriminatorType.STRING)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipoPessoa", discriminatorType = DiscriminatorType.STRING)
 public abstract class Pessoa {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -40,9 +34,9 @@ public abstract class Pessoa {
 	private String chave;
 	private String tipo;
 
-	public Pessoa(Integer id, String nome, String cpf, String dataNascimento, String email, String senha, String telefone,
-			String celular, String cep, String lougradouro, String numero, String cidade, String bairro,
-			String complemento, String foto, String chave) {
+	public Pessoa(Integer id, String nome, String cpf, String dataNascimento, String email, String senha,
+			String telefone, String celular, String cep, String lougradouro, String numero, String cidade,
+			String bairro, String complemento, String foto, String chave) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -78,22 +72,27 @@ public abstract class Pessoa {
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public String getCpf() {
 		return cpf;
 	}
+
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	
+
 	public String getDataNascimento() {
 		return dataNascimento;
 	}
@@ -197,6 +196,7 @@ public abstract class Pessoa {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -238,7 +238,4 @@ public abstract class Pessoa {
 		this.tipo = tipo;
 	}
 
-
-
-	
 }

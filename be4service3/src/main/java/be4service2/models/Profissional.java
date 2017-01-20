@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 public class Profissional extends Pessoa
 {
 	private String profissao;
-	@Column(length=250)
+	@Column(columnDefinition = "text")
 	private String resumoProfissional;
 	private String competencias;
 	private Double avaliacaoQualidade=0.0;

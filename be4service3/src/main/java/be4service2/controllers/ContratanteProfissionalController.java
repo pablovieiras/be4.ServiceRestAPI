@@ -2,6 +2,8 @@ package be4service2.controllers;
 
 import java.util.List;
 
+import javax.servlet.ServletException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -75,7 +77,7 @@ public class ContratanteProfissionalController
 	 }
 	
 	@RequestMapping(value="/profissional/{id}/servico/{id_servico}",method = RequestMethod.POST)
-	public void selecionarProfissional(@PathVariable("id") Integer id,@PathVariable("id_servico") Integer idServico){
+	public void selecionarProfissional(@PathVariable("id") Integer id,@PathVariable("id_servico") Integer idServico) throws ServletException{
 	
 		   	servicoService.selecionarProfissional(profissionalService.findById(id),servicoService.findById(idServico));
 	 }

@@ -60,4 +60,10 @@ public class ContratanteServiceImpl implements ContratanteService {
 		contratanteDao.tornarProfissional(contratante);
 
 	}
+
+	@Override
+	public void desativarConta(Contratante contratante) {
+		contratanteDao.desativarConta(contratante);
+		
+	}
 }

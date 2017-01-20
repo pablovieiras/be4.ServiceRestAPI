@@ -18,4 +18,6 @@ public interface ProfissionalDao {
 	
 	void tornarContratante(Integer id);
 	
+	void desativarConta(Profissional profissional);
+	
 	}

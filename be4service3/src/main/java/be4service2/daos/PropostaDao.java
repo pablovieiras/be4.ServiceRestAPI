@@ -3,7 +3,6 @@ package be4service2.daos;
 import java.util.List;
 
 import be4service2.models.Proposta;
-import be4service2.models.Servico;
 
 public interface PropostaDao {
 
@@ -21,4 +20,5 @@ public interface PropostaDao {
 	
 	void mudarStatusParaRejeitadoDaPropostaRecusada(Integer idServico,Integer idSelecionado);
 
+	void mudarStatusParaAceitoDaPropostaEscolhida(Integer idServico, Integer idSelecionado);
 }

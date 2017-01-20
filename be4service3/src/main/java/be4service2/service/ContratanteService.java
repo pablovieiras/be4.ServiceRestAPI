@@ -6,6 +6,7 @@ import be4service2.models.Contratante;
 import be4service2.models.ContratanteProfissional;
 
 public interface ContratanteService {
+	
 	List<Contratante> all();
 
 	void save(Contratante contratante);
@@ -17,5 +18,7 @@ public interface ContratanteService {
 	void update(Contratante contratante);
 	
 	void tornarProfissional(Integer id,ContratanteProfissional contratante);
+	
+	void desativarConta (Contratante contratante);
 	
 }

@@ -19,7 +19,7 @@ public interface ContratanteDao {
 	void update(Contratante contratante);
 	
 	void tornarProfissional(ContratanteProfissional contratante);
-
-	void criarServico(Contratante contratante);
+	
+	void desativarConta(Contratante contratante);
 
 }

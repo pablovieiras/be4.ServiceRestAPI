@@ -17,6 +17,8 @@ public interface ProfissionalService {
 	void update(Profissional profissional);
 
 	void tornarContratante(Integer id);
+	
+	void desativarConta(Profissional profissional);
 
 
 }

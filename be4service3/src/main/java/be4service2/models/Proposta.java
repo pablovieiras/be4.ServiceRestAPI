@@ -9,30 +9,27 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 public class Proposta {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idProposta;
 	@ManyToOne
-	@JoinColumn(name="id_servico")
+	@JoinColumn(name = "id_servico")
 	private Servico servico;
 	@ManyToOne
-	@JoinColumn(name="id_pessoa")
-	private Pessoa pessoa;
-
+	@JoinColumn(name = "id_profissional")
+	private Profissional profissional;
 	private String titulo;
 	private BigDecimal valorProposta;
 	private int prazoEstimado;
 	private String descricao;
-	private String status;
-	
-	public Proposta(){
-		
+	private String status = "Em Avaliação";
+
+	public Proposta() {
+
 	}
-	
+
 	public Proposta(Servico servico, BigDecimal valorProposta) {
 		super();
 		this.servico = servico;
@@ -42,15 +39,15 @@ public class Proposta {
 	public Proposta(Servico servico, Profissional profissional, BigDecimal valorProposta) {
 		super();
 		this.servico = servico;
-		this.pessoa = pessoa;
+		this.profissional = profissional;
 		this.valorProposta = valorProposta;
 	}
-	
+
 	public Proposta(Integer idProposta, Servico servico, Profissional profissional, BigDecimal valorProposta) {
 		super();
 		this.idProposta = idProposta;
 		this.servico = servico;
-		this.pessoa = pessoa;
+		this.profissional = profissional;
 		this.valorProposta = valorProposta;
 	}
 
@@ -62,16 +59,27 @@ public class Proposta {
 	public Servico getServico() {
 		return servico;
 	}
+
 	public void setServico(Servico servico) {
 		this.servico = servico;
 	}
-	
+
+	public Profissional getProfissional() {
+		return profissional;
+	}
+
+	public void setProfissional(Profissional profissional) {
+		this.profissional = profissional;
+	}
+
 	public BigDecimal getValorProposta() {
 		return valorProposta;
 	}
+
 	public void setValorProposta(BigDecimal valorProposta) {
 		this.valorProposta = valorProposta;
 	}
+
 	// ignore
 	public Integer getIdProposta() {
 		return idProposta;
@@ -112,18 +120,12 @@ public class Proposta {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public Pessoa getPessoa() {
-		return pessoa;
+
+	@Override
+	public String toString() {
+		return "Proposta [idProposta=" + idProposta + ", servico=" + servico + ", profissional=" + profissional
+				+ ", titulo=" + titulo + ", valorProposta=" + valorProposta + ", prazoEstimado=" + prazoEstimado
+				+ ", descricao=" + descricao + ", status=" + status + "]";
 	}
 
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
-	}
-
-	
-
-
-	
-	
-	
 }

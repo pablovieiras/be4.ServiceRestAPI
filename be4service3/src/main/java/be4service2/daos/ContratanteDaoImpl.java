@@ -57,30 +57,22 @@ public void update(Contratante contratante)
 public void tornarProfissional(ContratanteProfissional contratante) {
 	// o que colocar
 	/*String ss= "UPDATE Pessoa p SET p.tipo = 'ContratanteProfissional' WHERE p.id = :id";*/
-	String ss="UPDATE Pessoa p set tipo='contratanteProfissional',cpf=:cpf where p.id=:id";
+	String ss="UPDATE Pessoa p set tipo_pessoa='contratanteProfissional',cpf=:cpf where p.id=:id";
    javax.persistence.Query query = manager.createQuery(ss);
    query.setParameter("cpf", contratante.getCpf());
    query.setParameter("id", contratante.getId());
    query.executeUpdate();
 
- /*  String ss2="UPDATE Pessoa p set avaliacao_profissional=:avalicaoProfissional where p.id=:id";
-   javax.persistence.Query query2 = manager.createQuery(ss);
-   if(contratante.getAvaliacaoProfissional()==null){
-	   query2.setParameter("avalicaoProfissional", 0);
-   }
-   else{
-	   query2.setParameter("avalicaoProfissional", contratante.getAvaliacaoProfissional());
-   }
-
-   query2.executeUpdate();*/
-
-	//manager.merge(contratante);
 	
 }
 
+
 @Override
-public void criarServico(Contratante contratante) {
-	
+public void desativarConta(Contratante contratante) {
+	String ss="UPDATE Pessoa p set tipo_pessoa='contaDesativada'where p.id=:id";
+	   javax.persistence.Query query = manager.createQuery(ss);
+	   query.setParameter("id", contratante.getId());
+	   query.executeUpdate();
 	
 }
 

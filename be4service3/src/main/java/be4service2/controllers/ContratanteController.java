@@ -40,7 +40,7 @@ public class ContratanteController{
    }
    
     
-@RequestMapping(value="/{id}/propostasServiço",method = RequestMethod.GET)
+@RequestMapping(value="/{id}/propostasServiï¿½o",method = RequestMethod.GET)
    public List<Proposta> getListaPropostasServico(@PathVariable("id") Integer id)
    { 
 	   return servicoService.listaPropostasServico(servicoService.findById(id));
@@ -78,22 +78,19 @@ public class ContratanteController{
 	 }
 
 	
-	//seleciona um profissional e faz uma oferta para ele fazer o determinado servico
+	//seleciona um profissional com servico e seta o profissional no servico direto sem proposta
 	@RequestMapping(value="/profissional/{id}/servico/{id_servico}/fazerOferta",method = RequestMethod.POST)
-	public void selecionarProfissional(@PathVariable("id") Integer id,@PathVariable("id_servico") Integer idServico,
-			@PathVariable("id") Integer idProposta) throws ServletException{
-		   	servicoService.selecionarProfissional(profissionalService.findById(id),servicoService.findById(idServico),
-		   			idProposta);
+	public void selecionarProfissionalDireto(@PathVariable("id") Integer id,@PathVariable("id_servico") Integer idServico) throws ServletException{
+		   	servicoService.selecionarProfissional(profissionalService.findById(id),servicoService.findById(idServico));
 	 }
-
-	@RequestMapping(value="/{id}/servico/{idServico}/fazerProposta",method = RequestMethod.POST)
-	public void fazerProposta(@PathVariable("id") Integer id,@PathVariable("idServico") Integer idServico,@RequestBody Proposta proposta){
-		System.out.println(proposta.toString());
-		 	servicoService.fazerProposta(contratanteService.findById(id),servicoService.findById(idServico),proposta);
-	 }
+	
+/*	@RequestMapping(value="/profissional/{id}/servico/{id_servico}/fazerOferta",method = RequestMethod.POST)
+	public void selecionarPrsofissional(@PathVariable("id") Integer id,@PathVariable("id_servico") Integer idServico) throws ServletException{
+		   	servicoService.selecionarProfissional(profissionalService.findById(id),servicoService.findById(idServico));
+	 }*/
 	 
 	@RequestMapping(value="/servico/{id_servico}/proposta/{id}",method = RequestMethod.POST)
-	public void selecionarProposta(@PathVariable("id") Integer id,@PathVariable("id_servico") Integer idServico){
+	public void selecionarProposta(@PathVariable("id") Integer id,@PathVariable("id_servico") Integer idServico) throws ServletException{
 		   	servicoService.selecionarProposta(id,servicoService.findById(idServico));
 	 }
 
@@ -108,4 +105,10 @@ public class ContratanteController{
 	public void finalizarServico (@PathVariable("id_servico")Integer idServico){
 		servicoService.finalizarServico(servicoService.findById(idServico));
 	}
+	
+	@RequestMapping(value="/{idContratante}/desativarConta",method = RequestMethod.PUT)
+	public void desativarConta (@PathVariable("idContratante")Integer idContratante){
+		contratanteService.desativarConta(contratanteService.findById(idContratante));
+	}
+	
 }

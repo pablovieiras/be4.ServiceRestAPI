@@ -25,7 +25,6 @@ public class ContratanteProfissionalServiceImpl implements ContratanteProfission
 	@Override
 	public void save(ContratanteProfissional contratanteProfissional) {
 		 contratanteProfissionalDao.save(contratanteProfissional);
-		
 	}
 
 	@Override

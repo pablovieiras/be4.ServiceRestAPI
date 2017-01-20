@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 
 import be4service2.controllers.TokenFilter;
 
+@SpringBootApplication
 public class Boot
 {
 	@Bean

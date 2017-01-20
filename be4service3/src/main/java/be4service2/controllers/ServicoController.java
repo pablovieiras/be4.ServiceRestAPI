@@ -21,32 +21,7 @@ public class ServicoController
 
 	@Autowired
    private ServicoService servicoService;
-
-    
-@RequestMapping(method = RequestMethod.GET)
-   public List<Servico> load()
-   {
-      return servicoService.all();
-   }
-   
-    
-@RequestMapping(value="/{id}",method = RequestMethod.GET)
-   public Servico findById(@PathVariable("id") Integer id)
-   {
-      return servicoService.findById(id);
-   }
-
-   
-	
-	 
-	@RequestMapping(value="/{id}",method = RequestMethod.PUT)
-	public void update(@RequestBody Servico servico){
-		
-		   servicoService.update(servico);
-	 }
-
-	
-	  
+ 
 	@RequestMapping(value="/listarAbertos",method = RequestMethod.GET)
 	   public List<Servico> listarAbertos()
 	   {
