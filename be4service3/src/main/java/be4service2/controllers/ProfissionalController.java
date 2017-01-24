@@ -40,7 +40,7 @@ public class ProfissionalController {
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public void save(@RequestBody Profissional profissional) {
+	public void save(@RequestBody Profissional profissional) throws ServletException {
 
 		profissionalService.save(profissional);
 	}
@@ -53,6 +53,7 @@ public class ProfissionalController {
 
 	@RequestMapping(value = "/{id}/tornarContratante", method = RequestMethod.PUT)
 	public void tornarContratante(@PathVariable("id") Integer id) {
+		System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"+id);
 		profissionalService.tornarContratante(id);
 	}
 
@@ -91,10 +92,5 @@ public class ProfissionalController {
 				   
 	   }
 
-	@RequestMapping(value="/{id}/PropostasFeitas",method = RequestMethod.GET)
-	   public List<Proposta> getAllPropostasFeitas(@PathVariable("id") Integer id)
-	   { 
-		   return servicoService.getAllPropostasFeitas(profissionalService.findById(id));
-				   
-	   }
+
 }

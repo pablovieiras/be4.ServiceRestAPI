@@ -14,7 +14,9 @@ public class ProfissionalDaoImpl implements ProfissionalDao {
 
 	@Override
 	public List<Profissional> all() {
-		return manager.createQuery("select c from Profissional c", Profissional.class).getResultList();
+		String ss="select c from Pessoa c where c.tipo_pessoa='profissional' OR c.tipo_pessoa='contratanteProfissional'";
+		javax.persistence.Query query = manager.createQuery(ss);
+		return query.getResultList();
 	}
 
 	@Override

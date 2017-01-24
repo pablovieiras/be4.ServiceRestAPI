@@ -12,8 +12,6 @@ public class Contratante extends Pessoa
 
 	private Double avaliacaoCordialidade=0.0;
 	private Double avaliacaoCompromisso=0.0;
-
-
 	private Integer numeroAvaliacoesContratante=0;
 
 

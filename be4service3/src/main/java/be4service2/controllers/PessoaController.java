@@ -10,18 +10,19 @@ import be4service2.daos.PessoaDaoImpl;
 import be4service2.models.Pessoa;
 
 @RestController
-@RequestMapping(value= "/login2")
 public class PessoaController {
 	
 	@Autowired
     private PessoaDaoImpl pessoaDao;
 	
-	@RequestMapping(value="email/{email}/senha/{senha}",method = RequestMethod.POST)
+	@RequestMapping(value="login2/email/{email}/senha/{senha}",method = RequestMethod.POST)
 	  public Pessoa verificaLogin(@PathVariable("email") String email, @PathVariable("senha") String senha){
 		
 		return pessoaDao.verificaLogin(email, senha);
-		
-		   
 	   }
 	
+	@RequestMapping(value="desativarConta/{idPessoa}",method = RequestMethod.PUT)
+	public void desativarConta (@PathVariable("idPessoa")Integer idPessoa){
+		pessoaDao.desativarConta(idPessoa);
+	}
 }

@@ -2,14 +2,15 @@ package be4service2.service;
 
 import java.util.List;
 
+import javax.servlet.ServletException;
+
 import be4service2.models.Contratante;
 import be4service2.models.ContratanteProfissional;
 
 public interface ContratanteService {
 	
-	List<Contratante> all();
 
-	void save(Contratante contratante);
+	void save(Contratante contratante) throws ServletException;
 
 	Contratante findById(Integer id);
 
@@ -17,7 +18,7 @@ public interface ContratanteService {
 
 	void update(Contratante contratante);
 	
-	void tornarProfissional(Integer id,ContratanteProfissional contratante);
+	void tornarProfissional(ContratanteProfissional contratante);
 	
 	void desativarConta (Contratante contratante);
 	

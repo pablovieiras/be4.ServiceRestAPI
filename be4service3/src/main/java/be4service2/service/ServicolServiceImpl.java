@@ -108,7 +108,7 @@ public class ServicolServiceImpl implements ServicoService {
 	@Override
 	public void criarServico(ContratanteProfissional contratanteProfissional, Servico servico) {
 		servico.setContratante(contratanteProfissional);
-		contratanteProfissional.getServicosContratados().add(servico);
+		//contratanteProfissional.getServicosContratados().add(servico);arrrumar
 		servico.setStatus("Aberto");
 		servicoDao.save(servico);
 

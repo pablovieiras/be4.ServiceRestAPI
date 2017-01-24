@@ -35,39 +35,31 @@ public class ContratanteController{
 @RequestMapping(value="/{id}/servicosContratados",method = RequestMethod.GET)
    public List<Servico> getAllServicosContratados(@PathVariable("id") Integer id)
    { 
-	   return servicoService.getListaServicosContratados(contratanteService.findById(id));
-			   
+	   return servicoService.getListaServicosContratados(contratanteService.findById(id));	   
    }
    
     
-@RequestMapping(value="/{id}/propostasServi�o",method = RequestMethod.GET)
+   @RequestMapping(value="/{id}/propostasServico",method = RequestMethod.GET)
    public List<Proposta> getListaPropostasServico(@PathVariable("id") Integer id)
    { 
-	   return servicoService.listaPropostasServico(servicoService.findById(id));
-			   
+	   return servicoService.listaPropostasServico(servicoService.findById(id));		   
    }
 
-   
-   
-	 
 	@RequestMapping(value="/save",method = RequestMethod.POST)
-	  public void save(@RequestBody Contratante contratante){
-		
+	  public void save(@RequestBody Contratante contratante) throws ServletException{
 		   contratanteService.save(contratante);
 	   }
 	
 	 
 	@RequestMapping(value="/{id}",method = RequestMethod.PUT)
 	public void update(@RequestBody Contratante contratante){
-		
 		   contratanteService.update(contratante);
 	 }
 
 	 
-	@RequestMapping(value="/{id}/tornarProfissional",method = RequestMethod.PUT)
-	public void tornarProfissional(@PathVariable("id") Integer id,@RequestBody ContratanteProfissional contratante){
-			
-		   	contratanteService.tornarProfissional(id,contratante);
+	@RequestMapping(value="/tornarProfissional",method = RequestMethod.PUT)
+	public void tornarProfissional(@RequestBody ContratanteProfissional contratante){
+		   	contratanteService.tornarProfissional(contratante);
 	 }
 
 	 
@@ -105,10 +97,6 @@ public class ContratanteController{
 	public void finalizarServico (@PathVariable("id_servico")Integer idServico){
 		servicoService.finalizarServico(servicoService.findById(idServico));
 	}
-	
-	@RequestMapping(value="/{idContratante}/desativarConta",method = RequestMethod.PUT)
-	public void desativarConta (@PathVariable("idContratante")Integer idContratante){
-		contratanteService.desativarConta(contratanteService.findById(idContratante));
-	}
+
 	
 }
