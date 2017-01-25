@@ -97,6 +97,8 @@ public class ContratanteController{
 	public void finalizarServico (@PathVariable("id_servico")Integer idServico){
 		servicoService.finalizarServico(servicoService.findById(idServico));
 	}
+	
+	
 
 	
 }

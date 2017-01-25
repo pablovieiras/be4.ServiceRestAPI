@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import be4service2.models.ContratanteProfissional;
+import be4service2.models.Proposta;
 import be4service2.models.Servico;
 import be4service2.service.ContratanteProfissionalService;
 import be4service2.service.ProfissionalService;
@@ -81,5 +82,12 @@ public class ContratanteProfissionalController
 	
 		   	servicoService.selecionarProfissional(profissionalService.findById(id),servicoService.findById(idServico));
 	 }
+	
+	@RequestMapping(value = "/{id}/servico/{idServico}/fazerProposta", method = RequestMethod.POST)
+	public void fazerProposta(@PathVariable("id") Integer id, @PathVariable("idServico") Integer idServico,
+			@RequestBody Proposta proposta) {
+		System.out.println(proposta.toString());
+		servicoService.fazerProposta(profissionalService.findById(id), servicoService.findById(idServico), proposta);
+	}
 
 }
