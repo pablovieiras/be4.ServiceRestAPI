@@ -44,11 +44,11 @@ public class ProfissionalController {
 		List<ProfissionalDTO> listDTO = new ArrayList<>();
 
 		for (Profissional x : listlAux) {
-			listDTO.add(new ProfissionalDTO(x.getNome(), x.getEmail(), x.getResumoProfissional(), x.getProfissao()));
+			listDTO.add(new ProfissionalDTO(x.getNome(), x.getEmail(), x.getResumoProfissional(), x.getProfissao(), x.getId(), x.getTipo(), x.getCelular()));
 		}
 		
 		for (ContratanteProfissional x : listlAux2) {
-			listDTO.add(new ProfissionalDTO(x.getNome(), x.getEmail(), x.getResumoProfissional(), x.getProfissao()));
+			listDTO.add(new ProfissionalDTO(x.getNome(), x.getEmail(), x.getResumoProfissional(), x.getProfissao(), x.getId(), x.getTipo(), x.getCelular()));
 		}
 
 		return listDTO;
