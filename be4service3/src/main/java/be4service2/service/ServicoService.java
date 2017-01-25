@@ -38,7 +38,7 @@ public interface ServicoService {
 	
 	void aceitarServico(Integer id,Integer resposta);
 	
-	void fazerProposta(Profissional p,Servico servico,Proposta proposta);
+	void fazerProposta(Profissional p,Servico servico,Proposta proposta) throws ServletException;
 	
 	void avaliaProfissional(Integer idServico,AvaliacaoProfissional avaliacao) throws ServletException;
 	
@@ -48,7 +48,7 @@ public interface ServicoService {
 	
 	List<Servico> getListaServicosContratados(Contratante contratante);
 	
-	List<Servico> getAllServicosExecutados(Profissional profissional);
+	List<Servico> getAllServicosExecutados(Profissional profissional) throws ServletException;
 	
 	List<Servico> listarAbertos ();
 	

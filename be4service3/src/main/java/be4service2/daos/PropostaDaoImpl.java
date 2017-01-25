@@ -75,4 +75,15 @@ public class PropostaDaoImpl implements PropostaDao {
 		   query.executeUpdate();
 		
 	}
+
+
+	@Override
+	public Proposta verificaProposta(Integer idServico, Integer idProfissional) {
+		String ss = "select s from Proposta s where s.id_servico=:idservico AND s.id_profissional=:idprofissional";
+		javax.persistence.Query query = manager.createQuery(ss);
+		query.setParameter("idservico", idServico);
+		query.setParameter("idprofissional",idProfissional);
+		return (Proposta) query.getSingleResult();
+		
+	}
 }

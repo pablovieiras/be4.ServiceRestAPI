@@ -98,7 +98,7 @@ public class ServicolServiceImpl implements ServicoService {
 	@Override
 	public void selecionarProfissional(Profissional profissional, Servico servico) throws ServletException {
 		if (profissional == null) {
-			throw new ServletException("Profissional nao encontrado");
+			throw new ServletException("Profissional não encontrado");
 		}
 		servico.setProfissional(profissional);
 		servico.setStatus("Aguardando Aceitação do Profissional");
@@ -149,7 +149,12 @@ public class ServicolServiceImpl implements ServicoService {
 	}
 
 	@Override
-	public void fazerProposta(Profissional profissional, Servico servico, Proposta proposta) {
+	public void fazerProposta(Profissional profissional, Servico servico, Proposta proposta) throws ServletException {
+		Proposta p=null;
+		p=propostaDao.verificaProposta(servico.getIdServico(), profissional.getId());
+		if(p==null){
+			throw new ServletException("Este Profissional já fez uma proposta para este serviço");
+		}
 		proposta.setProfissional(profissional);
 		proposta.setServico(servico);
 		propostaDao.save(proposta);
@@ -172,14 +177,14 @@ public class ServicolServiceImpl implements ServicoService {
 		// busca o id do servico e guarda em uma variavel
 		Servico servico = servicoDao.findById(idServico);
 		if (servico.isAvaliacaoProfissional() == true) {
-			throw new ServletException("Profissional ja avaliado neste serviço");
+			throw new ServletException("Profissional já avaliado neste serviço");
 		}
 		if (servico.isAvaliacaoProfissional() == true) {
-			throw new ServletException("avaliação ja realizada");
+			throw new ServletException("avaliação já realizada");
 		}
 		servico.setAvaliacaoProfissional(true);
 		if (!servico.getStatus().equals("Em Andamento") && !servico.getStatus().equals("Finalizado")) {
-			throw new ServletException("Erro status do servico não esta em andamento ou finalizado");
+			throw new ServletException("Erro status do serviço não está em andamento ou finalizado");
 		}
 		// guarda o servico dentro da avaliacao
 		avaliacaoProfissional.setServico(servico);
@@ -204,14 +209,14 @@ public class ServicolServiceImpl implements ServicoService {
 		// busca o id do servico e guarda em uma variavel
 		Servico servico = servicoDao.findById(idServico);
 		if (servico.isAvaliacaoContratante() == true) {
-			throw new ServletException("Profissional ja avaliado neste serviço");
+			throw new ServletException("Profissional já avaliado neste serviço");
 		}
 		if (servico.isAvaliacaoContratante() == true) {
-			throw new ServletException("avaliação ja realizada");
+			throw new ServletException("avaliação já realizada");
 		}
 		servico.setAvaliacaoContratante(true);
 		if (!servico.getStatus().equals("Em Andamento") && !servico.getStatus().equals("Finalizado")) {
-			throw new ServletException("Erro status do servico não esta em andamento ou finalizado");
+			throw new ServletException("Erro status do serviço não esta em andamento ou finalizado");
 		}
 
 		// guarda o servico dentro da avaliacao
@@ -249,14 +254,18 @@ public class ServicolServiceImpl implements ServicoService {
 	}
 
 	@Override
-	public List<Servico> getAllServicosExecutados(Profissional profissional) {
-		
-		return servicoDao.getAllServicosExecutados(profissional);
+	public List<Servico> getAllServicosExecutados(Profissional profissional) throws ServletException {
+		List<Servico> lista=null;
+			lista =servicoDao.getAllServicosExecutados(profissional);
+			
+			if(lista==null){
+				throw new ServletException("Nenhum serviço encontrado");
+			}
+		return lista;
 	}
 
 	@Override
 	public List<Proposta> getAllPropostasFeitas(Profissional profissional) {
-		// TODO Auto-generated method stub
 		return servicoDao.getAllPropostasFeitas(profissional);
 	}
 

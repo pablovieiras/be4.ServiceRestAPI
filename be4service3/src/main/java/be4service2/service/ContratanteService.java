@@ -20,6 +20,5 @@ public interface ContratanteService {
 	
 	void tornarProfissional(ContratanteProfissional contratante);
 	
-	void desativarConta (Contratante contratante);
 	
 }
