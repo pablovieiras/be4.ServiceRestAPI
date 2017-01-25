@@ -18,6 +18,7 @@ import be4service2.service.ContratanteService;
 import be4service2.service.ProfissionalService;
 import be4service2.service.ServicoService;
 /*   produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE*/
+
 @RestController
 @RequestMapping(value= "contratante")
 public class ContratanteController{
