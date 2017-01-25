@@ -1,9 +1,8 @@
 package be4service2.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.ServletException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import be4service2.models.AvaliacaoContratante;
+import be4service2.models.ContratanteProfissional;
 import be4service2.models.Profissional;
 import be4service2.models.Proposta;
 import be4service2.models.Servico;
+import be4service2.service.ContratanteProfissionalService;
 import be4service2.service.ProfissionalService;
 import be4service2.service.ServicoService;
 
@@ -28,16 +29,46 @@ public class ProfissionalController {
 	private ProfissionalService profissionalService;
 	@Autowired
 	private ServicoService servicoService;
+	@Autowired
+	private ContratanteProfissionalService contrantranteProfissionalService;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public List<Profissional> load() {
-		return profissionalService.all();
+	public List<ProfissionalDTO> load() {
+
+		// lista auxiliar com todos os profissionais
+		List<Profissional> listlAux = profissionalService.all();
+		List<ContratanteProfissional> listlAux2= contrantranteProfissionalService.all();
+
+
+		// lista com profissionais DTO
+		List<ProfissionalDTO> listDTO = new ArrayList<>();
+
+		for (Profissional x : listlAux) {
+			listDTO.add(new ProfissionalDTO(x.getNome(), x.getEmail(), x.getResumoProfissional(), x.getProfissao()));
+		}
+		
+		for (ContratanteProfissional x : listlAux2) {
+			listDTO.add(new ProfissionalDTO(x.getNome(), x.getEmail(), x.getResumoProfissional(), x.getProfissao()));
+		}
+
+		return listDTO;
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public Profissional findById(@PathVariable("id") Integer id) {
-		return profissionalService.findById(id);
+
+	@RequestMapping(value = "/{id}/DTO", method = RequestMethod.GET)
+	public ProfissionalDTO findByIdDTO(@PathVariable("id") Integer id) {
+
+		Profissional profissional = profissionalService.findById(id);
+		ProfissionalDTO pdto = new ProfissionalDTO();
+		pdto.setNome(profissional.getNome());
+		pdto.setEmail(profissional.getEmail());
+		pdto.setProfissao(profissional.getProfissao());
+		pdto.setResumoProfissional(profissional.getResumoProfissional());
+
+		return pdto;
+
 	}
+
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public void save(@RequestBody Profissional profissional) throws ServletException {

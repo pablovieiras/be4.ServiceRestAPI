@@ -2,7 +2,6 @@ package be4service2.daos;
 
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
