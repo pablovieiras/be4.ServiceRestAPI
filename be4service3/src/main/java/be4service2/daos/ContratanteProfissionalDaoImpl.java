@@ -8,7 +8,6 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import be4service2.models.ContratanteProfissional;
-import be4service2.models.Profissional;
 
 @Repository
 public class ContratanteProfissionalDaoImpl implements ContratanteProfissionalDao {
@@ -18,9 +17,8 @@ public class ContratanteProfissionalDaoImpl implements ContratanteProfissionalDa
 
 	@Override
 	public List<ContratanteProfissional> all() {
-		String ss="select c from Pessoa c where c.tipo_pessoa='profissional' OR c.tipo_pessoa='contratanteProfissional'";
-		javax.persistence.Query query = manager.createQuery(ss);
-		return query.getResultList();
+		return manager.createQuery("select c from ContratanteProfissional c", ContratanteProfissional.class).getResultList();
+
 	}
 
 	@Override
