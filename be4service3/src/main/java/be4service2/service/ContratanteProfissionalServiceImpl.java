@@ -46,6 +46,7 @@ public class ContratanteProfissionalServiceImpl implements ContratanteProfission
 	}
 
 	public void deixarDeSerProfissional(ContratanteProfissional contratante){
+		contratante.setTipo("contratante");
 		contratanteProfissionalDao.deixarDeSerProfissional(contratante);
 	}
 
