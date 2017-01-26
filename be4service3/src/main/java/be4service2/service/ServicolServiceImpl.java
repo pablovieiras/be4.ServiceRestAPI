@@ -176,16 +176,15 @@ public class ServicolServiceImpl implements ServicoService {
 
 		// busca o id do servico e guarda em uma variavel
 		Servico servico = servicoDao.findById(idServico);
-		if (servico.isAvaliacaoProfissional() == true) {
+		if (servico.getAvaliacaoProfissional().equals("true")) {
 			throw new ServletException("Profissional já avaliado neste serviço");
 		}
-		if (servico.isAvaliacaoProfissional() == true) {
-			throw new ServletException("avaliação já realizada");
-		}
-		servico.setAvaliacaoProfissional(true);
+	
+
 		if (!servico.getStatus().equals("Em Andamento") && !servico.getStatus().equals("Finalizado")) {
 			throw new ServletException("Erro status do serviço não está em andamento ou finalizado");
 		}
+
 		// guarda o servico dentro da avaliacao
 		avaliacaoProfissional.setServico(servico);
 		// guarda o profissional dentro da avaliacao
@@ -197,7 +196,7 @@ public class ServicolServiceImpl implements ServicoService {
 		// salvar a avaliacao
 		avaliacaoProfissionalDao.save(avaliacaoProfissional);
 		// seta avaliacao do profissionao como true"ja avaliado"
-		servico.setAvaliacaoProfissional(true);
+		servico.setAvaliacaoProfissional("true");
 		servicoDao.update(servico);
 
 	}
@@ -208,13 +207,11 @@ public class ServicolServiceImpl implements ServicoService {
 
 		// busca o id do servico e guarda em uma variavel
 		Servico servico = servicoDao.findById(idServico);
-		if (servico.isAvaliacaoContratante() == true) {
+		if (servico.getAvaliacaoContratante().equals("true")) {
 			throw new ServletException("Profissional já avaliado neste serviço");
 		}
-		if (servico.isAvaliacaoContratante() == true) {
-			throw new ServletException("avaliação já realizada");
-		}
-		servico.setAvaliacaoContratante(true);
+	
+	
 		if (!servico.getStatus().equals("Em Andamento") && !servico.getStatus().equals("Finalizado")) {
 			throw new ServletException("Erro status do serviço não esta em andamento ou finalizado");
 		}
@@ -229,7 +226,7 @@ public class ServicolServiceImpl implements ServicoService {
 		// salvar a avaliacao
 		avaliacaoContratanteDao.save(avaliacaoContratante);
 		// seta avaliacao do profissionao como true"ja avaliado"
-		servico.setAvaliacaoContratante(true);
+		servico.setAvaliacaoContratante("true");
 		servicoDao.update(servico);
 
 	}

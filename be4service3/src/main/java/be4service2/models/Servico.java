@@ -22,8 +22,8 @@ public class Servico {
 	@ManyToOne
 	@JoinColumn(name = "id_profissional")
 	private Pessoa profissional;
-	private boolean avaliacaoContratante=false;
-	private boolean avaliacaoProfissional=false;
+	private String avaliacaoContratante="false";
+	private String avaliacaoProfissional="false";
 
 	private String titulo;
 	private String status;
@@ -139,25 +139,23 @@ public class Servico {
 		this.valor = valor;
 	}
 
-
-	public boolean isAvaliacaoContratante() {
+	public String getAvaliacaoContratante() {
 		return avaliacaoContratante;
 	}
 
-
-	public void setAvaliacaoContratante(boolean avaliacaoContratante) {
+	public void setAvaliacaoContratante(String avaliacaoContratante) {
 		this.avaliacaoContratante = avaliacaoContratante;
 	}
 
-
-	public boolean isAvaliacaoProfissional() {
+	public String getAvaliacaoProfissional() {
 		return avaliacaoProfissional;
 	}
 
-
-	public void setAvaliacaoProfissional(boolean avaliacaoProfissional) {
+	public void setAvaliacaoProfissional(String avaliacaoProfissional) {
 		this.avaliacaoProfissional = avaliacaoProfissional;
 	}
-	
+
+
+
 	
 }
