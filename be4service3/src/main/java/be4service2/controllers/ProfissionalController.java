@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import be4service2.models.AvaliacaoContratante;
 import be4service2.models.ContratanteProfissional;
 import be4service2.models.Profissional;
@@ -44,11 +43,15 @@ public class ProfissionalController {
 		List<ProfissionalDTO> listDTO = new ArrayList<>();
 
 		for (Profissional x : listlAux) {
-			listDTO.add(new ProfissionalDTO(x.getNome(), x.getEmail(), x.getResumoProfissional(), x.getProfissao(), x.getId(), x.getTipo(), x.getCelular()));
+			listDTO.add(new ProfissionalDTO(x.getId(), x.getNome(), x.getEmail(), x.getResumoProfissional(), 
+					x.getProfissao(),x.getTelefone(),x.getCelular(), x.getCompetencias(), x.getAvaliacaoQualidade(),
+					x.getAvaliacaoPreco(), x.getAvaliacaoPontualidade(), x.getCep(), x.getLougradouro(), x.getFoto())); 
 		}
 		
 		for (ContratanteProfissional x : listlAux2) {
-			listDTO.add(new ProfissionalDTO(x.getNome(), x.getEmail(), x.getResumoProfissional(), x.getProfissao(), x.getId(), x.getTipo(), x.getCelular()));
+			listDTO.add(new ProfissionalDTO(x.getId(), x.getNome(), x.getEmail(), x.getResumoProfissional(), 
+					x.getProfissao(),x.getTelefone(),x.getCelular(), x.getCompetencias(), x.getAvaliacaoQualidade(),
+					x.getAvaliacaoPreco(), x.getAvaliacaoPontualidade(), x.getAvaliacaoCordialidade(), x.getAvaliacaoCompromisso(),x.getCep(), x.getLougradouro(), x.getFoto()));
 		}
 
 		return listDTO;
