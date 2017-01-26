@@ -8,6 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 public class Servico {
@@ -22,7 +25,11 @@ public class Servico {
 	@ManyToOne
 	@JoinColumn(name = "id_profissional")
 	private Pessoa profissional;
+	@Type(type= "org.hibernate.type.NumericBooleanType")
+	@NotNull(message="NOT_NULL")
 	private boolean avaliacaoContratante=false;
+	@Type(type= "org.hibernate.type.NumericBooleanType")
+	@NotNull(message="NOT_NULL")	
 	private boolean avaliacaoProfissional=false;
 
 	private String titulo;
