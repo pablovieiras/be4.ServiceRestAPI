@@ -100,6 +100,7 @@ public void tornarProfissional(ContratanteProfissional contratante) {
    query.setParameter("avaliacaoPreco", contratante.getAvaliacaoPreco());
    query.setParameter("avaliacaoPontualidade", contratante.getAvaliacaoPontualidade());
    query.setParameter("numeroAvProfissional", contratante.getNumeroAvaliacoesProfissional());
+   query.setParameter("id", contratante.getId());
    
    query.executeUpdate();
 
