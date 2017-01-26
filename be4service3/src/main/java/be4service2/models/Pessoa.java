@@ -33,6 +33,7 @@ public abstract class Pessoa {
 	private String foto;
 	private String chave;
 	private String tipo;
+	private String sessao;
 
 	public Pessoa(Integer id, String nome, String cpf, String dataNascimento, String email, String senha,
 			String telefone, String celular, String cep, String lougradouro, String numero, String cidade,
@@ -236,6 +237,14 @@ public abstract class Pessoa {
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+
+	public String getSessao() {
+		return sessao;
+	}
+
+	public void setSessao(String sessao) {
+		this.sessao = sessao;
 	}
 
 }

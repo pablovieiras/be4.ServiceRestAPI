@@ -2,28 +2,136 @@ package be4service2.controllers;
 
 public class ProfissionalDTO {
 
+	private Integer idProfissional;
 	private String nome;
 	private String email;
 	private String resumoProfissional;
 	private String profissao;
-	private Integer id;
 	private String telefone;
 	private String celular;
+	private String competencias;
+	private Double avaliacaoQualidade;
+	private Double avaliacaoPreco;
+	private Double avaliacaoPontualidade;
+	private Double avaliacaoCordialidade;
+	private Double avaliacaoCompromisso;
+	private String cep;
+	private String rua;
+	private String foto;
 
 	public ProfissionalDTO() {
 		super();
 	}
-
-	public ProfissionalDTO(String nome, String email, String resumoProfissional, String profissao, Integer id,
-			String telefone, String celular) {
+	
+	
+	public ProfissionalDTO(Integer idProfissional, String nome, String email, String resumoProfissional,
+			String profissao, String telefone, String celular, String competencias, Double avaliacaoQualidade,
+			Double avaliacaoPreco, Double avaliacaoPontualidade, String cep, String rua, String foto) {
 		super();
+		this.idProfissional = idProfissional;
 		this.nome = nome;
 		this.email = email;
 		this.resumoProfissional = resumoProfissional;
 		this.profissao = profissao;
-		this.id = id;
 		this.telefone = telefone;
 		this.celular = celular;
+		this.competencias = competencias;
+		this.avaliacaoQualidade = avaliacaoQualidade;
+		this.avaliacaoPreco = avaliacaoPreco;
+		this.avaliacaoPontualidade = avaliacaoPontualidade;
+		this.cep = cep;
+		this.rua = rua;
+		this.foto = foto;
+	}
+
+
+
+
+	public ProfissionalDTO(Integer idProfissional, String nome, String email, String resumoProfissional,
+			String profissao, String telefone, String celular, String competencias, Double avaliacaoQualidade,
+			Double avaliacaoPreco, Double avaliacaoPontualidade, Double avaliacaoCordialidade,
+			Double avaliacaoCompromisso, String cep, String rua, String foto) {
+		super();
+		this.idProfissional = idProfissional;
+		this.nome = nome;
+		this.email = email;
+		this.resumoProfissional = resumoProfissional;
+		this.profissao = profissao;
+		this.telefone = telefone;
+		this.celular = celular;
+		this.competencias = competencias;
+		this.avaliacaoQualidade = avaliacaoQualidade;
+		this.avaliacaoPreco = avaliacaoPreco;
+		this.avaliacaoPontualidade = avaliacaoPontualidade;
+		this.avaliacaoCordialidade = avaliacaoCordialidade;
+		this.avaliacaoCompromisso = avaliacaoCompromisso;
+		this.cep = cep;
+		this.rua = rua;
+		this.foto = foto;
+	}
+
+	public String getCompetencias() {
+		return competencias;
+	}
+
+	public void setCompetencias(String competencias) {
+		this.competencias = competencias;
+	}
+
+	public Double getAvaliacaoQualidade() {
+		return avaliacaoQualidade;
+	}
+
+	public void setAvaliacaoQualidade(Double avaliacaoQualidade) {
+		this.avaliacaoQualidade = avaliacaoQualidade;
+	}
+
+	public Double getAvaliacaoPreco() {
+		return avaliacaoPreco;
+	}
+
+	public void setAvaliacaoPreco(Double avaliacaoPreco) {
+		this.avaliacaoPreco = avaliacaoPreco;
+	}
+
+	public Double getAvaliacaoPontualidade() {
+		return avaliacaoPontualidade;
+	}
+
+	public void setAvaliacaoPontualidade(Double avaliacaoPontualidade) {
+		this.avaliacaoPontualidade = avaliacaoPontualidade;
+	}
+
+	public Double getAvaliacaoCordialidade() {
+		return avaliacaoCordialidade;
+	}
+
+	public void setAvaliacaoCordialidade(Double avaliacaoCordialidade) {
+		this.avaliacaoCordialidade = avaliacaoCordialidade;
+	}
+
+	public Double getAvaliacaoCompromisso() {
+		return avaliacaoCompromisso;
+	}
+
+	public void setAvaliacaoCompromisso(Double avaliacaoCompromisso) {
+		this.avaliacaoCompromisso = avaliacaoCompromisso;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getRua() {
+		return rua;
+	}
+
+	public void setRua(String rua) {
+		this.rua = rua;
 	}
 
 	public String getNome() {
@@ -58,14 +166,6 @@ public class ProfissionalDTO {
 		this.profissao = profissao;
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	public String getTelefone() {
 		return telefone;
 	}
@@ -80,5 +180,21 @@ public class ProfissionalDTO {
 
 	public void setCelular(String celular) {
 		this.celular = celular;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	public Integer getIdProfissional() {
+		return idProfissional;
+	}
+
+	public void setIdProfissional(Integer idProfissional) {
+		this.idProfissional = idProfissional;
 	}
 }
