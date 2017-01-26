@@ -56,4 +56,10 @@ public interface ServicoService {
 	
 	List<Proposta> getAllPropostasFeitas(Profissional profissional);
 	
+	List<Servico> avalicoesPendentesContratante(Contratante contratante);
+	
+	List<Servico> avalicoesPendentesProfissional(Profissional profissional) throws ServletException;
+	
+
+	
 }

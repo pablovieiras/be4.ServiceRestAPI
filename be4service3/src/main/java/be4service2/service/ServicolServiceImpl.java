@@ -1,5 +1,6 @@
 package be4service2.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -108,7 +109,7 @@ public class ServicolServiceImpl implements ServicoService {
 	@Override
 	public void criarServico(ContratanteProfissional contratanteProfissional, Servico servico) {
 		servico.setContratante(contratanteProfissional);
-		//contratanteProfissional.getServicosContratados().add(servico);arrrumar
+		// contratanteProfissional.getServicosContratados().add(servico);arrrumar
 		servico.setStatus("Aberto");
 		servicoDao.save(servico);
 
@@ -150,9 +151,9 @@ public class ServicolServiceImpl implements ServicoService {
 
 	@Override
 	public void fazerProposta(Profissional profissional, Servico servico, Proposta proposta) throws ServletException {
-		Proposta p=null;
-		p=propostaDao.verificaProposta(servico.getIdServico(), profissional.getId());
-		if(p==null){
+		Proposta p = null;
+		p = propostaDao.verificaProposta(servico.getIdServico(), profissional.getId());
+		if (p == null) {
 			throw new ServletException("Este Profissional já fez uma proposta para este serviço");
 		}
 		proposta.setProfissional(profissional);
@@ -166,7 +167,6 @@ public class ServicolServiceImpl implements ServicoService {
 		servico.setProfissional(p.getProfissional());
 		servico.setValor(p.getValorProposta());
 		this.selecionarProfissional(p.getProfissional(), servico);
-	
 
 	}
 
@@ -252,12 +252,12 @@ public class ServicolServiceImpl implements ServicoService {
 
 	@Override
 	public List<Servico> getAllServicosExecutados(Profissional profissional) throws ServletException {
-		List<Servico> lista=null;
-			lista =servicoDao.getAllServicosExecutados(profissional);
-			
-			if(lista==null){
-				throw new ServletException("Nenhum serviço encontrado");
-			}
+		List<Servico> lista = null;
+		lista = servicoDao.getAllServicosExecutados(profissional);
+
+		if (lista == null) {
+			throw new ServletException("Nenhum serviço encontrado");
+		}
 		return lista;
 	}
 
@@ -265,5 +265,41 @@ public class ServicolServiceImpl implements ServicoService {
 	public List<Proposta> getAllPropostasFeitas(Profissional profissional) {
 		return servicoDao.getAllPropostasFeitas(profissional);
 	}
+
+	@Override
+	public List<Servico> avalicoesPendentesContratante(Contratante contratante) {
+
+		List<Servico> listServicos = new ArrayList<>();
+		List<Servico> listAvaPendentes = new ArrayList<>();
+
+		listServicos = this.getListaServicosContratados(contratante);
+
+		for (Servico x : listServicos) {
+			if (x.getAvaliacaoContratante().equals("false")) {
+				listAvaPendentes.add(x);
+			}
+		}
+
+		return listAvaPendentes;
+	}
+	
+	@Override
+	public List<Servico> avalicoesPendentesProfissional(Profissional profissional) throws ServletException {
+
+		List<Servico> listServicos = new ArrayList<>();
+		List<Servico> listAvaPendentes = new ArrayList<>();
+
+		listServicos = this.getAllServicosExecutados(profissional);
+
+		for (Servico x : listServicos) {
+			if (x.getAvaliacaoProfissional().equals("false")) {
+				listAvaPendentes.add(x);
+			}
+		}
+
+		return listAvaPendentes;
+	}
+	
+	
 
 }
