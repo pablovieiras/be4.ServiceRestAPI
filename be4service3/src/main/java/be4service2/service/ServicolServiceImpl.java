@@ -275,12 +275,31 @@ public class ServicolServiceImpl implements ServicoService {
 		listServicos = this.getListaServicosContratados(contratante);
 
 		for (Servico x : listServicos) {
-			if (x.isAvaliacaoContratante() == false) {
+			if (x.getAvaliacaoContratante().equals("false")) {
 				listAvaPendentes.add(x);
 			}
 		}
 
 		return listAvaPendentes;
 	}
+	
+	@Override
+	public List<Servico> avalicoesPendentesProfissional(Profissional profissional) throws ServletException {
+
+		List<Servico> listServicos = new ArrayList<>();
+		List<Servico> listAvaPendentes = new ArrayList<>();
+
+		listServicos = this.getAllServicosExecutados(profissional);
+
+		for (Servico x : listServicos) {
+			if (x.getAvaliacaoProfissional().equals("false")) {
+				listAvaPendentes.add(x);
+			}
+		}
+
+		return listAvaPendentes;
+	}
+	
+	
 
 }

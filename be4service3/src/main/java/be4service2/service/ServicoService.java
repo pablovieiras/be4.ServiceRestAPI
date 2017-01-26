@@ -58,4 +58,8 @@ public interface ServicoService {
 	
 	List<Servico> avalicoesPendentesContratante(Contratante contratante);
 	
+	List<Servico> avalicoesPendentesProfissional(Profissional profissional) throws ServletException;
+	
+
+	
 }
