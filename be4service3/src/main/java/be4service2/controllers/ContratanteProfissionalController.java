@@ -72,7 +72,6 @@ public class ContratanteProfissionalController
 	}
 
 
-
 	@RequestMapping(value="/{id}/deixarDeSerProfissional",method = RequestMethod.PUT)
 	public void deixarDeSerProfissional(@RequestBody ContratanteProfissional contratante){
 			//Contratante contratante= new Contratante(c.getId(),c.getNome(),c.getAvaliacaoContratante());
@@ -92,12 +91,7 @@ public class ContratanteProfissionalController
 		   	servicoService.selecionarProfissional(profissionalService.findById(id),servicoService.findById(idServico));
 	 }
 	
-	@RequestMapping(value = "/{id}/servico/{idServico}/fazerProposta", method = RequestMethod.POST)
-	public void fazerProposta(@PathVariable("id") Integer id, @PathVariable("idServico") Integer idServico,
-			@RequestBody Proposta proposta) {
-		System.out.println(proposta.toString());
-		servicoService.fazerProposta(profissionalService.findById(id), servicoService.findById(idServico), proposta);
-	}
+
 	@RequestMapping(value="/{id}/servicosExecutados",method = RequestMethod.GET)
 	public List<Servico> getAllServicosExecutados(@PathVariable("id") Integer id) throws ServletException{ 
 		   return servicoService.getAllServicosExecutados(profissionalService.findById(id));
