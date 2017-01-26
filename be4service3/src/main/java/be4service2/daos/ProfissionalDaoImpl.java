@@ -43,19 +43,11 @@ public class ProfissionalDaoImpl implements ProfissionalDao {
 
 	@Override
 	public void tornarContratante(Integer id) {
-		String ss = "UPDATE Pessoa p set tipo_pessoa='contratanteProfissional' where p.id=:id";
+		String ss = "UPDATE Pessoa p set tipo_pessoa='contratanteProfissional',tipo='contratanteProfissional' where p.id=:id";
 		javax.persistence.Query query = manager.createQuery(ss);
 		query.setParameter("id", id);
 		query.executeUpdate();
 	}
 
-	@Override
-	public void desativarConta(Profissional profissional) {
-		String ss = "UPDATE Pessoa p set tipo_pessoa='contaDesativada'where p.id=:id";
-		javax.persistence.Query query = manager.createQuery(ss);
-		query.setParameter("id", profissional.getId());
-		query.executeUpdate();
-
-	}
 
 }

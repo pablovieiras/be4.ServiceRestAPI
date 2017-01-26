@@ -30,10 +30,9 @@ public class ProfissionalServiceImpl implements ProfissionalService {
 	@Override
 	public void save(Profissional profissional) throws ServletException {
 		profissional.setTipo("profissional");
-		System.out.println("Profisionaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		Pessoa p=pessoaDao.verificaEmail(profissional.getEmail());
 		if(p!=null){
-			throw new ServletException("email ja cadastrado");
+			throw new ServletException("email já cadastrado");
 		}
 		System.out.println(profissional.toString());
 		profissionalDao.save(profissional);
@@ -62,10 +61,5 @@ public class ProfissionalServiceImpl implements ProfissionalService {
 		profissionalDao.tornarContratante(id);
 	}
 
-	@Override
-	public void desativarConta(Profissional profissional) {
-		profissionalDao.desativarConta(profissional);
-		
-	}
 
 }

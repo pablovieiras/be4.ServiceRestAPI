@@ -106,13 +106,6 @@ public void tornarProfissional(ContratanteProfissional contratante) {
 	
 }
 
-	@Override
-	public void desativarConta(Contratante contratante) {
-		String ss = "UPDATE Pessoa p set tipo_pessoa='contaDesativada'where p.id=:id";
-		javax.persistence.Query query = manager.createQuery(ss);
-		query.setParameter("id", contratante.getId());
-		query.executeUpdate();
 
-	}
 
 }

@@ -21,4 +21,6 @@ public interface PropostaDao {
 	void mudarStatusParaRejeitadoDaPropostaRecusada(Integer idServico,Integer idSelecionado);
 
 	void mudarStatusParaAceitoDaPropostaEscolhida(Integer idServico, Integer idSelecionado);
+	
+	Proposta verificaProposta(Integer idServico,Integer idProfissional);
 }

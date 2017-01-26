@@ -20,6 +20,5 @@ public interface ContratanteDao {
 	
 	void tornarProfissional(ContratanteProfissional contratante);
 	
-	void desativarConta(Contratante contratante);
-
+	
 }

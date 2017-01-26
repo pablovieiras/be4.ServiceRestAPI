@@ -68,9 +68,5 @@ public class ContratanteServiceImpl implements ContratanteService {
 
 	}
 
-	@Override
-	public void desativarConta(Contratante contratante) {
-		contratanteDao.desativarConta(contratante);
 
-	}
 }

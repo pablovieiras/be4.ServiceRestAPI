@@ -15,6 +15,7 @@ import be4service2.models.ContratanteProfissional;
 import be4service2.models.Proposta;
 import be4service2.models.Servico;
 import be4service2.service.ContratanteProfissionalService;
+import be4service2.service.ContratanteService;
 import be4service2.service.ProfissionalService;
 import be4service2.service.ServicoService;
 
@@ -30,6 +31,8 @@ public class ContratanteProfissionalController
 	private ServicoService servicoService;
 	@Autowired
 	private ProfissionalService profissionalService;
+	@Autowired
+	private ContratanteService contratanteService;
 		
    @RequestMapping(method = RequestMethod.GET)
    public List<ContratanteProfissional> load()
@@ -60,8 +63,13 @@ public class ContratanteProfissionalController
 	public void remove(@RequestBody ContratanteProfissional contratanteProfissional){
 		   contratanteProfissionalService.remove(contratanteProfissional);
 	 }
-
-
+	
+	@RequestMapping(value = "/{id}/servico/{idServico}/fazerProposta", method = RequestMethod.POST)
+	public void fazerProposta(@PathVariable("id") Integer id, @PathVariable("idServico") Integer idServico,
+			@RequestBody Proposta proposta) throws ServletException {
+		System.out.println(proposta.toString());
+		servicoService.fazerProposta(profissionalService.findById(id), servicoService.findById(idServico), proposta);
+	}
 
 
 	@RequestMapping(value="/{id}/deixarDeSerProfissional",method = RequestMethod.PUT)
@@ -83,11 +91,18 @@ public class ContratanteProfissionalController
 		   	servicoService.selecionarProfissional(profissionalService.findById(id),servicoService.findById(idServico));
 	 }
 	
-	@RequestMapping(value = "/{id}/servico/{idServico}/fazerProposta", method = RequestMethod.POST)
-	public void fazerProposta(@PathVariable("id") Integer id, @PathVariable("idServico") Integer idServico,
-			@RequestBody Proposta proposta) {
-		System.out.println(proposta.toString());
-		servicoService.fazerProposta(profissionalService.findById(id), servicoService.findById(idServico), proposta);
-	}
+
+	@RequestMapping(value="/{id}/servicosExecutados",method = RequestMethod.GET)
+	public List<Servico> getAllServicosExecutados(@PathVariable("id") Integer id) throws ServletException{ 
+		   return servicoService.getAllServicosExecutados(profissionalService.findById(id));
+				   
+	   }
+	
+	@RequestMapping(value="/{id}/servicosContratados",method = RequestMethod.GET)
+	   public List<Servico> getAllServicosContratados(@PathVariable("id") Integer id)
+	   { 
+		   return servicoService.getListaServicosContratados(contratanteService.findById(id));	   
+	   }
+	   
 
 }
