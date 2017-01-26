@@ -61,6 +61,15 @@ public class PessoaDaoImpl {
 		query.executeUpdate();
 	}
 
+	@Transactional
+	public void ativarConta(Integer id) {
+		Pessoa p=this.findById(id);
+		String ss = "UPDATE Pessoa p set tipo_pessoa=:tipo where p.id=:idp";
+		javax.persistence.Query query = manager.createQuery(ss);
+		query.setParameter("idp", id);
+		query.setParameter("tipo", p.getTipo());
+		query.executeUpdate();
+	}
 	public Pessoa verificaEmail(String email) {
 
 		try {
