@@ -16,7 +16,7 @@ public class ProfissionalDTO {
 	private Double avaliacaoCordialidade;
 	private Double avaliacaoCompromisso;
 	private String cep;
-	private String rua;
+	private String lougradouro;
 	private String foto;
 
 	public ProfissionalDTO() {
@@ -26,7 +26,7 @@ public class ProfissionalDTO {
 	
 	public ProfissionalDTO(Integer idProfissional, String nome, String email, String resumoProfissional,
 			String profissao, String telefone, String celular, String competencias, Double avaliacaoQualidade,
-			Double avaliacaoPreco, Double avaliacaoPontualidade, String cep, String rua, String foto) {
+			Double avaliacaoPreco, Double avaliacaoPontualidade, String cep, String lougradouro, String foto) {
 		super();
 		this.idProfissional = idProfissional;
 		this.nome = nome;
@@ -40,7 +40,7 @@ public class ProfissionalDTO {
 		this.avaliacaoPreco = avaliacaoPreco;
 		this.avaliacaoPontualidade = avaliacaoPontualidade;
 		this.cep = cep;
-		this.rua = rua;
+		this.lougradouro = lougradouro;
 		this.foto = foto;
 	}
 
@@ -50,7 +50,7 @@ public class ProfissionalDTO {
 	public ProfissionalDTO(Integer idProfissional, String nome, String email, String resumoProfissional,
 			String profissao, String telefone, String celular, String competencias, Double avaliacaoQualidade,
 			Double avaliacaoPreco, Double avaliacaoPontualidade, Double avaliacaoCordialidade,
-			Double avaliacaoCompromisso, String cep, String rua, String foto) {
+			Double avaliacaoCompromisso, String cep, String lougradouro, String foto) {
 		super();
 		this.idProfissional = idProfissional;
 		this.nome = nome;
@@ -66,7 +66,7 @@ public class ProfissionalDTO {
 		this.avaliacaoCordialidade = avaliacaoCordialidade;
 		this.avaliacaoCompromisso = avaliacaoCompromisso;
 		this.cep = cep;
-		this.rua = rua;
+		this.lougradouro = lougradouro;
 		this.foto = foto;
 	}
 
@@ -127,11 +127,11 @@ public class ProfissionalDTO {
 	}
 
 	public String getRua() {
-		return rua;
+		return lougradouro;
 	}
 
-	public void setRua(String rua) {
-		this.rua = rua;
+	public void setRua(String lougradouro) {
+		this.lougradouro = lougradouro;
 	}
 
 	public String getNome() {

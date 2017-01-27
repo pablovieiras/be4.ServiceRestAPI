@@ -42,7 +42,7 @@ public class ContratanteProfissionalDaoImpl implements ContratanteProfissionalDa
 	}
 
 	public void deixarDeSerProfissional(ContratanteProfissional contratante) {
-		String ss = "UPDATE Pessoa p set tipo_pessoa='contratante' where p.id=:id";
+		String ss = "UPDATE Pessoa p set tipo_pessoa='contratante',tipo='contratante' where p.id=:id";
 		javax.persistence.Query query = manager.createQuery(ss);
 		query.setParameter("id", contratante.getId());
 		int a = query.executeUpdate();

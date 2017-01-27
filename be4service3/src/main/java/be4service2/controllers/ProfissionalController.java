@@ -75,7 +75,7 @@ public class ProfissionalController {
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public void save(@RequestBody Profissional profissional) throws ServletException {
-
+		System.out.println(profissional.toString());
 		profissionalService.save(profissional);
 	}
 
