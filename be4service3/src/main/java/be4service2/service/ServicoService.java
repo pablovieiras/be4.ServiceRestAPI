@@ -8,6 +8,7 @@ import be4service2.models.AvaliacaoContratante;
 import be4service2.models.AvaliacaoProfissional;
 import be4service2.models.Contratante;
 import be4service2.models.ContratanteProfissional;
+import be4service2.models.Pessoa;
 import be4service2.models.Profissional;
 import be4service2.models.Proposta;
 import be4service2.models.Servico;
@@ -28,7 +29,7 @@ public interface ServicoService {
 	
 	void criarServico(ContratanteProfissional contratante,Servico servico);
 	
-	void selecionarProfissional(Profissional profissional,Servico servico) throws ServletException;
+	void selecionarProfissional(Pessoa profissional,Servico servico) throws ServletException;
 	
 
 	

@@ -1,6 +1,7 @@
 package be4service2.controllers;
 
 import java.util.List;
+
 import javax.servlet.ServletException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import be4service2.daos.PessoaDaoImpl;
 import be4service2.models.AvaliacaoProfissional;
 import be4service2.models.Contratante;
 import be4service2.models.ContratanteProfissional;
@@ -31,6 +34,10 @@ public class ContratanteController {
 
 	@Autowired
 	private ServicoService servicoService;
+	
+	@Autowired
+	private PessoaDaoImpl pessoaDao;
+
 
 	@RequestMapping(value = "/{id}/servicosContratados", method = RequestMethod.GET)
 	public List<Servico> getAllServicosContratados(@PathVariable("id") Integer id) {
@@ -68,8 +75,11 @@ public class ContratanteController {
 	@RequestMapping(value = "/profissional/{id}/servico/{id_servico}/fazerOferta", method = RequestMethod.POST)
 	public void selecionarProfissionalDireto(@PathVariable("id") Integer id,
 			@PathVariable("id_servico") Integer idServico) throws ServletException {
-		servicoService.selecionarProfissional(profissionalService.findById(id), servicoService.findById(idServico));
+		System.out.println(id+"kkkkkkkkk"+idServico);
+		servicoService.selecionarProfissional(pessoaDao.findById(id), servicoService.findById(idServico));
 	}
+
+
 
 	/*
 	 * @RequestMapping(value=

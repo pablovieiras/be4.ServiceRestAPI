@@ -3,7 +3,9 @@ package be4service2.daos;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.servlet.ServletException;
 
 import org.springframework.stereotype.Repository;
 
@@ -79,11 +81,24 @@ public class PropostaDaoImpl implements PropostaDao {
 
 	@Override
 	public Proposta verificaProposta(Integer idServico, Integer idProfissional) {
-		String ss = "select s from Proposta s where s.id_servico=:idservico AND s.id_profissional=:idprofissional";
+		System.out.println(idServico+"shdahdkashjdjahsdljha"+idProfissional);
+		String ss = "select p from Proposta p where id_profissional=:idprofissional AND id_servico=:idservico";
 		javax.persistence.Query query = manager.createQuery(ss);
 		query.setParameter("idservico", idServico);
 		query.setParameter("idprofissional",idProfissional);
-		return (Proposta) query.getSingleResult();
+		
+		
+			 List<Proposta> results= (List<Proposta>) query.getResultList();
+			 if (results.isEmpty()) {
+				    return null; // handle no-results case
+				} else {
+				    return results.get(0);
+				}
+		
+			
+	
+	
+		
 		
 	}
 }
