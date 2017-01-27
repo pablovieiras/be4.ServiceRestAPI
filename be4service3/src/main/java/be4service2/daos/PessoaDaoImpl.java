@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import be4service2.models.Pessoa;
+import be4service2.models.Profissional;
 
 @Repository
 public class PessoaDaoImpl {
@@ -16,7 +17,8 @@ public class PessoaDaoImpl {
 	private EntityManager manager;
 
 	public Pessoa findById(Integer id) {
-		return manager.find(Pessoa.class, "select c.id from Pessoa c");
+	 	return manager.find(Pessoa.class, id);
+	
 	}
 
 	public Pessoa verificaLogin(String login, String senha) {

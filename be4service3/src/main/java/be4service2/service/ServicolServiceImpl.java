@@ -19,6 +19,7 @@ import be4service2.models.AvaliacaoContratante;
 import be4service2.models.AvaliacaoProfissional;
 import be4service2.models.Contratante;
 import be4service2.models.ContratanteProfissional;
+import be4service2.models.Pessoa;
 import be4service2.models.Profissional;
 import be4service2.models.Proposta;
 import be4service2.models.Servico;
@@ -97,8 +98,11 @@ public class ServicolServiceImpl implements ServicoService {
 	 */
 
 	@Override
-	public void selecionarProfissional(Profissional profissional, Servico servico) throws ServletException {
-		if (profissional == null) {
+	public void selecionarProfissional(Pessoa profissional, Servico servico) throws ServletException {
+		if (profissional == null ) {
+			throw new ServletException("Profissional não encontrado");
+		}
+		if (profissional.getTipo().equals("contratante")) {
 			throw new ServletException("Profissional não encontrado");
 		}
 		servico.setProfissional(profissional);
