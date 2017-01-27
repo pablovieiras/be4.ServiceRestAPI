@@ -151,9 +151,10 @@ public class ServicolServiceImpl implements ServicoService {
 
 	@Override
 	public void fazerProposta(Profissional profissional, Servico servico, Proposta proposta) throws ServletException {
-		Proposta p = null;
-		p = propostaDao.verificaProposta(servico.getIdServico(), profissional.getId());
-		if (p == null) {
+	
+		 Proposta p = propostaDao.verificaProposta(servico.getIdServico(), profissional.getId());
+
+		if (p!=null) {
 			throw new ServletException("Este Profissional já fez uma proposta para este serviço");
 		}
 		proposta.setProfissional(profissional);

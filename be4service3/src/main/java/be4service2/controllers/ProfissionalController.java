@@ -99,6 +99,7 @@ public class ProfissionalController {
 	public void fazerProposta(@PathVariable("id") Integer id, @PathVariable("idServico") Integer idServico,
 			@RequestBody Proposta proposta) throws ServletException {
 		System.out.println(proposta.toString());
+		System.out.println(id+"llllllllllllllllllllll"+idServico+"kkkk"+proposta.toString());
 		servicoService.fazerProposta(profissionalService.findById(id), servicoService.findById(idServico), proposta);
 	}
 
