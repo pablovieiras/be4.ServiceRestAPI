@@ -26,9 +26,9 @@ public class PessoaController {
 		pessoaDao.desativarConta(idPessoa);
 	}
 	
-	@RequestMapping(value="desativarConta/{idPessoa}",method = RequestMethod.PUT)
+	@RequestMapping(value="ativarConta/{idPessoa}",method = RequestMethod.PUT)
 	public void ativarConta (@PathVariable("idPessoa")Integer idPessoa){
-		pessoaDao.desativarConta(idPessoa);
+		pessoaDao.ativarConta(idPessoa);
 	}
 	
 	

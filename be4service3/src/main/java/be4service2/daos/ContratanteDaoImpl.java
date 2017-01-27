@@ -48,58 +48,12 @@ public class ContratanteDaoImpl implements ContratanteDao {
 public void tornarProfissional(ContratanteProfissional contratante) {
 	// o que colocar
 	/*String ss= "UPDATE Pessoa p SET p.tipo = 'ContratanteProfissional' WHERE p.id = :id";*/
-	String ss="UPDATE Pessoa p set tipo_pessoa='contratanteProfissional',"
-			+ "p.nome=:nome,"
-			+ "p.cpf=:cpf,"
-			+ "p.data_nascimento=:dataNascimento,"
-			+ "p.email=:email,"
-			+ "p.senha=:senha,"
-			+ "p.telefone=:telefone,"
-			+ "p.celular=:celular,"
-			+ "p.cep=:cep,"
-			+ "p.lougradouro=:lougradouro,"
-			+ "p.numero=:numero,"
-			+ "p.cidade=:cidade,"
-			+ "p.bairro=:bairro,"
-			+ "p.complemento=:complemento,"
-			+ "p.tipo=:'contratanteProfissional',"
-			+ "p.avaliacao_cordialidade=:avcordialidade,"
-			+ "p.avaliacaoCompromisso=:avcompromisso,"
-			+ "p.numero_avaliacoes_contratante=:numeroAvContrtante"
-			+ "p.profissao=:profissao,"
-			+ "p.resumo_profissional=:resumoProfissional,"
-			+ "p.competencias=:competencias,"
-			+ "p.avaliacao_qualidade=:avaliacaoQualidade,"
-			+ "p.avaliacao_preco=:avaliacaoPreco,"
-			+ "p.avaliacao+pontualidade=:avaliacaoPontualidade,"
-			+ "p.numero_avaliacoes_profissional=:numeroAvProfissional"
-			+ "where p.id=:id";
 	
+	System.out.println("kkkkkkkkkkkkkkkkkkkkkkk"+contratante.toString());
+	String ss="UPDATE Pessoa p set tipo_pessoa='contratanteProfissional',tipo='contratanteProfissional' where p.id=:id";
 
    javax.persistence.Query query = manager.createQuery(ss);
-   query.setParameter("nome", contratante.getNome());
-   query.setParameter("cpf", contratante.getCpf());
-   query.setParameter("dataNascimento", contratante.getDataNascimento());
-   query.setParameter("email", contratante.getEmail());
-   query.setParameter("senha", contratante.getSenha());
-   query.setParameter("telefone", contratante.getTelefone());
-   query.setParameter("celular", contratante.getCelular());
-   query.setParameter("cep", contratante.getCep());
-   query.setParameter("lougradouro", contratante.getLougradouro());
-   query.setParameter("numero", contratante.getNumero());
-   query.setParameter("cidade", contratante.getCidade());
-   query.setParameter("bairro", contratante.getBairro());
-   query.setParameter("complemento", contratante.getComplemento());
-   query.setParameter("avcordialidade", contratante.getAvaliacaoCordialidade());
-   query.setParameter("avcompromisso", contratante.getAvaliacaoCompromisso());
-   query.setParameter("numeroAvContrtante", contratante.getNumeroAvaliacoesContratante());
-   query.setParameter("profissao", contratante.getProfissao());
-   query.setParameter("resumoProfissional", contratante.getResumoProfissional());
-   query.setParameter("competencias", contratante.getCompetencias());
-   query.setParameter("avaliacaoQualidade", contratante.getAvaliacaoQualidade());
-   query.setParameter("avaliacaoPreco", contratante.getAvaliacaoPreco());
-   query.setParameter("avaliacaoPontualidade", contratante.getAvaliacaoPontualidade());
-   query.setParameter("numeroAvProfissional", contratante.getNumeroAvaliacoesProfissional());
+
    query.setParameter("id", contratante.getId());
    
    query.executeUpdate();

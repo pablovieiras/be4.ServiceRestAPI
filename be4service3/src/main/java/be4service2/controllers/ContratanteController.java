@@ -54,6 +54,7 @@ public class ContratanteController {
 
 	@RequestMapping(value = "/tornarProfissional", method = RequestMethod.PUT)
 	public void tornarProfissional(@RequestBody ContratanteProfissional contratante) {
+		System.out.println("kkkkkkkkkkkkkkkkkkkkkkk"+contratante.toString());
 		contratanteService.tornarProfissional(contratante);
 	}
 

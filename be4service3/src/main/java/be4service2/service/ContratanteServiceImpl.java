@@ -61,9 +61,12 @@ public class ContratanteServiceImpl implements ContratanteService {
 			contratante.setAvaliacaoPreco(0.0);
 			contratante.setAvaliacaoPontualidade(0.0);
 		}
+		contratante.setTipo("contratanteProfissional");
+		//seta o tipo pessoa em contratante profissional
 		contratanteDao.tornarProfissional(contratante);
+		//da update no objeto inteiro com as novas informações
+		contratanteProfissionalDao.update(contratante);
 		
-		System.out.println(contratante.toString());
 				
 
 	}
