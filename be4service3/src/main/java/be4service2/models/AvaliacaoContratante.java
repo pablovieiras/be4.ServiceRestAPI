@@ -18,8 +18,8 @@ public class AvaliacaoContratante {
 	@JoinColumn(name="id_contratante")
 	private Pessoa contratante;
 	
-	private Double avaliacaoCordialidade=0.0;
-	private Double avaliacaoCompromisso=0.0;
+	private Double avaliacaoCordialidade=1.0;
+	private Double avaliacaoCompromisso=1.0;
 
 	public AvaliacaoContratante(){
 		

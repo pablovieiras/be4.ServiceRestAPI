@@ -18,9 +18,9 @@ public class AvaliacaoProfissional {
 	@JoinColumn(name="id_profissional")
 	private Pessoa profissional;
 	
-	private Double avaliacaoQualidade=0.0;
-	private Double avaliacaoPreco=0.0;
-	private Double avaliacaoPontualidade=0.0;
+	private Double avaliacaoQualidade=1.0;
+	private Double avaliacaoPreco=1.0;
+	private Double avaliacaoPontualidade=1.0;
 	
 	public AvaliacaoProfissional(){
 		
