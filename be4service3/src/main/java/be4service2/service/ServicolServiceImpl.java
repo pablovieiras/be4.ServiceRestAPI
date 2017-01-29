@@ -79,7 +79,10 @@ public class ServicolServiceImpl implements ServicoService {
 	}
 
 	@Override
-	public void finalizarServico(Servico servico) {
+	public void finalizarServico(Servico servico) throws ServletException {
+		if(!servico.getStatus().equals("Em Andamento")){
+			throw new ServletException("Serviço não está Em Andamento para ser Finalizado");
+		}
 		servico.setStatus("finalizado");
 		servicoDao.update(servico);
 	}

@@ -105,7 +105,7 @@ public class ContratanteController {
 	}
 
 	@RequestMapping(value = "/servico/{id_servico}/finalizarServico", method = RequestMethod.PUT)
-	public void finalizarServico(@PathVariable("id_servico") Integer idServico) {
+	public void finalizarServico(@PathVariable("id_servico") Integer idServico) throws ServletException {
 		servicoService.finalizarServico(servicoService.findById(idServico));
 	}
 	

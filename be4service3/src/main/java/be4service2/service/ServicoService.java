@@ -45,7 +45,7 @@ public interface ServicoService {
 	
 	void avaliaContratante(Integer idServico, AvaliacaoContratante avaliacao) throws ServletException ;
 	
-	void finalizarServico (Servico servico);
+	void finalizarServico (Servico servico) throws ServletException;
 	
 	List<Servico> getListaServicosContratados(Pessoa contratante);
 	

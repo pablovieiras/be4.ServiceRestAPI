@@ -118,4 +118,14 @@ public class ContratanteProfissionalController {
 		return servicoService.avalicoesPendentesContratanteProfissional(pessoaDao.findById(id));
 	}
 
+	//aceitar ou recusar o serviço resposta 0 ele recusa e 1 ele aceita 
+	@RequestMapping(value = "/servico/{idServicol}/aceitarServico/{resposta}", method = RequestMethod.POST)
+	public void aceitarServico(@PathVariable("idServicol") Integer idServicol, @PathVariable("resposta") Integer resposta) {
+		servicoService.aceitarServico(servicoService.findById(idServicol), resposta);
+	}
+	//finaliza o serviço 
+	@RequestMapping(value = "/servico/{id_servico}/finalizarServico", method = RequestMethod.PUT)
+	public void finalizarServico(@PathVariable("id_servico") Integer idServico) throws ServletException {
+		servicoService.finalizarServico(servicoService.findById(idServico));
+	}
 }
