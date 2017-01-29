@@ -2,13 +2,17 @@ package be4service2.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.ServletException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import be4service2.daos.PessoaDaoImpl;
 import be4service2.models.AvaliacaoContratante;
 import be4service2.models.ContratanteProfissional;
 import be4service2.models.Profissional;
@@ -21,13 +25,14 @@ import be4service2.service.ServicoService;
 @RestController
 /* @CrossOrigin(origins = "http://localhost:50281") */
 @RequestMapping(value = "/profissional")
-
 public class ProfissionalController {
 
 	@Autowired
 	private ProfissionalService profissionalService;
 	@Autowired
 	private ServicoService servicoService;
+	@Autowired
+	private PessoaDaoImpl pessoaDao;
 	@Autowired
 	private ContratanteProfissionalService contrantranteProfissionalService;
 
@@ -90,17 +95,15 @@ public class ProfissionalController {
 		profissionalService.tornarContratante(id);
 	}
 
-	@RequestMapping(value = "/servico/{id}/aceitarServico/{resposta}", method = RequestMethod.POST)
-	public void aceitarServico(@PathVariable("id") Integer id, @PathVariable("resposta") Integer resposta) {
-		servicoService.aceitarServico(id, resposta);
+	@RequestMapping(value = "/servico/{idServicol}/aceitarServico/{resposta}", method = RequestMethod.POST)
+	public void aceitarServico(@PathVariable("idServicol") Integer idServicol, @PathVariable("resposta") Integer resposta) {
+		servicoService.aceitarServico(servicoService.findById(idServicol), resposta);
 	}
 
 	@RequestMapping(value = "/{id}/servico/{idServico}/fazerProposta", method = RequestMethod.POST)
 	public void fazerProposta(@PathVariable("id") Integer id, @PathVariable("idServico") Integer idServico,
 			@RequestBody Proposta proposta) throws ServletException {
-		System.out.println(proposta.toString());
-		System.out.println(id+"llllllllllllllllllllll"+idServico+"kkkk"+proposta.toString());
-		servicoService.fazerProposta(profissionalService.findById(id), servicoService.findById(idServico), proposta);
+		servicoService.fazerProposta(pessoaDao.findById(id), servicoService.findById(idServico), proposta);
 	}
 
 	@RequestMapping(value = "/servico/{id_servico}/avaliaContratante", method = RequestMethod.POST)
@@ -119,6 +122,11 @@ public class ProfissionalController {
 		   return servicoService.getAllServicosExecutados(profissionalService.findById(id));
 				   
 	   }
+	@RequestMapping(value = "/{id}/avalicoesPendentes", method = RequestMethod.GET)
+	public List<Servico> avalicoesPendentes(@PathVariable("id") Integer id) throws ServletException {
+				
+		return servicoService.avalicoesPendentesProfissional(profissionalService.findById(id));
+	}
 
 
 }

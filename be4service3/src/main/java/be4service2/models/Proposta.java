@@ -19,7 +19,7 @@ public class Proposta {
 	private Servico servico;
 	@ManyToOne
 	@JoinColumn(name = "id_profissional")
-	private Profissional profissional;
+	private Pessoa profissional;
 	private String titulo;
 	private BigDecimal valorProposta;
 	private int prazoEstimado;
@@ -36,14 +36,14 @@ public class Proposta {
 		this.valorProposta = valorProposta;
 	}
 
-	public Proposta(Servico servico, Profissional profissional, BigDecimal valorProposta) {
+	public Proposta(Servico servico, Pessoa profissional, BigDecimal valorProposta) {
 		super();
 		this.servico = servico;
 		this.profissional = profissional;
 		this.valorProposta = valorProposta;
 	}
 
-	public Proposta(Integer idProposta, Servico servico, Profissional profissional, BigDecimal valorProposta) {
+	public Proposta(Integer idProposta, Servico servico, Pessoa profissional, BigDecimal valorProposta) {
 		super();
 		this.idProposta = idProposta;
 		this.servico = servico;
@@ -64,11 +64,11 @@ public class Proposta {
 		this.servico = servico;
 	}
 
-	public Profissional getProfissional() {
+	public Pessoa getProfissional() {
 		return profissional;
 	}
 
-	public void setProfissional(Profissional profissional) {
+	public void setProfissional(Pessoa profissional) {
 		this.profissional = profissional;
 	}
 
@@ -127,5 +127,7 @@ public class Proposta {
 				+ ", titulo=" + titulo + ", valorProposta=" + valorProposta + ", prazoEstimado=" + prazoEstimado
 				+ ", descricao=" + descricao + ", status=" + status + "]";
 	}
+
+
 
 }

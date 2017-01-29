@@ -102,8 +102,14 @@ public class ServicolServiceImpl implements ServicoService {
 		if (profissional == null ) {
 			throw new ServletException("Profissional não encontrado");
 		}
-		if (profissional.getTipo().equals("contratante")) {
+		if(profissional.getTipo().equals("contratante")) {
 			throw new ServletException("Profissional não encontrado");
+		}
+		if(profissional.getId()==servico.getContratante().getId()){
+			throw new ServletException("Não é possivel fazer proposta para o seu proprio serviço");
+		}
+		if(!servico.getStatus().equals("Aberto")){
+			throw new ServletException("Não é possivel fazer proposta para um serviço que não esta aberto");
 		}
 		servico.setProfissional(profissional);
 		servico.setStatus("Aguardando Aceitação do Profissional");
@@ -111,11 +117,11 @@ public class ServicolServiceImpl implements ServicoService {
 	}
 
 	@Override
-	public void criarServico(ContratanteProfissional contratanteProfissional, Servico servico) {
+	public Servico criarServico(ContratanteProfissional contratanteProfissional, Servico servico) {
 		servico.setContratante(contratanteProfissional);
 		// contratanteProfissional.getServicosContratados().add(servico);arrrumar
 		servico.setStatus("Aberto");
-		servicoDao.save(servico);
+		return servicoDao.save(servico);
 
 	}
 
@@ -126,13 +132,15 @@ public class ServicolServiceImpl implements ServicoService {
 	}
 
 	@Override
-	public void aceitarServico(Integer id, Integer resposta) {
+	public void aceitarServico(Servico servico, Integer resposta) {
 		// busca o servico
-		Servico servico = servicoDao.findById(id);
+/*		Servico servico = servicoDao.findById(id);*/
+	
 		if (resposta == 0) {
 			// muda status apenas da proposta para rejeitado
-			propostaDao.mudarStatusParaRejeitadoDaPropostaRecusada(servico.getIdServico(),
-					servico.getProfissional().getId());
+			System.out.println("aquiiiiiiiiiiiiiii"+servico.getIdServico());
+			propostaDao.mudarStatusParaRejeitadoDaPropostaRecusada(servico.getIdServico(),servico.getProfissional().getId());
+			System.out.println("ok");
 			// muda o status
 			servico.setStatus("Aberto");
 			// remove o profissional do serviço
@@ -154,8 +162,20 @@ public class ServicolServiceImpl implements ServicoService {
 	}
 
 	@Override
-	public void fazerProposta(Profissional profissional, Servico servico, Proposta proposta) throws ServletException {
-	
+	public void fazerProposta(Pessoa profissional, Servico servico, Proposta proposta) throws ServletException {
+		
+		if(!servico.getStatus().equals("Aberto")){
+			throw new ServletException("Não é possivel fazer proposta para serviço que não esta em Aberto");
+		}
+		
+		if(profissional.getTipo().equals("contratante")){
+			throw new ServletException("Apenas profissionais pode fazer propostas");
+		}
+		
+		if(servico.getContratante().getId().equals(profissional.getId())){
+			throw new ServletException("Não é possivel fazer proposta para o seu proprio serviço");
+		}
+		
 		 Proposta p = propostaDao.verificaProposta(servico.getIdServico(), profissional.getId());
 
 		if (p!=null) {
@@ -169,6 +189,9 @@ public class ServicolServiceImpl implements ServicoService {
 	@Override
 	public void selecionarProposta(Integer id, Servico servico) throws ServletException {
 		Proposta p = propostaDao.findById(id);
+		if (p==null) {
+			throw new ServletException("Proposta não encontrada");
+		}
 		servico.setProfissional(p.getProfissional());
 		servico.setValor(p.getValorProposta());
 		this.selecionarProfissional(p.getProfissional(), servico);
@@ -237,7 +260,7 @@ public class ServicolServiceImpl implements ServicoService {
 	}
 
 	@Override
-	public List<Servico> getListaServicosContratados(Contratante contratante) {
+	public List<Servico> getListaServicosContratados(Pessoa contratante) {
 
 		return servicoDao.getListaServicosContratados(contratante);
 	}
@@ -248,15 +271,18 @@ public class ServicolServiceImpl implements ServicoService {
 		return servicoDao.listarAbertos();
 	}
 
+	//somento serviços em aberto traz sua lista de porpostas 
 	@Override
-	public List<Proposta> listaPropostasServico(Servico servico) {
-
+	public List<Proposta> listaPropostasServico(Servico servico) throws ServletException {
+		if(!servico.getStatus().equals("Aberto")){
+			throw new ServletException("Serviço não está em aberto no momento");
+		}
 		return servicoDao.listaPropostasServico(servico);
 
 	}
 
 	@Override
-	public List<Servico> getAllServicosExecutados(Profissional profissional) throws ServletException {
+	public List<Servico> getAllServicosExecutados(Pessoa profissional) throws ServletException {
 		List<Servico> lista = null;
 		lista = servicoDao.getAllServicosExecutados(profissional);
 
@@ -303,6 +329,31 @@ public class ServicolServiceImpl implements ServicoService {
 		}
 
 		return listAvaPendentes;
+	}
+
+	
+	@Override
+	public List<Servico> avalicoesPendentesContratanteProfissional(Pessoa contratanteProfissional) throws ServletException {
+		List<Servico> listServicosContratados = new ArrayList<>();
+		List<Servico> listServicosExecutados = new ArrayList<>();
+		List<Servico> listAvaPendentes = new ArrayList<>();
+		
+		listServicosContratados = this.getListaServicosContratados(contratanteProfissional);
+		listServicosExecutados = this.getAllServicosExecutados(contratanteProfissional);
+
+		for (Servico x : listServicosContratados) {
+			if (x.getAvaliacaoProfissional().equals("false")) {
+				listAvaPendentes.add(x);
+			}
+		}
+
+		for (Servico x : listServicosExecutados) {
+			if (x.getAvaliacaoProfissional().equals("false")) {
+				listAvaPendentes.add(x);
+			}
+		}
+		return listAvaPendentes;
+	
 	}
 	
 	

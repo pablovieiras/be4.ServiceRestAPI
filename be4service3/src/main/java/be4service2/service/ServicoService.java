@@ -27,7 +27,7 @@ public interface ServicoService {
 	
 	Servico criarServico(Contratante contratante,Servico servico);
 	
-	void criarServico(ContratanteProfissional contratante,Servico servico);
+	Servico criarServico(ContratanteProfissional contratante,Servico servico);
 	
 	void selecionarProfissional(Pessoa profissional,Servico servico) throws ServletException;
 	
@@ -37,9 +37,9 @@ public interface ServicoService {
 	
 	void selecionarProposta(Integer id,Servico servico) throws ServletException;
 	
-	void aceitarServico(Integer id,Integer resposta);
+	void aceitarServico(Servico servico,Integer resposta);
 	
-	void fazerProposta(Profissional p,Servico servico,Proposta proposta) throws ServletException;
+	void fazerProposta(Pessoa p,Servico servico,Proposta proposta) throws ServletException;
 	
 	void avaliaProfissional(Integer idServico,AvaliacaoProfissional avaliacao) throws ServletException;
 	
@@ -47,13 +47,13 @@ public interface ServicoService {
 	
 	void finalizarServico (Servico servico);
 	
-	List<Servico> getListaServicosContratados(Contratante contratante);
+	List<Servico> getListaServicosContratados(Pessoa contratante);
 	
-	List<Servico> getAllServicosExecutados(Profissional profissional) throws ServletException;
+	List<Servico> getAllServicosExecutados(Pessoa profissional) throws ServletException;
 	
 	List<Servico> listarAbertos ();
 	
-	List<Proposta> listaPropostasServico(Servico servico);
+	List<Proposta> listaPropostasServico(Servico servico) throws ServletException;
 	
 	List<Proposta> getAllPropostasFeitas(Profissional profissional);
 	
@@ -61,6 +61,6 @@ public interface ServicoService {
 	
 	List<Servico> avalicoesPendentesProfissional(Profissional profissional) throws ServletException;
 	
-
+	List<Servico> avalicoesPendentesContratanteProfissional(Pessoa profissional) throws ServletException;
 	
 }

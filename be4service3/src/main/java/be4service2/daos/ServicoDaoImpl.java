@@ -7,7 +7,7 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
-import be4service2.models.Contratante;
+import be4service2.models.Pessoa;
 import be4service2.models.Profissional;
 import be4service2.models.Proposta;
 import be4service2.models.Servico;
@@ -48,7 +48,7 @@ public class ServicoDaoImpl implements ServicoDao {
 	// retorna lista dos contratantes do id
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Servico> getListaServicosContratados(Contratante contratante) {
+	public List<Servico> getListaServicosContratados(Pessoa contratante) {
 		String ss = "select s from Servico s where id_contratante=:idc";
 		javax.persistence.Query query = manager.createQuery(ss);
 		query.setParameter("idc", contratante.getId());
@@ -67,7 +67,7 @@ public class ServicoDaoImpl implements ServicoDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Proposta> listaPropostasServico(Servico servico) {
-		String ss = "select s from Proposta s where s.id_servico=:ids";
+		String ss = "select s from Proposta s where id_servico=:ids AND status='Em Avaliação'";
 		javax.persistence.Query query = manager.createQuery(ss);
 		query.setParameter("ids", servico.getIdServico());
 		return query.getResultList();
@@ -75,7 +75,7 @@ public class ServicoDaoImpl implements ServicoDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Servico> getAllServicosExecutados(Profissional profissional) {
+	public List<Servico> getAllServicosExecutados(Pessoa profissional) {
 		String ss = "select s from Servico s where id_profissional=:idc";
 		javax.persistence.Query query = manager.createQuery(ss);
 		query.setParameter("idc", profissional.getId());

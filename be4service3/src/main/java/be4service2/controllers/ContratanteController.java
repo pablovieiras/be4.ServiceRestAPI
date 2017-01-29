@@ -41,11 +41,11 @@ public class ContratanteController {
 
 	@RequestMapping(value = "/{id}/servicosContratados", method = RequestMethod.GET)
 	public List<Servico> getAllServicosContratados(@PathVariable("id") Integer id) {
-		return servicoService.getListaServicosContratados(contratanteService.findById(id));
+		return servicoService.getListaServicosContratados(pessoaDao.findById(id));
 	}
 
 	@RequestMapping(value = "/{id}/propostasServico", method = RequestMethod.GET)
-	public List<Proposta> getListaPropostasServico(@PathVariable("id") Integer id) {
+	public List<Proposta> getListaPropostasServico(@PathVariable("id") Integer id) throws ServletException {
 		return servicoService.listaPropostasServico(servicoService.findById(id));
 	}
 

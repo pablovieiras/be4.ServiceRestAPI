@@ -49,7 +49,7 @@ public class PropostaDaoImpl implements PropostaDao {
 
 	@Override
 	public void mudarStatusParaRejeitado(Integer idServico, Integer idSelecionado) {
-		String ss="UPDATE Proposta p set status='Rejeitado' where p.id=:idServico AND p.id!=:idselecionado";
+		String ss="UPDATE Proposta p set status='Rejeitado' where id_servico=:idServicol AND id_profissional!=:idselecionado";
 		   javax.persistence.Query query = manager.createQuery(ss);
 		   query.setParameter("idServicol", idServico);
 		   query.setParameter("idselecionado", idSelecionado);
@@ -60,7 +60,7 @@ public class PropostaDaoImpl implements PropostaDao {
 
 	@Override
 	public void mudarStatusParaRejeitadoDaPropostaRecusada(Integer idServico, Integer idSelecionado) {
-		String ss="UPDATE Proposta p set p.status='Rejeitado' where p.id=:idselecionado";
+		String ss="UPDATE Proposta p set status='Rejeitado' where id_profissional=:idselecionado AND id_servico=:idServicol";
 		   javax.persistence.Query query = manager.createQuery(ss);
 		   query.setParameter("idServicol", idServico);
 		   query.setParameter("idselecionado", idSelecionado);
@@ -70,7 +70,7 @@ public class PropostaDaoImpl implements PropostaDao {
 	
 	@Override
 	public void mudarStatusParaAceitoDaPropostaEscolhida(Integer idServico, Integer idSelecionado) {
-		String ss="UPDATE Proposta p set p.status='Aceito' where p.id=:idselecionado";
+		String ss="UPDATE Proposta p set status='Aceito' where id_profissional=:idselecionado AND id_servico=:idServicol";
 		   javax.persistence.Query query = manager.createQuery(ss);
 		   query.setParameter("idServicol", idServico);
 		   query.setParameter("idselecionado", idSelecionado);
@@ -82,9 +82,9 @@ public class PropostaDaoImpl implements PropostaDao {
 	@Override
 	public Proposta verificaProposta(Integer idServico, Integer idProfissional) {
 		System.out.println(idServico+"shdahdkashjdjahsdljha"+idProfissional);
-		String ss = "select p from Proposta p where id_profissional=:idprofissional AND id_servico=:idservico";
+		String ss = "select p from Proposta p where id_profissional=:idprofissional AND id_servico=:idServicol";
 		javax.persistence.Query query = manager.createQuery(ss);
-		query.setParameter("idservico", idServico);
+		query.setParameter("idServicol", idServico);
 		query.setParameter("idprofissional",idProfissional);
 		
 		
