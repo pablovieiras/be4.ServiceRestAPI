@@ -332,7 +332,7 @@ public class ServicolServiceImpl implements ServicoService {
 		listServicos = this.getListaServicosContratados(contratante);
 
 		for (Servico x : listServicos) {
-			if (x.getAvaliacaoContratante().equals("false") && x.getStatus().equals("Em Andamento")||x.getStatus().equals("Finalizado")) {
+			if (x.getAvaliacaoContratante().equals("false") && x.getStatus().equals("Em Andamento") || x.getStatus().equals("Finalizado")) {
 				listAvaPendentes.add(x);
 			}
 		}

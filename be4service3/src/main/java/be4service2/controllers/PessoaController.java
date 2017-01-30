@@ -2,12 +2,14 @@ package be4service2.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import be4service2.daos.PessoaDaoImpl;
 import be4service2.models.Pessoa;
+import be4service2.models.Usuario;
 
 @RestController
 public class PessoaController {
@@ -33,5 +35,18 @@ public class PessoaController {
 	public void ativarConta(@PathVariable("idPessoa") Integer idPessoa) {
 		pessoaDao.ativarConta(idPessoa);
 	}
+	
+	//login auxilar para o android
+	@RequestMapping(value="/email",method = RequestMethod.POST)
+	  public Pessoa verificaLoginAndroide(@RequestBody Usuario p){
+		System.out.println(p.getEmail() + " " + p.getSenha());
+		return pessoaDao.verificaLogin(p.getEmail(), p.getSenha());
+	   }
 
+	//busca uma pessoa ppor um determinado id
+	@RequestMapping(value = "/{id}/DTO", method = RequestMethod.GET)
+	public Pessoa findByIdPessoa(@PathVariable("id") Integer id) {
+		return pessoaDao.findById(id);
+		
+	}
 }
