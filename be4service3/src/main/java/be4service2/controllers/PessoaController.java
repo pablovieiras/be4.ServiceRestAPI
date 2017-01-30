@@ -1,5 +1,7 @@
 package be4service2.controllers;
 
+import javax.xml.bind.ParseConversionEvent;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,8 +46,9 @@ public class PessoaController {
 	   }
 
 	//busca uma pessoa ppor um determinado id
-	@RequestMapping(value = "/{id}/DTO", method = RequestMethod.GET)
-	public Pessoa findByIdPessoa(@PathVariable("id") Integer id) {
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public Pessoa findByIdPessoa(@PathVariable("id") String idString) {
+		Integer id=Integer.parseInt(idString);
 		return pessoaDao.findById(id);
 		
 	}

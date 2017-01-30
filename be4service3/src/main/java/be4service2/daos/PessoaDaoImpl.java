@@ -8,7 +8,6 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import be4service2.models.Pessoa;
-import be4service2.models.Profissional;
 
 @Repository
 public class PessoaDaoImpl {
