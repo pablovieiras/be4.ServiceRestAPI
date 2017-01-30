@@ -1,7 +1,5 @@
 package be4service2.controllers;
 
-import java.util.Date;
-
 import javax.servlet.ServletException;
 
 import org.springframework.beans.factory.annotation.Autowired;

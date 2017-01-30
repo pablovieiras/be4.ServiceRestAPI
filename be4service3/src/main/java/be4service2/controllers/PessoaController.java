@@ -11,25 +11,27 @@ import be4service2.models.Pessoa;
 
 @RestController
 public class PessoaController {
-	
+
 	@Autowired
-    private PessoaDaoImpl pessoaDao;
-	
-	@RequestMapping(value="login2/email/{email}/senha/{senha}",method = RequestMethod.POST)
-	  public Pessoa verificaLogin(@PathVariable("email") String email, @PathVariable("senha") String senha){
-		
+	private PessoaDaoImpl pessoaDao;
+
+	// verifica o login do usuario com a senha
+	@RequestMapping(value = "login2/email/{email}/senha/{senha}", method = RequestMethod.POST)
+	public Pessoa verificaLogin(@PathVariable("email") String email, @PathVariable("senha") String senha) {
+
 		return pessoaDao.verificaLogin(email, senha);
-	   }
-	
-	@RequestMapping(value="desativarConta/{idPessoa}",method = RequestMethod.PUT)
-	public void desativarConta (@PathVariable("idPessoa")Integer idPessoa){
+	}
+
+	// Desativa a conta por tempo indeterminado
+	@RequestMapping(value = "desativarConta/{idPessoa}", method = RequestMethod.PUT)
+	public void desativarConta(@PathVariable("idPessoa") Integer idPessoa) {
 		pessoaDao.desativarConta(idPessoa);
 	}
-	
-	@RequestMapping(value="ativarConta/{idPessoa}",method = RequestMethod.PUT)
-	public void ativarConta (@PathVariable("idPessoa")Integer idPessoa){
+
+	// ativa a conta
+	@RequestMapping(value = "ativarConta/{idPessoa}", method = RequestMethod.PUT)
+	public void ativarConta(@PathVariable("idPessoa") Integer idPessoa) {
 		pessoaDao.ativarConta(idPessoa);
 	}
-	
-	
+
 }

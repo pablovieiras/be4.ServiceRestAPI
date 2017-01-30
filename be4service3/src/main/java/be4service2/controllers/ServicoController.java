@@ -10,19 +10,16 @@ import org.springframework.web.bind.annotation.RestController;
 import be4service2.models.Servico;
 import be4service2.service.ServicoService;
 
-/*   produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE*/
-
 @RestController
-@RequestMapping(value= "/servico")
-public class ServicoController 
-{
+@RequestMapping(value = "/servico")
+public class ServicoController {
 
 	@Autowired
-   private ServicoService servicoService;
- 
-	@RequestMapping(value="/listarAbertos",method = RequestMethod.GET)
-	   public List<Servico> listarAbertos()
-	   {
-	      return servicoService.listarAbertos();
-	   }
+	private ServicoService servicoService;
+
+	// lista todos os serviços em aberto
+	@RequestMapping(value = "/listarAbertos", method = RequestMethod.GET)
+	public List<Servico> listarAbertos() {
+		return servicoService.listarAbertos();
+	}
 }
