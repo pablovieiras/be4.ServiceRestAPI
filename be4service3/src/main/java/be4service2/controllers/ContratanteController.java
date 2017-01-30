@@ -97,7 +97,7 @@ public class ContratanteController {
 			throws ServletException {
 		servicoService.selecionarProposta(id, servicoService.findById(idServico));
 	}
-
+	//avalia o profissional baseado no serviço
 	@RequestMapping(value = "/servico/{id_servico}/avaliaProfissional", method = RequestMethod.POST)
 	public void avaliaProfissional(@PathVariable("id_servico") Integer idServico,
 			@RequestBody AvaliacaoProfissional avaliacaoProfissional) throws ServletException {
@@ -111,7 +111,6 @@ public class ContratanteController {
 	
 	@RequestMapping(value = "/{id}/avalicoesPendentes", method = RequestMethod.GET)
 	public List<Servico> avalicoesPendentes(@PathVariable("id") Integer id) {
-				
 		return servicoService.avalicoesPendentesContratante(contratanteService.findById(id));
 	}
 

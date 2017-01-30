@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import be4service2.daos.PessoaDaoImpl;
+import be4service2.models.AvaliacaoContratante;
+import be4service2.models.AvaliacaoProfissional;
 import be4service2.models.ContratanteProfissional;
 import be4service2.models.Proposta;
 import be4service2.models.Servico;
@@ -83,13 +85,6 @@ public class ContratanteProfissionalController {
 		return servicoService.criarServico(contratanteProfissionalService.findById(id), servico);
 	}
 
-	@RequestMapping(value = "/profissional/{id}/servico/{id_servico}", method = RequestMethod.POST)
-	public void selecionarProfissional(@PathVariable("id") Integer id, @PathVariable("id_servico") Integer idServico)
-			throws ServletException {
-
-		servicoService.selecionarProfissional(profissionalService.findById(id), servicoService.findById(idServico));
-	}
-
 	@RequestMapping(value = "/{id}/servicosExecutados", method = RequestMethod.GET)
 	public List<Servico> getAllServicosExecutados(@PathVariable("id") Integer id) throws ServletException {
 		return servicoService.getAllServicosExecutados(pessoaDao.findById(id));
@@ -127,5 +122,17 @@ public class ContratanteProfissionalController {
 	@RequestMapping(value = "/servico/{id_servico}/finalizarServico", method = RequestMethod.PUT)
 	public void finalizarServico(@PathVariable("id_servico") Integer idServico) throws ServletException {
 		servicoService.finalizarServico(servicoService.findById(idServico));
+	}
+	//avalia o contratante baseado no serviço
+	@RequestMapping(value = "/servico/{id_servico}/avaliaContratante", method = RequestMethod.POST)
+	public void avaliaContratante(@PathVariable("id_servico") Integer idServico,
+			@RequestBody AvaliacaoContratante avaliacaoContratante) throws ServletException {
+		servicoService.avaliaContratante(idServico, avaliacaoContratante);
+	}
+	//avalia o profissional baseado no serviço
+	@RequestMapping(value = "/servico/{id_servico}/avaliaProfissional", method = RequestMethod.POST)
+	public void avaliaProfissional(@PathVariable("id_servico") Integer idServico,
+			@RequestBody AvaliacaoProfissional avaliacaoProfissional) throws ServletException {
+		servicoService.avaliaProfissional(idServico, avaliacaoProfissional);
 	}
 }

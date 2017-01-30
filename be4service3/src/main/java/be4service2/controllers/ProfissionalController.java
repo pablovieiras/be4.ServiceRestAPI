@@ -105,7 +105,7 @@ public class ProfissionalController {
 			@RequestBody Proposta proposta) throws ServletException {
 		servicoService.fazerProposta(pessoaDao.findById(id), servicoService.findById(idServico), proposta);
 	}
-
+	//avalia o contratante baseado no serviço
 	@RequestMapping(value = "/servico/{id_servico}/avaliaContratante", method = RequestMethod.POST)
 	public void avaliaContratante(@PathVariable("id_servico") Integer idServico,
 			@RequestBody AvaliacaoContratante avaliacaoContratante) throws ServletException {

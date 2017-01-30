@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import be4service2.daos.AvaliacaoContratanteDao;
 import be4service2.daos.AvaliacaoProfissionalDao;
 import be4service2.daos.ContratanteDao;
+import be4service2.daos.ContratanteProfissionalDao;
 import be4service2.daos.ProfissionalDao;
 import be4service2.daos.PropostaDao;
 import be4service2.daos.ServicoDao;
@@ -33,6 +34,8 @@ public class ServicolServiceImpl implements ServicoService {
 	private PropostaDao propostaDao;
 	@Autowired
 	private ProfissionalDao profissionalDao;
+	@Autowired
+	private ContratanteProfissionalDao contratanteProfissionalDao;
 	@Autowired
 	private AvaliacaoContratanteDao avaliacaoContratanteDao;
 	@Autowired
@@ -220,10 +223,20 @@ public class ServicolServiceImpl implements ServicoService {
 		avaliacaoProfissional.setServico(servico);
 		// guarda o profissional dentro da avaliacao
 		avaliacaoProfissional.setProfissional(servico.getProfissional());
-		Profissional p = profissionalDao.findById(servico.getProfissional().getId());
-		p.mediaAvaliacao(avaliacaoProfissional.getAvaliacaoQualidade(), avaliacaoProfissional.getAvaliacaoPreco(),
-				avaliacaoProfissional.getAvaliacaoPontualidade());
-		profissionalDao.update(p);
+
+
+		if(servico.getProfissional().getTipo().equals("profissional")){
+			Profissional p = profissionalDao.findById(servico.getProfissional().getId());
+			p.mediaAvaliacao(avaliacaoProfissional.getAvaliacaoQualidade(), avaliacaoProfissional.getAvaliacaoPreco(),avaliacaoProfissional.getAvaliacaoPontualidade());
+		}
+		else if(servico.getProfissional().getTipo().equals("contratanteProfissional")){
+			ContratanteProfissional p = contratanteProfissionalDao.findById(servico.getProfissional().getId());
+			p.mediaAvaliacaoProfissional(avaliacaoProfissional.getAvaliacaoQualidade(), avaliacaoProfissional.getAvaliacaoPreco(),avaliacaoProfissional.getAvaliacaoPontualidade());
+		}
+		else{
+			throw new ServletException("Tipo pessoa inválido");
+		}
+		
 		// salvar a avaliacao
 		avaliacaoProfissionalDao.save(avaliacaoProfissional);
 		// seta avaliacao do profissionao como true"ja avaliado"
@@ -246,14 +259,24 @@ public class ServicolServiceImpl implements ServicoService {
 		if (!servico.getStatus().equals("Em Andamento") && !servico.getStatus().equals("Finalizado")) {
 			throw new ServletException("Erro status do serviço não esta em andamento ou finalizado");
 		}
-
 		// guarda o servico dentro da avaliacao
 		avaliacaoContratante.setServico(servico);
 		// guarda o contratante dentro da avaliacao
 		avaliacaoContratante.setContratante(servico.getContratante());
-		Contratante c = contratanteDao.findById(servico.getContratante().getId());
-		c.mediaAvaliacao(avaliacaoContratante.getAvaliacaoCordialidade(),
-				avaliacaoContratante.getAvaliacaoCompromisso());
+		//verifica se é contratantee ou contratanteProfissional
+		if(servico.getContratante().getTipo().equals("contratante")){
+			Contratante c = contratanteDao.findById(servico.getContratante().getId());
+			c.mediaAvaliacao(avaliacaoContratante.getAvaliacaoCordialidade(),avaliacaoContratante.getAvaliacaoCompromisso());
+
+		}
+		else if(servico.getContratante().getTipo().equals("contratanteProfissional")){
+			ContratanteProfissional c = contratanteProfissionalDao.findById(servico.getContratante().getId());
+			c.mediaAvaliacaoContratante(avaliacaoContratante.getAvaliacaoCordialidade(),avaliacaoContratante.getAvaliacaoCompromisso());
+
+		}
+		else{
+			throw new ServletException("Tipo pessoa inválido");
+		}
 		// salvar a avaliacao
 		avaliacaoContratanteDao.save(avaliacaoContratante);
 		// seta avaliacao do profissionao como true"ja avaliado"

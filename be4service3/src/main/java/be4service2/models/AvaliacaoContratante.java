@@ -98,6 +98,13 @@ public class AvaliacaoContratante {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "AvaliacaoContratante [idAvaliacaoContratante=" + idAvaliacaoContratante + ", servico=" + servico
+				+ ", contratante=" + contratante + ", avaliacaoCordialidade=" + avaliacaoCordialidade
+				+ ", avaliacaoCompromisso=" + avaliacaoCompromisso + "]";
+	}
 	
 	
 	

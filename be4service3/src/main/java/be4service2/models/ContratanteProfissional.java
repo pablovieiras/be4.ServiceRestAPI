@@ -121,8 +121,40 @@ public class ContratanteProfissional extends Pessoa{
 				+ ", avaliacaoPontualidade=" + avaliacaoPontualidade + ", numeroAvaliacoesProfissional="
 				+ numeroAvaliacoesProfissional + "]";
 	}
+	//media geral das avaliacoes contratante
+	public void mediaAvaliacaoContratante(Double avCompromisso,Double avCordialidade){
+		//faz calculo para achar o valor completo de todas avaliacoes
+		Double valorAntigoCompromisso=this.getAvaliacaoCordialidade()*numeroAvaliacoesContratante;
+		Double valorAntigoCordialidade=this.getAvaliacaoCompromisso()*numeroAvaliacoesContratante;
+		//aumenta o numero de pessoas que avaliaram o contratante
+		this.numeroAvaliacoesContratante++;
+		//faz a media do valor total e seta o valor na avaliacao do contratante
+		Double mediaCompromisso=(valorAntigoCompromisso+avCompromisso)/this.numeroAvaliacoesContratante;
+		this.setAvaliacaoCompromisso(mediaCompromisso);
+		Double mediaCordialidade=(valorAntigoCordialidade+avCordialidade)/this.numeroAvaliacoesContratante;
+		this.setAvaliacaoCordialidade(mediaCordialidade);
+	}
 	
+	//media geral das avaliacoes profissional
+	public void mediaAvaliacaoProfissional(Double avQualidade,Double avPreco,Double avPontualidade){
+		//faz calculo para achar o valor completo de todas avaliacoes
+		Double valorAntigoQualidade=this.getAvaliacaoQualidade()*this.getNumeroAvaliacoesProfissional();
+		Double valorAntigoPreco=this.getAvaliacaoPreco()*this.getNumeroAvaliacoesProfissional();
+		Double valorAntigoPontualidade=this.avaliacaoPontualidade*this.getNumeroAvaliacoesProfissional();
 	
+		//aumenta o numero de pessoas que avaliaram o contratante
+		this.numeroAvaliacoesProfissional++;
+
+		//faz a media do valor total e seta o valor na avaliacao do contratante
+		Double mediaQualidade=(valorAntigoQualidade+avQualidade)/this.getNumeroAvaliacoesProfissional();
+		this.setAvaliacaoQualidade(mediaQualidade);
+		Double mediaPreco=(valorAntigoPreco+avPreco)/this.getNumeroAvaliacoesProfissional();
+		this.setAvaliacaoPreco(mediaPreco);
+		Double mediaPontualidade=(valorAntigoPontualidade+avPontualidade)/this.getNumeroAvaliacoesProfissional();
+		this.setAvaliacaoPontualidade(mediaPontualidade);
+	
+		
+	}
 	
 }
 
