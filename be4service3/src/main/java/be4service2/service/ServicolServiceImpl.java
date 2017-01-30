@@ -86,7 +86,7 @@ public class ServicolServiceImpl implements ServicoService {
 		if(!servico.getStatus().equals("Em Andamento")){
 			throw new ServletException("Serviço não está Em Andamento para ser Finalizado");
 		}
-		servico.setStatus("finalizado");
+		servico.setStatus("Finalizado");
 		servicoDao.update(servico);
 	}
 
