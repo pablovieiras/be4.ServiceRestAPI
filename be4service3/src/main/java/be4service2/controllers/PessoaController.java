@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import be4service2.daos.PessoaDaoImpl;
 import be4service2.models.ContratanteProfissional;
 import be4service2.models.Pessoa;
-import be4service2.models.Profissional;
+import be4service2.models.Usuario;
 
 @RestController
 public class PessoaController {
@@ -38,8 +39,22 @@ public class PessoaController {
 	public void ativarConta(@PathVariable("idPessoa") Integer idPessoa) {
 		pessoaDao.ativarConta(idPessoa);
 	}
+	
+	//login auxilar para o android
+	@RequestMapping(value="/email",method = RequestMethod.POST)
+	  public Pessoa verificaLoginAndroide(@RequestBody Usuario p){
+		System.out.println(p.getEmail() + " " + p.getSenha());
+		return pessoaDao.verificaLogin(p.getEmail(), p.getSenha());
+	   }
 
-	// realiza a busca de um profissional de acordo com sua profiss√£o
+	//busca uma pessoa ppor um determinado id
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public Pessoa findByIdPessoa(@PathVariable("id") String idString) {
+		Integer id=Integer.parseInt(idString);
+		return pessoaDao.findById(id);
+		
+	}
+	// realiza a busca de um profissional de acordo com sua profiss„o
 	@RequestMapping(value = "buscaProfissionalPorProfissao/{profissao}", method = RequestMethod.GET)
 	public List<ProfissionalDTO> buscaProfissionalPorProfissao(@PathVariable("profissao") String profissao) {
 

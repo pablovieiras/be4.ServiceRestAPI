@@ -86,7 +86,7 @@ public class ServicolServiceImpl implements ServicoService {
 		if(!servico.getStatus().equals("Em Andamento")){
 			throw new ServletException("Serviço não está Em Andamento para ser Finalizado");
 		}
-		servico.setStatus("finalizado");
+		servico.setStatus("Finalizado");
 		servicoDao.update(servico);
 	}
 
@@ -332,7 +332,7 @@ public class ServicolServiceImpl implements ServicoService {
 		listServicos = this.getListaServicosContratados(contratante);
 
 		for (Servico x : listServicos) {
-			if (x.getAvaliacaoContratante().equals("false")) {
+			if (x.getAvaliacaoContratante().equals("false") && x.getStatus().equals("Em Andamento") || x.getStatus().equals("Finalizado")) {
 				listAvaPendentes.add(x);
 			}
 		}
@@ -349,7 +349,7 @@ public class ServicolServiceImpl implements ServicoService {
 		listServicos = this.getAllServicosExecutados(profissional);
 
 		for (Servico x : listServicos) {
-			if (x.getAvaliacaoProfissional().equals("false")) {
+			if (x.getAvaliacaoProfissional().equals("false")&& x.getStatus().equals("Em Andamento")||x.getStatus().equals("Finalizado")) {
 				listAvaPendentes.add(x);
 			}
 		}
@@ -368,13 +368,13 @@ public class ServicolServiceImpl implements ServicoService {
 		listServicosExecutados = this.getAllServicosExecutados(contratanteProfissional);
 
 		for (Servico x : listServicosContratados) {
-			if (x.getAvaliacaoProfissional().equals("false")) {
+			if (x.getAvaliacaoProfissional().equals("false")&& x.getStatus().equals("Em Andamento")||x.getStatus().equals("Finalizado")) {
 				listAvaPendentes.add(x);
 			}
 		}
 
 		for (Servico x : listServicosExecutados) {
-			if (x.getAvaliacaoProfissional().equals("false")) {
+			if (x.getAvaliacaoProfissional().equals("false")&& x.getStatus().equals("Em Andamento")||x.getStatus().equals("Finalizado")) {
 				listAvaPendentes.add(x);
 			}
 		}
