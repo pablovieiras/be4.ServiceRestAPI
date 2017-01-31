@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import be4service2.daos.PessoaDaoImpl;
 import be4service2.models.ContratanteProfissional;
 import be4service2.models.Pessoa;
+import be4service2.models.Profissional;
 import be4service2.models.Usuario;
 
 @RestController
@@ -54,7 +55,7 @@ public class PessoaController {
 		return pessoaDao.findById(id);
 		
 	}
-	// realiza a busca de um profissional de acordo com sua profissão
+	// realiza a busca de um profissional de acordo com sua profissï¿½o
 	@RequestMapping(value = "buscaProfissionalPorProfissao/{profissao}", method = RequestMethod.GET)
 	public List<ProfissionalDTO> buscaProfissionalPorProfissao(@PathVariable("profissao") String profissao) {
 

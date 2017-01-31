@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import be4service2.models.ContratanteProfissional;
 import be4service2.models.Pessoa;
-import ch.qos.logback.core.net.SyslogOutputStream;
+import be4service2.models.Profissional;
 
 @Repository
 public class PessoaDaoImpl {
