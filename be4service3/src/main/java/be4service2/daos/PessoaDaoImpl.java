@@ -1,5 +1,7 @@
 package be4service2.daos;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -7,8 +9,10 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
+import be4service2.models.ContratanteProfissional;
 import be4service2.models.Pessoa;
 import be4service2.models.Profissional;
+import ch.qos.logback.core.net.SyslogOutputStream;
 
 @Repository
 public class PessoaDaoImpl {
@@ -86,5 +90,24 @@ public class PessoaDaoImpl {
 			return null;
 		}
 
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Profissional> buscaProfissionalPorProfissao(String profissao) {
+		String ss = "select p from Pessoa p where profissao LIKE :profissao AND tipo='profissional'";
+		javax.persistence.Query query = manager.createQuery(ss);
+		
+		query.setParameter("profissao", "%"+profissao+"%");
+		
+		return query.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<ContratanteProfissional> buscaContratanteProfissionalPorProfissao(String profissao) {
+		String ss = "select p from Pessoa p where profissao LIKE :profissao AND tipo='contratanteProfissional'";
+		javax.persistence.Query query = manager.createQuery(ss);
+		query.setParameter("profissao", "%"+profissao+"%");
+
+		return query.getResultList();
 	}
 }

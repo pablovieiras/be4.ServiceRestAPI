@@ -91,4 +91,14 @@ public class ServicoDaoImpl implements ServicoDao {
 		return query.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Servico> buscaServicoPorTitulo(String titulo) {
+		String ss = "select s from Servico s where titulo LIKE :titulo AND status='Aberto'";
+		javax.persistence.Query query = manager.createQuery(ss);
+		query.setParameter("titulo", "%"+titulo+"%");
+		return query.getResultList();
+
+	}
+
 }

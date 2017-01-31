@@ -1,5 +1,8 @@
 package be4service2.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import be4service2.daos.PessoaDaoImpl;
+import be4service2.models.ContratanteProfissional;
 import be4service2.models.Pessoa;
+import be4service2.models.Profissional;
 
 @RestController
 public class PessoaController {
@@ -32,6 +37,33 @@ public class PessoaController {
 	@RequestMapping(value = "ativarConta/{idPessoa}", method = RequestMethod.PUT)
 	public void ativarConta(@PathVariable("idPessoa") Integer idPessoa) {
 		pessoaDao.ativarConta(idPessoa);
+	}
+
+	// realiza a busca de um profissional de acordo com sua profissão
+	@RequestMapping(value = "buscaProfissionalPorProfissao/{profissao}", method = RequestMethod.GET)
+	public List<ProfissionalDTO> buscaProfissionalPorProfissao(@PathVariable("profissao") String profissao) {
+
+		List<Profissional> listlAuxProf = pessoaDao.buscaProfissionalPorProfissao(profissao);
+		List<ContratanteProfissional> listlAux2ContraProf = pessoaDao.buscaContratanteProfissionalPorProfissao(profissao);
+
+		// lista com profissionais DTO
+		List<ProfissionalDTO> listDTO = new ArrayList<>();
+
+		for (Profissional x : listlAuxProf) {
+			listDTO.add(new ProfissionalDTO(x.getId(), x.getNome(), x.getEmail(), x.getResumoProfissional(),
+					x.getProfissao(), x.getTelefone(), x.getCelular(), x.getCompetencias(), x.getAvaliacaoQualidade(),
+					x.getAvaliacaoPreco(), x.getAvaliacaoPontualidade(), x.getCep(), x.getLougradouro(), x.getFoto()));
+		}
+
+		for (ContratanteProfissional x : listlAux2ContraProf) {
+			listDTO.add(new ProfissionalDTO(x.getId(), x.getNome(), x.getEmail(), x.getResumoProfissional(),
+					x.getProfissao(), x.getTelefone(), x.getCelular(), x.getCompetencias(), x.getAvaliacaoQualidade(),
+					x.getAvaliacaoPreco(), x.getAvaliacaoPontualidade(), x.getAvaliacaoCordialidade(),
+					x.getAvaliacaoCompromisso(), x.getCep(), x.getLougradouro(), x.getFoto()));
+		}
+
+		return listDTO;
+
 	}
 
 }

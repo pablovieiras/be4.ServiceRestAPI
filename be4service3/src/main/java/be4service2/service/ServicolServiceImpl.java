@@ -381,6 +381,11 @@ public class ServicolServiceImpl implements ServicoService {
 		return listAvaPendentes;
 	
 	}
+
+	@Override
+	public List<Servico> buscaServicoPorTitulo(String titulo) {
+		return servicoDao.buscaServicoPorTitulo(titulo);
+	}
 	
 	
 
