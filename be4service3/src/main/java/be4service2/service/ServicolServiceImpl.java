@@ -301,7 +301,9 @@ public class ServicolServiceImpl implements ServicoService {
 	@Override
 	public List<Proposta> listaPropostasServico(Servico servico) throws ServletException {
 		if(!servico.getStatus().equals("Aberto")){
-			throw new ServletException("Serviço não está em aberto no momento");
+			//throw new ServletException("Serviço não está em aberto no momento");
+			//pablo pediu pra não retornar a execessão e sim uma lista vazia
+			return new ArrayList<Proposta>();
 		}
 		return servicoDao.listaPropostasServico(servico);
 
