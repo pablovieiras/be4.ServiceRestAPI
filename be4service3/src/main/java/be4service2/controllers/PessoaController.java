@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import be4service2.models.Profissional;
 import be4service2.models.Usuario;
 
 @RestController
+//@CrossOrigin(origins = "http://172.23.16.18")
 public class PessoaController {
 
 	@Autowired

@@ -31,9 +31,10 @@ public class Servico {
 	private int prazoEstimado;
 	private String competencias;
 	private String descricao;
+	private String categoria;
 
 	public Servico(Pessoa contratante, String titulo, String status, BigDecimal valor, int prazoEstimado,
-			String competencias, String descricao) {
+			String competencias, String descricao, String categoria) {
 		super();
 		this.contratante = contratante;
 		this.titulo = titulo;
@@ -42,6 +43,7 @@ public class Servico {
 		this.prazoEstimado = prazoEstimado;
 		this.competencias = competencias;
 		this.descricao = descricao;
+		this.categoria = categoria;
 	}
 
 	public Servico() {
@@ -153,6 +155,14 @@ public class Servico {
 
 	public void setAvaliacaoProfissional(String avaliacaoProfissional) {
 		this.avaliacaoProfissional = avaliacaoProfissional;
+	}
+
+	public String getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
 	}
 
 

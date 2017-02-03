@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ import be4service2.service.ServicoService;
 /*   produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE*/
 
 @RestController
+//@CrossOrigin(origins = "http://172.23.16.18")
 @RequestMapping(value = "contratante")
 public class ContratanteController {
 

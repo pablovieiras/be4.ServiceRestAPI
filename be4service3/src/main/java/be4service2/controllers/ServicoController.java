@@ -3,6 +3,7 @@ package be4service2.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,6 +13,7 @@ import be4service2.models.Servico;
 import be4service2.service.ServicoService;
 
 @RestController
+//@CrossOrigin(origins = "http://172.23.16.18")
 @RequestMapping(value = "/servico")
 public class ServicoController {
 
