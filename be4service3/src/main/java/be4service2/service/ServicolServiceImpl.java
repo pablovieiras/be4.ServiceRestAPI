@@ -83,9 +83,11 @@ public class ServicolServiceImpl implements ServicoService {
 
 	@Override
 	public void finalizarServico(Servico servico) throws ServletException {
-		/*if(!servico.getStatus().equals("Em Andamento")){
-			throw new ServletException("Serviço não está Em Andamento para ser Finalizado");
-		}*/
+		/*
+		 * if(!servico.getStatus().equals("Em Andamento")){ throw new
+		 * ServletException("Serviço não está Em Andamento para ser Finalizado"
+		 * ); }
+		 */
 		servico.setStatus("Finalizado");
 		servicoDao.update(servico);
 	}
@@ -105,16 +107,16 @@ public class ServicolServiceImpl implements ServicoService {
 
 	@Override
 	public void selecionarProfissional(Pessoa profissional, Servico servico) throws ServletException {
-		if (profissional == null ) {
+		if (profissional == null) {
 			throw new ServletException("Profissional não encontrado");
 		}
-		if(profissional.getTipo().equals("contratante")) {
+		if (profissional.getTipo().equals("contratante")) {
 			throw new ServletException("Profissional não encontrado");
 		}
-		if(profissional.getId()==servico.getContratante().getId()){
+		if (profissional.getId() == servico.getContratante().getId()) {
 			throw new ServletException("Não é possivel fazer proposta para o seu proprio serviço");
 		}
-		if(!servico.getStatus().equals("Aberto")){
+		if (!servico.getStatus().equals("Aberto")) {
 			throw new ServletException("Não é possivel fazer proposta para um serviço que não esta aberto");
 		}
 		servico.setProfissional(profissional);
@@ -140,19 +142,18 @@ public class ServicolServiceImpl implements ServicoService {
 	@Override
 	public void aceitarServico(Servico servico, Integer resposta) {
 		// busca o servico
-/*		Servico servico = servicoDao.findById(id);*/
-	
+		/* Servico servico = servicoDao.findById(id); */
+
 		if (resposta == 0) {
 			// muda status apenas da proposta para rejeitado
-			System.out.println("aquiiiiiiiiiiiiiii"+servico.getIdServico());
-			propostaDao.mudarStatusParaRejeitadoDaPropostaRecusada(servico.getIdServico(),servico.getProfissional().getId());
+			propostaDao.mudarStatusParaRejeitadoDaPropostaRecusada(servico.getIdServico(),
+					servico.getProfissional().getId());
 			System.out.println("ok");
 			// muda o status
 			servico.setStatus("Aberto");
 			// remove o profissional do serviço
 			servico.setProfissional(null);
-			// remove o valor
-			servico.setValor(null);
+			
 		} else {
 			servico.setStatus("Em Andamento");
 			// muda o status da proposta de todos para rejeitado menos do
@@ -169,22 +170,22 @@ public class ServicolServiceImpl implements ServicoService {
 
 	@Override
 	public void fazerProposta(Pessoa profissional, Servico servico, Proposta proposta) throws ServletException {
-		
-		if(!servico.getStatus().equals("Aberto")){
+
+		if (!servico.getStatus().equals("Aberto")) {
 			throw new ServletException("Não é possivel fazer proposta para serviço que não esta em Aberto");
 		}
-		
-		if(profissional.getTipo().equals("contratante")){
+
+		if (profissional.getTipo().equals("contratante")) {
 			throw new ServletException("Apenas profissionais pode fazer propostas");
 		}
-		
-		if(servico.getContratante().getId().equals(profissional.getId())){
+
+		if (servico.getContratante().getId().equals(profissional.getId())) {
 			throw new ServletException("Não é possivel fazer proposta para o seu proprio serviço");
 		}
-		
-		 Proposta p = propostaDao.verificaProposta(servico.getIdServico(), profissional.getId());
 
-		if (p!=null) {
+		Proposta p = propostaDao.verificaProposta(servico.getIdServico(), profissional.getId());
+
+		if (p != null) {
 			throw new ServletException("Este Profissional já fez uma proposta para este serviço");
 		}
 		proposta.setProfissional(profissional);
@@ -195,12 +196,22 @@ public class ServicolServiceImpl implements ServicoService {
 	@Override
 	public void selecionarProposta(Integer id, Servico servico) throws ServletException {
 		Proposta p = propostaDao.findById(id);
-		if (p==null) {
+		if (p == null) {
 			throw new ServletException("Proposta não encontrada");
 		}
 		servico.setProfissional(p.getProfissional());
 		servico.setValor(p.getValorProposta());
-		this.selecionarProfissional(p.getProfissional(), servico);
+		// this.selecionarProfissional(p.getProfissional(), servico);
+
+		servico.setStatus("Em Andamento");
+
+		// muda o status da proposta de todos para rejeitado menos do
+		// selecionado
+		propostaDao.mudarStatusParaRejeitado(servico.getIdServico(), servico.getProfissional().getId());
+		// muda o status do selecionado para Aceito
+		propostaDao.mudarStatusParaAceitoDaPropostaEscolhida(servico.getIdServico(), servico.getProfissional().getId());
+
+		servicoDao.update(servico);
 
 	}
 
@@ -213,7 +224,6 @@ public class ServicolServiceImpl implements ServicoService {
 		if (servico.getAvaliacaoProfissional().equals("true")) {
 			throw new ServletException("Profissional já avaliado neste serviço");
 		}
-	
 
 		if (!servico.getStatus().equals("Em Andamento") && !servico.getStatus().equals("Finalizado")) {
 			throw new ServletException("Erro status do serviço não está em andamento ou finalizado");
@@ -224,19 +234,18 @@ public class ServicolServiceImpl implements ServicoService {
 		// guarda o profissional dentro da avaliacao
 		avaliacaoProfissional.setProfissional(servico.getProfissional());
 
-
-		if(servico.getProfissional().getTipo().equals("profissional")){
+		if (servico.getProfissional().getTipo().equals("profissional")) {
 			Profissional p = profissionalDao.findById(servico.getProfissional().getId());
-			p.mediaAvaliacao(avaliacaoProfissional.getAvaliacaoQualidade(), avaliacaoProfissional.getAvaliacaoPreco(),avaliacaoProfissional.getAvaliacaoPontualidade());
-		}
-		else if(servico.getProfissional().getTipo().equals("contratanteProfissional")){
+			p.mediaAvaliacao(avaliacaoProfissional.getAvaliacaoQualidade(), avaliacaoProfissional.getAvaliacaoPreco(),
+					avaliacaoProfissional.getAvaliacaoPontualidade());
+		} else if (servico.getProfissional().getTipo().equals("contratanteProfissional")) {
 			ContratanteProfissional p = contratanteProfissionalDao.findById(servico.getProfissional().getId());
-			p.mediaAvaliacaoProfissional(avaliacaoProfissional.getAvaliacaoQualidade(), avaliacaoProfissional.getAvaliacaoPreco(),avaliacaoProfissional.getAvaliacaoPontualidade());
-		}
-		else{
+			p.mediaAvaliacaoProfissional(avaliacaoProfissional.getAvaliacaoQualidade(),
+					avaliacaoProfissional.getAvaliacaoPreco(), avaliacaoProfissional.getAvaliacaoPontualidade());
+		} else {
 			throw new ServletException("Tipo pessoa inválido");
 		}
-		
+
 		// salvar a avaliacao
 		avaliacaoProfissionalDao.save(avaliacaoProfissional);
 		// seta avaliacao do profissionao como true"ja avaliado"
@@ -254,8 +263,7 @@ public class ServicolServiceImpl implements ServicoService {
 		if (servico.getAvaliacaoContratante().equals("true")) {
 			throw new ServletException("Profissional já avaliado neste serviço");
 		}
-	
-	
+
 		if (!servico.getStatus().equals("Em Andamento") && !servico.getStatus().equals("Finalizado")) {
 			throw new ServletException("Erro status do serviço não esta em andamento ou finalizado");
 		}
@@ -263,18 +271,18 @@ public class ServicolServiceImpl implements ServicoService {
 		avaliacaoContratante.setServico(servico);
 		// guarda o contratante dentro da avaliacao
 		avaliacaoContratante.setContratante(servico.getContratante());
-		//verifica se é contratantee ou contratanteProfissional
-		if(servico.getContratante().getTipo().equals("contratante")){
+		// verifica se é contratantee ou contratanteProfissional
+		if (servico.getContratante().getTipo().equals("contratante")) {
 			Contratante c = contratanteDao.findById(servico.getContratante().getId());
-			c.mediaAvaliacao(avaliacaoContratante.getAvaliacaoCordialidade(),avaliacaoContratante.getAvaliacaoCompromisso());
+			c.mediaAvaliacao(avaliacaoContratante.getAvaliacaoCordialidade(),
+					avaliacaoContratante.getAvaliacaoCompromisso());
 
-		}
-		else if(servico.getContratante().getTipo().equals("contratanteProfissional")){
+		} else if (servico.getContratante().getTipo().equals("contratanteProfissional")) {
 			ContratanteProfissional c = contratanteProfissionalDao.findById(servico.getContratante().getId());
-			c.mediaAvaliacaoContratante(avaliacaoContratante.getAvaliacaoCordialidade(),avaliacaoContratante.getAvaliacaoCompromisso());
+			c.mediaAvaliacaoContratante(avaliacaoContratante.getAvaliacaoCordialidade(),
+					avaliacaoContratante.getAvaliacaoCompromisso());
 
-		}
-		else{
+		} else {
 			throw new ServletException("Tipo pessoa inválido");
 		}
 		// salvar a avaliacao
@@ -297,12 +305,13 @@ public class ServicolServiceImpl implements ServicoService {
 		return servicoDao.listarAbertos();
 	}
 
-	//somento serviços em aberto traz sua lista de porpostas 
+	// somento serviços em aberto traz sua lista de porpostas
 	@Override
 	public List<Proposta> listaPropostasServico(Servico servico) throws ServletException {
-		if(!servico.getStatus().equals("Aberto")){
-			//throw new ServletException("Serviço não está em aberto no momento");
-			//pablo pediu pra não retornar a execessão e sim uma lista vazia
+		if (!servico.getStatus().equals("Aberto")) {
+			// throw new ServletException("Serviço não está em aberto no
+			// momento");
+			// pablo pediu pra não retornar a execessão e sim uma lista vazia
 			return new ArrayList<Proposta>();
 		}
 		return servicoDao.listaPropostasServico(servico);
@@ -334,14 +343,15 @@ public class ServicolServiceImpl implements ServicoService {
 		listServicos = this.getListaServicosContratados(contratante);
 
 		for (Servico x : listServicos) {
-			if (x.getAvaliacaoContratante().equals("false") && x.getStatus().equals("Em Andamento") || x.getStatus().equals("Finalizado")) {
+			if (x.getAvaliacaoContratante().equals("false") && x.getStatus().equals("Em Andamento")
+					|| x.getStatus().equals("Finalizado")) {
 				listAvaPendentes.add(x);
 			}
 		}
 
 		return listAvaPendentes;
 	}
-	
+
 	@Override
 	public List<Servico> avalicoesPendentesProfissional(Profissional profissional) throws ServletException {
 
@@ -351,7 +361,8 @@ public class ServicolServiceImpl implements ServicoService {
 		listServicos = this.getAllServicosExecutados(profissional);
 
 		for (Servico x : listServicos) {
-			if (x.getAvaliacaoProfissional().equals("false")&& x.getStatus().equals("Em Andamento")||x.getStatus().equals("Finalizado")) {
+			if (x.getAvaliacaoProfissional().equals("false") && x.getStatus().equals("Em Andamento")
+					|| x.getStatus().equals("Finalizado")) {
 				listAvaPendentes.add(x);
 			}
 		}
@@ -359,36 +370,36 @@ public class ServicolServiceImpl implements ServicoService {
 		return listAvaPendentes;
 	}
 
-	
 	@Override
-	public List<Servico> avalicoesPendentesContratanteProfissional(Pessoa contratanteProfissional) throws ServletException {
+	public List<Servico> avalicoesPendentesContratanteProfissional(Pessoa contratanteProfissional)
+			throws ServletException {
 		List<Servico> listServicosContratados = new ArrayList<>();
 		List<Servico> listServicosExecutados = new ArrayList<>();
 		List<Servico> listAvaPendentes = new ArrayList<>();
-		
+
 		listServicosContratados = this.getListaServicosContratados(contratanteProfissional);
 		listServicosExecutados = this.getAllServicosExecutados(contratanteProfissional);
 
 		for (Servico x : listServicosContratados) {
-			if (x.getAvaliacaoProfissional().equals("false")&& x.getStatus().equals("Em Andamento")||x.getStatus().equals("Finalizado")) {
+			if (x.getAvaliacaoProfissional().equals("false") && x.getStatus().equals("Em Andamento")
+					|| x.getStatus().equals("Finalizado")) {
 				listAvaPendentes.add(x);
 			}
 		}
 
 		for (Servico x : listServicosExecutados) {
-			if (x.getAvaliacaoProfissional().equals("false")&& x.getStatus().equals("Em Andamento")||x.getStatus().equals("Finalizado")) {
+			if (x.getAvaliacaoProfissional().equals("false") && x.getStatus().equals("Em Andamento")
+					|| x.getStatus().equals("Finalizado")) {
 				listAvaPendentes.add(x);
 			}
 		}
 		return listAvaPendentes;
-	
+
 	}
 
 	@Override
 	public List<Servico> buscaServicoPorTitulo(String titulo) {
 		return servicoDao.buscaServicoPorTitulo(titulo);
 	}
-	
-	
 
 }
