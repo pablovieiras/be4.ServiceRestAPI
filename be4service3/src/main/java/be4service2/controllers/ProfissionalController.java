@@ -73,6 +73,7 @@ public class ProfissionalController {
 		pdto.setNome(profissional.getNome());
 		pdto.setEmail(profissional.getEmail());
 		pdto.setProfissao(profissional.getProfissao());
+		//
 		pdto.setResumoProfissional(profissional.getResumoProfissional());
 
 		return pdto;

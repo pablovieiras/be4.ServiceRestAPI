@@ -30,9 +30,7 @@ public interface ServicoService {
 	Servico criarServico(ContratanteProfissional contratante,Servico servico);
 	
 	void selecionarProfissional(Pessoa profissional,Servico servico) throws ServletException;
-	
-
-	
+		
 	void selecionarProfissional(ContratanteProfissional profissional,Servico servico);
 	
 	void selecionarProposta(Integer id,Servico servico) throws ServletException;
@@ -62,5 +60,8 @@ public interface ServicoService {
 	List<Servico> avalicoesPendentesProfissional(Profissional profissional) throws ServletException;
 	
 	List<Servico> avalicoesPendentesContratanteProfissional(Pessoa profissional) throws ServletException;
+	
+	List <Servico> buscaServicoPorTitulo (String titulo);
+
 	
 }

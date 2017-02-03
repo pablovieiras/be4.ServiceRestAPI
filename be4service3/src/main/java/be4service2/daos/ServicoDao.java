@@ -28,5 +28,7 @@ public interface ServicoDao {
 	List<Proposta> listaPropostasServico(Servico servico);
 
 	List<Proposta> getAllPropostasFeitas(Profissional profissional);
+	
+	List <Servico> buscaServicoPorTitulo (String titulo);
 
 }

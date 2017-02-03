@@ -3,6 +3,7 @@ package be4service2.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,4 +23,10 @@ public class ServicoController {
 	public List<Servico> listarAbertos() {
 		return servicoService.listarAbertos();
 	}
+	
+	// busca todos os serviços em aberto por titulo
+		@RequestMapping(value = "/buscaServicoPorTitulo/{titulo}", method = RequestMethod.GET)
+		public List<Servico> buscaServicoPorTitulo(@PathVariable("titulo")String titulo) {
+			return servicoService.buscaServicoPorTitulo(titulo);
+		}
 }
