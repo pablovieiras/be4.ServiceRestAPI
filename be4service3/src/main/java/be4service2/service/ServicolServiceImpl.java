@@ -210,7 +210,7 @@ public class ServicolServiceImpl implements ServicoService {
 
 		// busca o id do servico e guarda em uma variavel
 		Servico servico = servicoDao.findById(idServico);
-		if (servico.getAvaliacaoProfissional().equals("true")) {
+		if (servico.getAvaliacaoContratante().equals("true")) {
 			throw new ServletException("Profissional já avaliado neste serviço");
 		}
 	
@@ -240,7 +240,7 @@ public class ServicolServiceImpl implements ServicoService {
 		// salvar a avaliacao
 		avaliacaoProfissionalDao.save(avaliacaoProfissional);
 		// seta avaliacao do profissionao como true"ja avaliado"
-		servico.setAvaliacaoProfissional("true");
+		servico.setAvaliacaoContratante("true");
 		servicoDao.update(servico);
 
 	}
@@ -251,7 +251,7 @@ public class ServicolServiceImpl implements ServicoService {
 
 		// busca o id do servico e guarda em uma variavel
 		Servico servico = servicoDao.findById(idServico);
-		if (servico.getAvaliacaoContratante().equals("true")) {
+		if (servico.getAvaliacaoProfissional().equals("true")) {
 			throw new ServletException("Profissional já avaliado neste serviço");
 		}
 	
@@ -280,7 +280,7 @@ public class ServicolServiceImpl implements ServicoService {
 		// salvar a avaliacao
 		avaliacaoContratanteDao.save(avaliacaoContratante);
 		// seta avaliacao do profissionao como true"ja avaliado"
-		servico.setAvaliacaoContratante("true");
+		servico.setAvaliacaoProfissional("true");
 		servicoDao.update(servico);
 
 	}
