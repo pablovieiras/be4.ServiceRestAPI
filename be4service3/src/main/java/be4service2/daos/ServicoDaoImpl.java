@@ -94,9 +94,10 @@ public class ServicoDaoImpl implements ServicoDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Servico> buscaServicoPorTitulo(String titulo) {
-		String ss = "select s from Servico s where titulo LIKE :titulo AND status='Aberto'";
+		String ss = "select s from Servico s where titulo LIKE :titulo OR categoria LIKE :categoria AND status='Aberto'";
 		javax.persistence.Query query = manager.createQuery(ss);
 		query.setParameter("titulo", "%"+titulo+"%");
+		query.setParameter("categoria", "%"+titulo+"%");
 		return query.getResultList();
 
 	}
