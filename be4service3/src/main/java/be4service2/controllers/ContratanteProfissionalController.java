@@ -41,7 +41,7 @@ public class ContratanteProfissionalController {
 
 	// traz um contratante profissional por um determinado id
 	@RequestMapping(value = "/{id_contratanteProfissional}", method = RequestMethod.GET)
-	public ContratanteProfissional findById(@PathVariable("id_contratanteProfissional") Integer id) {
+	public ContratanteProfissional findById(@PathVariable("id_contratanteProfissionall") Integer id) {
 		return contratanteProfissionalService.findById(id);
 	}
 

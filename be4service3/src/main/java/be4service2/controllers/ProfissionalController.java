@@ -72,10 +72,18 @@ public class ProfissionalController {
 		ProfissionalDTO pdto = new ProfissionalDTO();
 		pdto.setNome(profissional.getNome());
 		pdto.setEmail(profissional.getEmail());
-		pdto.setProfissao(profissional.getProfissao());
-		//
 		pdto.setResumoProfissional(profissional.getResumoProfissional());
-
+		pdto.setProfissao(profissional.getProfissao());
+		pdto.setTelefone(profissional.getTelefone());
+		pdto.setCelular(profissional.getCelular());
+		pdto.setCompetencias(profissional.getCompetencias());
+		pdto.setAvaliacaoQualidade(profissional.getAvaliacaoQualidade());
+		pdto.setAvaliacaoPreco(profissional.getAvaliacaoPreco());
+		pdto.setAvaliacaoPontualidade(profissional.getAvaliacaoPontualidade());
+		pdto.setCep(profissional.getCep());
+		pdto.setLogradouro(profissional.getLougradouro());
+		pdto.setFoto(profissional.getFoto());
+		
 		return pdto;
 
 	}
