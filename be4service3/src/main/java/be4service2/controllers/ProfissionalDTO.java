@@ -17,7 +17,7 @@ public class ProfissionalDTO {
 	private Double avaliacaoCompromisso;
 	private String cep;
 	private String logradouro;
-	private String foto;
+	private byte[] foto;
 
 	public ProfissionalDTO() {
 		super();
@@ -26,7 +26,7 @@ public class ProfissionalDTO {
 	
 	public ProfissionalDTO(Integer idProfissional, String nome, String email, String resumoProfissional,
 			String profissao, String telefone, String celular, String competencias, Double avaliacaoQualidade,
-			Double avaliacaoPreco, Double avaliacaoPontualidade, String cep, String logradouro, String foto) {
+			Double avaliacaoPreco, Double avaliacaoPontualidade, String cep, String logradouro, byte[] foto) {
 		super();
 		this.idProfissional = idProfissional;
 		this.nome = nome;
@@ -50,7 +50,7 @@ public class ProfissionalDTO {
 	public ProfissionalDTO(Integer idProfissional, String nome, String email, String resumoProfissional,
 			String profissao, String telefone, String celular, String competencias, Double avaliacaoQualidade,
 			Double avaliacaoPreco, Double avaliacaoPontualidade, Double avaliacaoCordialidade,
-			Double avaliacaoCompromisso, String cep, String logradouro, String foto) {
+			Double avaliacaoCompromisso, String cep, String logradouro, byte[] foto) {
 		super();
 		this.idProfissional = idProfissional;
 		this.nome = nome;
@@ -182,11 +182,11 @@ public class ProfissionalDTO {
 		this.celular = celular;
 	}
 
-	public String getFoto() {
+	public byte[] getFoto() {
 		return foto;
 	}
 
-	public void setFoto(String foto) {
+	public void setFoto(byte[] foto) {
 		this.foto = foto;
 	}
 

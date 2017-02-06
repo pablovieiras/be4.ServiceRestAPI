@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Lob;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -30,14 +31,17 @@ public abstract class Pessoa {
 	private String cidade;
 	private String bairro;
 	private String complemento;
-	private String foto;
+	@Lob
+	private byte[] foto;
 	private String chave;
 	private String tipo;
 	private String sessao;
+	
+	
 
 	public Pessoa(Integer id, String nome, String cpf, String dataNascimento, String email, String senha,
 			String telefone, String celular, String cep, String lougradouro, String numero, String cidade,
-			String bairro, String complemento, String foto, String chave) {
+			String bairro, String complemento, byte[] foto, String chave) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -57,7 +61,7 @@ public abstract class Pessoa {
 		this.chave = chave;
 	}
 
-	public Pessoa(String nome, String email, String senha, String celular, String foto) {
+	public Pessoa(String nome, String email, String senha, String celular, byte[] foto) {
 		super();
 		this.nome = nome;
 		this.email = email;
@@ -182,11 +186,11 @@ public abstract class Pessoa {
 		this.complemento = complemento;
 	}
 
-	public String getFoto() {
+	public byte[] getFoto() {
 		return foto;
 	}
 
-	public void setFoto(String foto) {
+	public void setFoto(byte[] foto) {
 		this.foto = foto;
 	}
 

@@ -27,13 +27,13 @@ public class ContratanteProfissional extends Pessoa{
 	
 	public ContratanteProfissional(Integer id, String nome, String cpf, String dataNascimento, String email,
 			String senha, String telefone, String celular, String cep, String lougradouro, String numero, String cidade,
-			String bairro, String complemento, String foto, String chave) {
+			String bairro, String complemento, byte[] foto, String chave) {
 		super(id, nome, cpf, dataNascimento, email, senha, telefone, celular, cep, lougradouro, numero, cidade, bairro,
 				complemento, foto, chave);
 	}
 	public ContratanteProfissional(Integer id, String nome, String cpf, String dataNascimento, String email,
 			String senha, String telefone, String celular, String cep, String lougradouro, String numero, String cidade,
-			String bairro, String complemento, String foto, String chave, Double avaliacaoCordialidade,
+			String bairro, String complemento, byte[] foto, String chave, Double avaliacaoCordialidade,
 			Double avaliacaoCompromisso, Integer numeroAvaliacoesContratante, String profissao,
 			String resumoProfissional, String competencias, Double avaliacaoQualidade, Double avaliacaoPreco,
 			Double avaliacaoPontualidade, Integer numeroAvaliacoesProfissional) {

@@ -24,7 +24,7 @@ public class Profissional extends Pessoa
 	
 	public Profissional(Integer id, String nome, String cpf, String dataNascimento, String email, String senha,
 			String telefone, String celular, String cep, String lougradouro, String numero, String cidade,
-			String bairro, String complemento, String foto, String chave) {
+			String bairro, String complemento, byte[] foto, String chave) {
 		super(id, nome, cpf, dataNascimento, email, senha, telefone, celular, cep, lougradouro, numero, cidade, bairro,
 				complemento, foto, chave);
 	}

@@ -18,7 +18,7 @@ public class Contratante extends Pessoa
 	public Contratante() {
 		super();
 	}
-	public Contratante(String nome, String email, String senha, String celular, String foto) {
+	public Contratante(String nome, String email, String senha, String celular, byte[] foto) {
 		super(nome, email, senha, celular, foto);
 	}
 
