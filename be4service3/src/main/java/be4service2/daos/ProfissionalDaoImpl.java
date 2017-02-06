@@ -38,7 +38,7 @@ public class ProfissionalDaoImpl implements ProfissionalDao {
 
 	@Override
 	public void update(Profissional profissional) {
-		manager.merge(findById(profissional.getId()));
+		manager.merge(profissional);
 	}
 
 	@Override
