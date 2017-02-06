@@ -6,7 +6,6 @@ import java.util.List;
 import javax.servlet.ServletException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +23,7 @@ import be4service2.service.ProfissionalService;
 import be4service2.service.ServicoService;
 
 @RestController
-//@CrossOrigin(origins = "http://172.23.16.18")
+// @CrossOrigin(origins = "http://172.23.16.18")
 @RequestMapping(value = "/profissional")
 public class ProfissionalController {
 
@@ -66,8 +65,8 @@ public class ProfissionalController {
 	}
 
 	// procura ppor um profissional usando um determinado id e retorna um DTO
-	@RequestMapping(value = "/{id}/DTO", method = RequestMethod.GET)
-	public ProfissionalDTO findByIdDTO(@PathVariable("id") Integer id) {
+	@RequestMapping(value = "/{id_profissional}/DTO", method = RequestMethod.GET)
+	public ProfissionalDTO findByIdDTO(@PathVariable("id_profissional") Integer id) {
 
 		Profissional profissional = profissionalService.findById(id);
 		ProfissionalDTO pdto = new ProfissionalDTO();
@@ -89,14 +88,14 @@ public class ProfissionalController {
 	}
 
 	// altera as informações do profissional
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/{id_profissional}", method = RequestMethod.PUT)
 	public void update(@RequestBody Profissional profissional) {
 		profissionalService.update(profissional);
 	}
 
 	// o profissional se torna um contratanteProfissional
-	@RequestMapping(value = "/{id}/tornarContratante", method = RequestMethod.PUT)
-	public void tornarContratante(@PathVariable("id") Integer id) {
+	@RequestMapping(value = "/{id_profissional}/tornarContratante", method = RequestMethod.PUT)
+	public void tornarContratante(@PathVariable("id_profissional") Integer id) {
 		profissionalService.tornarContratante(id);
 	}
 
@@ -109,8 +108,8 @@ public class ProfissionalController {
 	}
 
 	// escolhe um determinado serviço e faz uma proposta para o mesmo
-	@RequestMapping(value = "/{id}/servico/{idServico}/fazerProposta", method = RequestMethod.POST)
-	public void fazerProposta(@PathVariable("id") Integer id, @PathVariable("idServico") Integer idServico,
+	@RequestMapping(value = "/{id_profissional}/servico/{idServico}/fazerProposta", method = RequestMethod.POST)
+	public void fazerProposta(@PathVariable("id_profissional") Integer id, @PathVariable("idServico") Integer idServico,
 			@RequestBody Proposta proposta) throws ServletException {
 		servicoService.fazerProposta(pessoaDao.findById(id), servicoService.findById(idServico), proposta);
 	}
@@ -128,16 +127,17 @@ public class ProfissionalController {
 		servicoService.finalizarServico(servicoService.findById(idServico));
 	}
 
-	// traz toda a lista de serviços que o profissional executou ou que foi selecionado para executar
-	@RequestMapping(value = "/{id}/servicosExecutados", method = RequestMethod.GET)
-	public List<Servico> getAllServicosExecutados(@PathVariable("id") Integer id) throws ServletException {
+	// traz toda a lista de serviços que o profissional executou ou que foi
+	// selecionado para executar
+	@RequestMapping(value = "/{id_servico}/servicosExecutados", method = RequestMethod.GET)
+	public List<Servico> getAllServicosExecutados(@PathVariable("id_servico") Integer id) throws ServletException {
 		return servicoService.getAllServicosExecutados(profissionalService.findById(id));
 	}
 
 	// retorna uma lista de avaliações pendentes que o profissional ainda não
 	// avaliou
-	@RequestMapping(value = "/{id}/avalicoesPendentes", method = RequestMethod.GET)
-	public List<Servico> avalicoesPendentes(@PathVariable("id") Integer id) throws ServletException {
+	@RequestMapping(value = "/{id_profissional}/avalicoesPendentes", method = RequestMethod.GET)
+	public List<Servico> avalicoesPendentes(@PathVariable("id_profissional") Integer id) throws ServletException {
 		return servicoService.avalicoesPendentesProfissional(profissionalService.findById(id));
 	}
 
