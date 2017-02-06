@@ -128,7 +128,7 @@ public class ProfissionalController {
 		servicoService.finalizarServico(servicoService.findById(idServico));
 	}
 
-	// traz toda a lista de serviços que o profissional executou
+	// traz toda a lista de serviços que o profissional executou ou que foi selecionado para executar
 	@RequestMapping(value = "/{id}/servicosExecutados", method = RequestMethod.GET)
 	public List<Servico> getAllServicosExecutados(@PathVariable("id") Integer id) throws ServletException {
 		return servicoService.getAllServicosExecutados(profissionalService.findById(id));
