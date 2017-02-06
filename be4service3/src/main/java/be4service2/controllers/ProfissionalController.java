@@ -87,7 +87,10 @@ public class ProfissionalController {
 		return pdto;
 
 	}
-
+	@RequestMapping(value = "/{id_profissional}", method = RequestMethod.GET)
+	public Profissional findById(@PathVariable("id_profissional") Integer id) {
+		return profissionalService.findById(id);
+	}
 	// salva o profissional no banco
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public void save(@RequestBody Profissional profissional) throws ServletException {
